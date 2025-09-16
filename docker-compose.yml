@@ -2,24 +2,24 @@ services:
   # Base de données PostgreSQL
   db:
     restart: always
-    container_name: project_db
+    container_name: shopeasy_db
     image: postgres:14.19-alpine3.21
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=UQO123?
       - POSTGRES_DB=postgres
-    ports: 
+    ports:
       - 5433:5432
     volumes:
-        - postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U appuser -d appdb"]
+      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
       interval: 10s
       timeout: 5s
       retries: 5
   # Backend Django
   backend:
-    container_name: project_backend
+    container_name: shopeasy_backend
     build: ./backend
     volumes:
       - ./backend/:/backend
@@ -33,14 +33,14 @@ services:
       - 8000:8000
   # Frontend React
   frontend:
-    container_name: project_frontend
+    container_name: shopeasy_frontend
     volumes:
       - ./frontend:/home/node
     build: ./frontend
     working_dir: /home/node
   # Nginx reverse proxy
   nginx:
-    container_name: project_nginx
+    container_name: shopeasy_nginx
     build: ./nginx
     volumes:
       - ./nginx/nginx-proxy.conf:/etc/nginx/conf.d/default.conf:ro
@@ -51,7 +51,7 @@ services:
       - 5173:8080
   # Redis pour cache et sessions
   redis:
-    container_name: project_redis
+    container_name: shopeasy_redis
     image: redis:7-alpine
     ports:
       - "6379:6379"
