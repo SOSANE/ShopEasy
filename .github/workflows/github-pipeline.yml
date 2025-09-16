@@ -1,4 +1,4 @@
-name: CI Pipeline
+name: CI/CD Pipeline
 
 on:
   push:
@@ -24,18 +24,18 @@ jobs:
 
       - name: Enregistrer une image
         run: |
-          docker commit project_db project_db:latest
-          docker commit project_backend project_backend:latest
-          docker commit project_frontend project_frontend:latest
-          docker commit project_nginx project_nginx:latest
-          docker commit project_redis project_redis:latest
-          docker save project_db:latest project_backend:latest project_frontend:latest project_nginx:latest project_redis:latest -o project.tar
+          docker commit shopeasy_db shopeasy_db:latest
+          docker commit shopeasy_backend shopeasy_backend:latest
+          docker commit shopeasy_frontend shopeasy_frontend:latest
+          docker commit shopeasy_nginx shopeasy_nginx:latest
+          docker commit shopeasy_redis shopeasy_redis:latest
+          docker save shopeasy_db:latest shopeasy_backend:latest shopeasy_frontend:latest shopeasy_nginx:latest shopeasy_redis:latest -o project.tar
 
       - name: Uploader une image en tant qu'artifact
         uses: actions/upload-artifact@v4
         with:
-          name: projecttemplate-image
-          path: project.tar
+          name: shopeasy-image
+          path: shopeasy.tar
   test:
     needs: build
     runs-on: ubuntu-24.04
@@ -46,19 +46,19 @@ jobs:
       - name: Télécharger l'artifact
         uses: actions/download-artifact@v4
         with:
-          name: projecttemplate-image
+          name: shopeasy-image
           path: .
 
       - name: Télécharger l'image
         run: |
-          docker load -i project.tar
+          docker load -i shopeasy.tar
           docker image ls -a
           docker compose up -d
           sleep 30
 
       - name: Exécuter test API
         run: |
-          docker exec project_backend python manage.py test tests
+          docker exec shopeasy_backend python manage.py test tests
 
   quality_gate:
     runs-on: ubuntu-24.04

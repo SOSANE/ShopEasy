@@ -2,6 +2,21 @@
 
 Ceci est le répertoire du projet de session INF1763 (Techniques et outils professionnels de développement logiciel) durant la session d'automne 2025. La remise du projet est prévu pour le XX décembre 2025.
 
+_[Suivre le Wiki](https://github.com/SOSANE/ShopEasy/wiki/)_
+
+Suivre les guides suivants:
+
+- [Wiki: Configurer mon environnement de développement](https://github.com/SOSANE/ShopEasy/wiki/Set-up)
+- [Guide de contribution](CONTRIBUTING.md)
+- [Guide de déploiement](DEPLOYMENT.md)
+- [Guide d'utilisation de Docker](docs/Guide_Utilisation_Docker_Compose_INF1763.md)
+
+Documentation supplémentaire:
+
+- [Architecture du projet](docs/Architecture.md)
+- [Endpoints du backend](docs/API.md)
+- [Ressources supplémentaires](docs/Ressources.md)
+
 ## Tech Stack
 
 On se met d'accord sur la tech stack suivante, risque à être modifié:
@@ -38,16 +53,6 @@ Attendre que tous les containers ont finis de build. L'interface Swagger UI pour
 
 Le frontend est accessible avec http://localhost:5173/
 ![frontend-interface](/docs/images/frontend-interface.png)
-
-### Exécuter des tests
-
-```sh
-docker exec -it shopeasy_backend bash
-```
-
-```sh
-python manage.py test tests
-```
 
 ### Créer un super-utilisateur (superuser)
 

@@ -116,7 +116,7 @@ REST_FRAMEWORK = {
 # https://github.com/tfranzel/drf-spectacular
 SPECTACULAR_SETTINGS = {
     "TITLE": "ShopEasy API",
-    "DESCRIPTION": "Projet de session INF1763 - ShopEasy",
+    "DESCRIPTION": "Projet de session INF1763 - ShopEasy, système de e-commerce simplifié.",
     "VERSION": "1.0.0",
     "SERVE_INCLUDE_SCHEMA": False,
     # OTHER SETTINGS
