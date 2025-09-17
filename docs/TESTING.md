@@ -28,8 +28,6 @@ Tests avec `Vitest` & `React Testing Library`.
 docker exec -it shopeasy_frontend bash
 ```
 
-_Dans l'occasion qu'on ajoute commande test dans `frontend/package.json`_
-
 ```sh
 npm run test
 ```
