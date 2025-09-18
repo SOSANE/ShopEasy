@@ -29,7 +29,7 @@ jobs:
           docker commit shopeasy_frontend shopeasy_frontend:latest
           docker commit shopeasy_nginx shopeasy_nginx:latest
           docker commit shopeasy_redis shopeasy_redis:latest
-          docker save shopeasy_db:latest shopeasy_backend:latest shopeasy_frontend:latest shopeasy_nginx:latest shopeasy_redis:latest -o project.tar
+          docker save shopeasy_db:latest shopeasy_backend:latest shopeasy_frontend:latest shopeasy_nginx:latest shopeasy_redis:latest -o shopeasy.tar
 
       - name: Uploader une image en tant qu'artifact
         uses: actions/upload-artifact@v4
