@@ -12,10 +12,12 @@ export const EN = {
 
   homepage: {
     title: "Home",
+    text1: "Homepage",
   },
 
   loginpage: {
     title: "Login",
+    text1: "Loginpage",
   },
 
   error404page: {

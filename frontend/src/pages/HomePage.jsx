@@ -11,7 +11,7 @@ function HomePage() {
 
   return (
     <PageTemplate title={LOCALIZE.homepage.title}>
-      <p>Homepage</p>
+      <p>{LOCALIZE.homepage.text1}</p>
     </PageTemplate>
   );
 }

@@ -11,7 +11,7 @@ function LoginPage() {
 
   return (
     <PageTemplate title={LOCALIZE.loginpage.title}>
-      <p>Loginpage</p>
+      <p>{LOCALIZE.loginpage.text1}</p>
     </PageTemplate>
   );
 }
