@@ -4,12 +4,12 @@ import PageTemplate from "../components/PageTemplate";
 // Constants
 import LOCALIZE from "../ressources/text/localize";
 
-function HomePage() {
+function Error404Page() {
   return (
-    <PageTemplate title={LOCALIZE.homepage.title}>
-      <p>Homepage</p>
+    <PageTemplate title={LOCALIZE.error404page.title}>
+      <p>{LOCALIZE.error404page.text1}</p>
     </PageTemplate>
   );
 }
 
-export default HomePage;
+export default Error404Page;

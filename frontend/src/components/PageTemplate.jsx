@@ -1,7 +1,12 @@
-function PageTemplate({ children }) {
+// Components
+import ChangeLanguage from "./header/ChangeLanguage";
+
+function PageTemplate({ children, title }) {
   return (
     <>
-      <p>Initial template!</p> {children}
+      <h1>{title}</h1>
+      <ChangeLanguage />
+      {children}
     </>
   );
 }
