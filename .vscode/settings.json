@@ -6,13 +6,11 @@
   "explorer.confirmDragAndDrop": false,
   "editor.formatOnSave": true,
   "eslint.options": {
-    "overrideConfigFile": ".eslintrc.json"
+    "overrideConfigFile": "eslint.config.js"
   },
   "files.eol": "\n", // Force les fins de lignes à être formatté en LF (UNIX)
   // Problème de configuration ESLint: https://github.com/microsoft/vscode-eslint/issues/696#issuecomment-560799933
-  "eslint.workingDirectories": [
-    "./frontend/"
-  ],
+  "eslint.workingDirectories": ["./frontend/"],
   "window.zoomLevel": 0,
   "editor.accessibilitySupport": "off",
   "python.linting.enabled": true,
@@ -20,13 +18,7 @@
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter"
   },
-  "python.testing.unittestArgs": [
-    "-v",
-    "-s",
-    "./backend",
-    "-p",
-    "*_test.py"
-  ],
+  "python.testing.unittestArgs": ["-v", "-s", "./backend", "-p", "*_test.py"],
   "prettier.printWidth": 100,
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -92,5 +84,5 @@
   },
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
-  },
+  }
 }

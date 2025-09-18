@@ -36,6 +36,7 @@ services:
     container_name: shopeasy_frontend
     volumes:
       - ./frontend:/home/node
+      - /home/node/node_modules
     build: ./frontend
     working_dir: /home/node
   # Nginx reverse proxy
