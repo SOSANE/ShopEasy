@@ -4,9 +4,10 @@
 export const FR = {
   langueContraire: "en",
   language: "Langue",
+  title: "ShopEasy",
 
   header: {
-    change: "Changer de langue",
+    changeLanguage: "English",
   },
 
   homepage: {
@@ -18,7 +19,7 @@ export const FR = {
   },
 
   error404page: {
-    title: "Error 404",
+    title: "Erreur 404",
     text1: "La page n'as pas été trouvée.",
   },
 };

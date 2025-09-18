@@ -7,18 +7,21 @@ import LOCALIZE from "../ressources/text/localize";
 
 const localizationSlice = createSlice({
   name: "localization",
-  initialState: { language: localStorage.getItem("currLang") || "fr" },
+  initialState: { language: setLanguage() },
   reducers: {
     changeLang: (state, action) => {
-      LOCALIZE.setLanguage(action.payload);
       localStorage.setItem("currLang", action.payload);
-      return {
-        ...state,
-        language: action.payload,
-      };
+      LOCALIZE.setLanguage(action.payload);
+      state.language = action.payload;
     },
   },
 });
+
+function setLanguage() {
+  const language = localStorage.getItem("currLang") || "fr";
+  LOCALIZE.setLanguage(language);
+  return language;
+}
 
 export const { changeLang } = localizationSlice.actions;
 export default localizationSlice.reducer;

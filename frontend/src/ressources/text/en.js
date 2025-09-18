@@ -4,9 +4,10 @@
 export const EN = {
   langueContraire: "fr",
   language: "Language",
+  title: "ShopEasy",
 
   header: {
-    change: "Change language",
+    changeLanguage: "Français",
   },
 
   homepage: {

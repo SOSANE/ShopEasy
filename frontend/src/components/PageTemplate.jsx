@@ -1,12 +1,21 @@
+import { useSelector } from "react-redux";
+import Container from "react-bootstrap/Container";
+
 // Components
-import ChangeLanguage from "./header/ChangeLanguage";
+import Header from "./header/Header";
+import Footer from "./footer/Footer";
 
 function PageTemplate({ children, title }) {
+  const langue = useSelector(state => state.localization.language);
+
   return (
     <>
-      <h1>{title}</h1>
-      <ChangeLanguage />
-      {children}
+      <Header />
+      <Container>
+        <h1>{title}</h1>
+        {children}
+      </Container>
+      <Footer />
     </>
   );
 }

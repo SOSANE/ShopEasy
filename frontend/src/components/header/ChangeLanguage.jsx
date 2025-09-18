@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { changeLang } from "../../redux/localizationSlice";
 
+// Constants
 import LOCALIZE from "../../ressources/text/localize";
 
 function ChangeLanguage() {
@@ -8,12 +9,9 @@ function ChangeLanguage() {
   const dispatch = useDispatch();
 
   return (
-    <>
-      <p>{`${LOCALIZE.language}: ${langue}`}</p>
-      <button onClick={() => dispatch(changeLang(LOCALIZE.langueContraire))}>
-        {LOCALIZE.header.change}
-      </button>
-    </>
+    <button variant="dark" onClick={() => dispatch(changeLang(LOCALIZE.langueContraire))}>
+      {LOCALIZE.header.changeLanguage}
+    </button>
   );
 }
 

@@ -4,11 +4,9 @@ import RouteList from "./RouteList";
 
 function App() {
   return (
-    <>
-      <BrowserRouter>
-        <RouteList />
-      </BrowserRouter>
-    </>
+    <BrowserRouter>
+      <RouteList />
+    </BrowserRouter>
   );
 }
 

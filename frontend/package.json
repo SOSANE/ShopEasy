@@ -14,6 +14,8 @@
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.9.1",
+    "react-bootstrap": "^2.10.10",
+    "bootstrap": "^5.3.8",
     "react-localization": "^2.0.6",
     "@reduxjs/toolkit": "^2.9.0",
     "react-redux": "^9.2.0",
