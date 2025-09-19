@@ -1,9 +1,11 @@
-import { useSelector } from "react-redux";
-import { Container, Row, Col } from "react-bootstrap";
+import { useLocalization } from "../../state/contexts/LocalizationContext";
+
+// Constants
 import LOCALIZE from "../../ressources/text/localize";
 
 function Footer() {
-  const langue = useSelector(state => state.localization.language);
+  const language = useLocalization();
+
   return (
     <footer className="footer fixed-bottom">
       <div className="text-center py-3">

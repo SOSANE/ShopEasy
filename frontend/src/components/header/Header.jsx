@@ -1,10 +1,10 @@
-import { useSelector } from "react-redux";
+import { useLocalization } from "../../state/contexts/LocalizationContext";
 
 // Components
 import NavBar from "./NavBar";
 
 function Header() {
-  const langue = useSelector(state => state.localization.language);
+  const language = useLocalization();
 
   return (
     <header>

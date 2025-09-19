@@ -1,12 +1,12 @@
-import { useSelector } from "react-redux";
-import Container from "react-bootstrap/Container";
+import { useLocalization } from "../state/contexts/LocalizationContext";
 
 // Components
 import Header from "./header/Header";
 import Footer from "./footer/Footer";
+import Container from "react-bootstrap/Container";
 
 function PageTemplate({ children, title }) {
-  const langue = useSelector(state => state.localization.language);
+  const language = useLocalization();
 
   return (
     <>

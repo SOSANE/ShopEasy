@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useLocalization } from "../state/contexts/LocalizationContext";
 
 // Components
 import PageTemplate from "../components/PageTemplate";
@@ -7,7 +7,7 @@ import PageTemplate from "../components/PageTemplate";
 import LOCALIZE from "../ressources/text/localize";
 
 function LoginPage() {
-  const langue = useSelector(state => state.localization.language);
+  const language = useLocalization();
 
   return (
     <PageTemplate title={LOCALIZE.loginpage.title}>

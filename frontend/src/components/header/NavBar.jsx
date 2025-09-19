@@ -1,5 +1,6 @@
-import { useSelector } from "react-redux";
+import { useLocalization } from "../../state/contexts/LocalizationContext";
 
+// Components
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
@@ -10,7 +11,7 @@ import PATH from "../../ressources/routes/paths";
 import LOCALIZE from "../../ressources/text/localize";
 
 function NavBar() {
-  const langue = useSelector(state => state.localization.language);
+  const language = useLocalization();
 
   return (
     <Navbar fixed="top" className="bg-body-tertiary">
