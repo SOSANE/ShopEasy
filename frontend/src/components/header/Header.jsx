@@ -7,7 +7,7 @@ function Header() {
   const language = useLocalization();
 
   return (
-    <header>
+    <header className="fixed top-0 left-0 w-full">
       <NavBar />
     </header>
   );

@@ -8,6 +8,7 @@ export const FR = {
 
   header: {
     changeLanguage: "English",
+    logoAltText: "Logo ShopEasy",
   },
 
   homepage: {

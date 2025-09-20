@@ -10,7 +10,7 @@ function ChangeLanguage() {
 
   return (
     <button
-      variant="dark"
+      className="rounded-lg bg-stone-800 p-2 text-stone-50 hover:bg-stone-950 hover:text-stone-100"
       onClick={() => dispatch({ type: SET_LANGUAGE, language: LOCALIZE.langueContraire })}
     >
       {LOCALIZE.header.changeLanguage}
