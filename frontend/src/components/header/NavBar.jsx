@@ -1,6 +1,5 @@
+// Components & fonction
 import { useLocalization } from "../../state/contexts/LocalizationContext";
-
-// Components
 import ChangeLanguage from "./ChangeLanguage";
 import shopEasyLogo from "../../assets/shopping-bag.svg";
 

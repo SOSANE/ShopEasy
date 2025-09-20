@@ -3,12 +3,15 @@
 Utiliser les ressources suivantes pour familiarisation du Tech Stack:
 
 - Django:
-    - https://www.w3schools.com/django/django_install_django.php
-    - https://www.djangoproject.com/
-    - https://www.django-rest-framework.org/
-    - https://drf-spectacular.readthedocs.io/en/latest/readme.html
+    - [Documentation Django](https://docs.djangoproject.com/en/5.2/)
+    - [Installer Django tuto.](https://www.w3schools.com/django/django_install_django.php)
+    - [Documentation Django rest framework](https://www.django-rest-framework.org/)
+    - [Documentation DRF Spectacular](https://drf-spectacular.readthedocs.io/en/latest/readme.html)
 
-- React/Redux
+- React
+    - [React JS Official Documentation](https://reactjs.org/docs/getting-started.html)
+    - [React Developer Cheat Sheet](https://devhints.io/react)
+
 
 - Frontend testing:
     - [Vitest](https://vitest.dev/)

@@ -1,6 +1,6 @@
 # ShopEasy - Système de e-commerce simplifié
 
-Ceci est le répertoire du projet de session INF1763 (Techniques et outils professionnels de développement logiciel) durant la session d'automne 2025. La remise du projet est prévu pour le XX décembre 2025.
+Ceci est le répertoire du projet de session INF1763 (Techniques et outils professionnels de développement logiciel) durant la session d'automne 2025. La remise du projet est prévu pour le 10 décembre 2025.
 
 _[Suivre le Wiki](https://github.com/SOSANE/ShopEasy/wiki/)_
 

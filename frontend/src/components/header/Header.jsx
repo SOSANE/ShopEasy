@@ -1,7 +1,6 @@
-import { useLocalization } from "../../state/contexts/LocalizationContext";
-
-// Components
+// Components & fonction
 import NavBar from "./NavBar";
+import { useLocalization } from "../../state/contexts/LocalizationContext";
 
 function Header() {
   const language = useLocalization();

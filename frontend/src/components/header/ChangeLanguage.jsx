@@ -1,8 +1,9 @@
-import { useLocalization, useLocalizationDispatch } from "../../state/contexts/LocalizationContext";
-
 // Constants
 import LOCALIZE from "../../ressources/text/localize";
 import { SET_LANGUAGE } from "../../state/actions";
+
+// Components & fonction
+import { useLocalization, useLocalizationDispatch } from "../../state/contexts/LocalizationContext";
 
 function ChangeLanguage() {
   const language = useLocalization();
