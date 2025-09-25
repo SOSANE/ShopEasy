@@ -19,7 +19,7 @@ jobs:
 
       - name: Build les containers
         run: |
-          docker compose up -f docker-compose.ci.yml --build -d
+          docker compose -f docker-compose.ci.yml up --build -d
           sleep 30
 
       - name: Enregistrer une image
@@ -54,7 +54,7 @@ jobs:
         run: |
           docker load -i shopeasy.tar
           docker image ls -a
-          docker compose up -f docker-compose.ci.yml  -d
+          docker compose -f docker-compose.ci.yml up --build -d
           sleep 30
 
       - name: Exécuter test API
