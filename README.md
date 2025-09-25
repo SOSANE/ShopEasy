@@ -83,3 +83,11 @@ python manage.py createsuperuser
 En accédant sur http://localhost:8000/api/admin, on peut se connecter sur le dashboard d'administrateur
 ![django-admin-login-page](/docs/images/django-admin-login-page.png)
 ![django-admin-interface](/docs/images/django-admin-interface.png)
+
+
+## Membres de l'équipe 9
+- Anta Mbaye Sene
+- Nelie Mabelle Djieunang Noumbo
+- Sosane Mahamoud Houssein
+- Tresor Megane Tambat
+- Zachary McSween Manickchand
