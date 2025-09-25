@@ -19,7 +19,7 @@ jobs:
 
       - name: Build les containers
         run: |
-          docker compose up --build -d
+          docker compose up -f docker-compose.ci.yml --build -d
           sleep 30
 
       - name: Enregistrer une image
@@ -49,11 +49,12 @@ jobs:
           name: shopeasy-image
           path: .
 
+      # Téléchargement de l'image à corriger
       - name: Télécharger l'image
         run: |
           docker load -i shopeasy.tar
           docker image ls -a
-          docker compose up -d
+          docker compose up -f docker-compose.ci.yml  -d
           sleep 30
 
       - name: Exécuter test API
