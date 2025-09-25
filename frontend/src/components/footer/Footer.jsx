@@ -1,4 +1,6 @@
+// Components & fonction
 import { useLocalization } from "../../state/contexts/LocalizationContext";
+import { Link } from "react-router";
 
 // Constants
 import LOCALIZE from "../../ressources/text/localize";
@@ -11,7 +13,7 @@ function Footer() {
     <footer className="fixed bottom-0 left-0 w-full text-stone-900">
       <div className="py-4 text-center">
         © 2025 Copyright:
-        <a href={PATH.home}> {LOCALIZE.title}</a>
+        <Link to={PATH.home}> {LOCALIZE.title}</Link>
       </div>
     </footer>
   );
