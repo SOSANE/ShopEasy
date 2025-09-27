@@ -115,8 +115,8 @@ REST_FRAMEWORK = {
 # Swagger UI avec drf-spectacular
 # https://github.com/tfranzel/drf-spectacular
 SPECTACULAR_SETTINGS = {
-    "TITLE": "Project template API",
-    "DESCRIPTION": "Template pour le projet de session INF1763",
+    "TITLE": "ShopEasy API",
+    "DESCRIPTION": "Projet de session INF1763 - ShopEasy, système de e-commerce simplifié.",
     "VERSION": "1.0.0",
     "SERVE_INCLUDE_SCHEMA": False,
     # OTHER SETTINGS
