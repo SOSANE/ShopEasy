@@ -32,7 +32,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 INSTALLED_APPS = [
     # APPS
     "backend.backend_models",
-    "user_management.user_management_models",
+    #"user_management.user_management_models",
     # BASE
     "django.contrib.admin",
     "django.contrib.auth",
@@ -123,7 +123,8 @@ SPECTACULAR_SETTINGS = {
 }
 
 # Allow the user to log in by email or username
-AUTH_USER_MODEL = "user_management_models.User"
+#AUTH_USER_MODEL = "user_management_models.User"
+AUTH_USER_MODEL = 'backend_models.Utilisateur'
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
@@ -201,7 +202,7 @@ LOGGING = {
         "file": {
             "level": "DEBUG",
             "class": "logging.FileHandler",
-            "filename": "/backend/logs/debug.log",
+            "filename": "./backend/logs/debug.log",
             "formatter": "simple",
         }
     },

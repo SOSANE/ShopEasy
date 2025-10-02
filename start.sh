@@ -41,7 +41,7 @@ check_prerequisites() {
     fi
     
     # Vérifier Docker Compose
-    if ! command -v docker-compose &> /dev/null; then
+    if ! command -v docker compose &> /dev/null; then
         log_error "Docker Compose n'est pas installé. Veuillez l'installer d'abord."
         exit 1
     fi
@@ -92,7 +92,7 @@ EOF
 # Fonction pour nettoyer l'environnement
 cleanup() {
     log_info "Nettoyage de l'environnement..."
-    docker-compose down -v 2>/dev/null || true
+    docker compose down -v 2>/dev/null || true
     docker system prune -f 2>/dev/null || true
     log_success "Environnement nettoyé"
 }
@@ -105,9 +105,9 @@ start_services() {
     
     if [ -n "$profile" ]; then
         log_info "Utilisation du profil: $profile"
-        docker-compose --profile "$profile" up -d
+        docker compose --profile "$profile" up -d
     else
-        docker-compose up -d
+        docker compose up -d
     fi
     
     log_info "Attente du démarrage des services..."
@@ -143,7 +143,7 @@ check_services() {
     fi
     
     # Vérifier la base de données
-    if docker-compose exec -T db pg_isready -U app_user > /dev/null 2>&1; then
+    if docker compose exec -T db pg_isready -U app_user > /dev/null 2>&1; then
         log_success "Base de données accessible"
     else
         log_warning "Base de données pas encore prête"
@@ -153,13 +153,13 @@ check_services() {
 # Fonction pour afficher les logs
 show_logs() {
     log_info "Affichage des logs récents..."
-    docker-compose logs --tail=20
+    docker compose logs --tail=20
 }
 
 # Fonction pour afficher le statut
 show_status() {
     log_info "Statut des services:"
-    docker-compose ps
+    docker compose ps
     
     echo ""
     log_info "Services accessibles:"
@@ -169,7 +169,7 @@ show_status() {
     echo "  📊 Actuator:     http://localhost:8000/actuator"
     
     # Vérifier si monitoring est actif
-    if docker-compose ps | grep -q prometheus; then
+    if docker compose ps | grep -q prometheus; then
         echo "  📈 Prometheus:   http://localhost:9090"
         echo "  📊 Grafana:      http://localhost:3001 (admin/admin123)"
     fi
@@ -207,12 +207,12 @@ main() {
             ;;
         "stop")
             log_info "Arrêt de l'application..."
-            docker-compose down
+            docker compose down
             log_success "Application arrêtée"
             ;;
         "restart")
             log_info "Redémarrage de l'application..."
-            docker-compose down
+            docker compose down
             start_services "$2"
             show_status
             ;;
@@ -221,9 +221,9 @@ main() {
             ;;
         "logs")
             if [ -n "$2" ]; then
-                docker-compose logs "$2"
+                docker compose logs "$2"
             else
-                docker-compose logs
+                docker compose logs
             fi
             ;;
         "clean")
@@ -232,11 +232,11 @@ main() {
         "test")
             log_info "Lancement des tests..."
             if [ -f "docker-compose.test.yml" ]; then
-                docker-compose -f docker-compose.test.yml up -d
+                docker compose -f docker-compose.test.yml up -d
                 sleep 20
-                docker-compose -f docker-compose.test.yml exec -T backend ./mvnw test
-                docker-compose -f docker-compose.test.yml exec -T frontend npm test -- --coverage --watchAll=false
-                docker-compose -f docker-compose.test.yml down -v
+                docker compose -f docker-compose.test.yml exec -T backend ./mvnw test
+                docker compose -f docker-compose.test.yml exec -T frontend npm test -- --coverage --watchAll=false
+                docker compose -f docker-compose.test.yml down -v
             else
                 log_warning "Fichier docker-compose.test.yml introuvable"
             fi
