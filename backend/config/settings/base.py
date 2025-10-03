@@ -28,13 +28,11 @@ SECRET_KEY = "django-insecure-57)4%+i#30iz@n1-=0erpgidx&jpmhs4^l(nu#k1v*(8sv0zc5
 ALLOWED_HOSTS = ["*"]
 CORS_ORIGIN_ALLOW_ALL = True
 
-APP = "api"
-APP_MODELS = "models"
-
 # Application definition
 INSTALLED_APPS = [
     # APPS
-    f"{APP}.{APP_MODELS}",
+    "backend.backend_models",
+    "user_management.user_management_models",
     # BASE
     "django.contrib.admin",
     "django.contrib.auth",
@@ -125,7 +123,7 @@ SPECTACULAR_SETTINGS = {
 }
 
 # Allow the user to log in by email or username
-AUTH_USER_MODEL = f"{APP_MODELS}.Utilisateur"
+AUTH_USER_MODEL = "user_management_models.User"
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
@@ -203,7 +201,7 @@ LOGGING = {
         "file": {
             "level": "DEBUG",
             "class": "logging.FileHandler",
-            "filename": f"./{APP}/logs/debug.log",
+            "filename": "/backend/logs/debug.log",
             "formatter": "simple",
         }
     },
