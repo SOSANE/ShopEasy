@@ -1,23 +1,24 @@
-# Image python de https://hub.docker.com/_/python/
-FROM python:3.13.7-slim
+FROM astral/uv:python3.13-bookworm-slim
 
-# Variables d'environement
-ENV TZ America/Toronto
-ENV PYTHONDONTWRITEBYTECODE 1 
-ENV PYTHONUNBUFFERED 1
+ENV TZ=America/Toronto
 
-# Déplacer vers le dossier backend
-RUN mkdir /backend
-WORKDIR /backend
+WORKDIR /app
 
-# Installer les dépendances du backend
-ADD requirements.txt /backend/
+# system deps (single RUN to keep layer count small)
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends libpq5 libpq-dev python3-dev postgresql postgresql-contrib curl \
-    && rm -rf /var/lib/apt/lists/* \
-    && pip install -r requirements.txt
+    && apt-get install -y --no-install-recommends libpq5 libpq-dev build-essential curl \
+    && rm -rf /var/lib/apt/lists/*
 
+# copy only requirements first to leverage Docker layer caching
+COPY requirements.txt /app/
+RUN pip2 install --no-cache-dir -r requirements.txt
 
-ADD . /backend/
+# copy application code
+COPY . /app/
+
+# entrypoint handles migrations and startup
+COPY ./entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
 CMD ["/bin/sh", "entrypoint.sh"]
 EXPOSE 8000
