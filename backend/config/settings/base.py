@@ -34,7 +34,7 @@ APP_MODELS = "models"
 # Application definition
 INSTALLED_APPS = [
     # APPS
-    f"{APP}.{APP_MODELS}"
+    f"{APP}.{APP_MODELS}",
     # BASE
     "django.contrib.admin",
     "django.contrib.auth",
