@@ -2,7 +2,7 @@
 
 ```mermaid
 ---
-title: Schema Base de Donné
+title: Schéma de base de données
 config:
     layout: elk
 ---
@@ -73,6 +73,7 @@ erDiagram
     Produit_Panier{
         clé_primaire id_panier
         clé_primaire id_produit
+        int quantité
     }
     Commande ||--|{ Item_Commande : contient
     Client ||--o{ Commande: passe
