@@ -196,7 +196,7 @@ class Migration(migrations.Migration):
                         null=True,
                         on_delete=django.db.models.deletion.SET_NULL,
                         related_name="sous_catégories",
-                        to="backend_models.catégorie",
+                        to="models.catégorie",
                     ),
                 ),
             ],
@@ -223,7 +223,7 @@ class Migration(migrations.Migration):
                 (
                     "catégories",
                     models.ManyToManyField(
-                        related_name="produits", to="backend_models.catégorie"
+                        related_name="produits", to="models.catégorie"
                     ),
                 ),
                 (
@@ -231,7 +231,7 @@ class Migration(migrations.Migration):
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE,
                         related_name="produits",
-                        to="backend_models.marchand",
+                        to="models.marchand",
                     ),
                 ),
             ],
@@ -254,7 +254,7 @@ class Migration(migrations.Migration):
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE,
                         related_name="images",
-                        to="backend_models.produit",
+                        to="models.produit",
                     ),
                 ),
             ],
@@ -276,14 +276,14 @@ class Migration(migrations.Migration):
                     "panier",
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE,
-                        to="backend_models.panier",
+                        to="models.panier",
                     ),
                 ),
                 (
                     "produit",
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE,
-                        to="backend_models.produit",
+                        to="models.produit",
                     ),
                 ),
             ],
@@ -295,7 +295,7 @@ class Migration(migrations.Migration):
             model_name="panier",
             name="produits",
             field=models.ManyToManyField(
-                through="backend_models.ProduitPanier", to="backend_models.produit"
+                through="models.ProduitPanier", to="models.produit"
             ),
         ),
         migrations.AddField(
@@ -304,7 +304,7 @@ class Migration(migrations.Migration):
             field=models.OneToOneField(
                 on_delete=django.db.models.deletion.CASCADE,
                 related_name="panier",
-                to="backend_models.client",
+                to="models.client",
             ),
         ),
         migrations.CreateModel(
@@ -325,7 +325,7 @@ class Migration(migrations.Migration):
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE,
                         related_name="commandes",
-                        to="backend_models.client",
+                        to="models.client",
                     ),
                 ),
             ],
@@ -352,7 +352,7 @@ class Migration(migrations.Migration):
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE,
                         related_name="adresses",
-                        to="backend_models.client",
+                        to="models.client",
                     ),
                 ),
             ],
@@ -376,14 +376,14 @@ class Migration(migrations.Migration):
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE,
                         related_name="items",
-                        to="backend_models.commande",
+                        to="models.commande",
                     ),
                 ),
                 (
                     "produit",
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE,
-                        to="backend_models.produit",
+                        to="models.produit",
                     ),
                 ),
             ],
