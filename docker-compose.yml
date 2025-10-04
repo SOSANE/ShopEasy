@@ -65,8 +65,6 @@ services:
     container_name: mailhog
     ports:
       - "1025:1025"
-    logging:
-      driver: "none"
 
   minio:
     image: minio/minio:latest
@@ -88,3 +86,4 @@ services:
 volumes:
   postgres_data:
   redis_data:
+  minio_data:
