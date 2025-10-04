@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export PATH="/app/.venv/bin:$PATH"
+
 # Créer fichiers de migrations
 python manage.py makemigrations
 
@@ -12,4 +14,4 @@ python manage.py migrate sessions
 python manage.py migrate models
 
 # Application accessible sur http://localhost:8000
-python manage.py runserver 0.0.0.0:8000
+#python manage.py runserver 0.0.0.0:8000

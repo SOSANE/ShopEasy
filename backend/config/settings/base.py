@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     "drf_spectacular",
     "rest_framework_swagger",
     "rest_framework.authtoken",
-    "minio_storage",
+    # "minio_storage", // BUG: I can't figure out how to import this ??
 ]
 
 MIDDLEWARE = [
