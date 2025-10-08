@@ -29,6 +29,8 @@ services:
         condition: service_healthy
       redis:
         condition: service_started
+      minio:
+        condition: service_healthy
     ports:
       - 8000:8000
   # Frontend React
@@ -71,10 +73,9 @@ services:
     container_name: minio
     ports:
       - "9000:9000"
-    environment:
-      MINIO_ROOT_USER: minioadmin
-      MINIO_ROOT_PASSWORD: supersecretpassword
-      MINIO_DEFAULT_BUCKETS: produit-media-bucket
+      - "9001:9001"
+    env_file:
+      - .env.local
     volumes:
       - minio_data:/media
     healthcheck:
@@ -82,6 +83,7 @@ services:
       interval: 30s
       timeout: 20s
       retries: 3
+    command: server /data --console-address :9001
 
 volumes:
   postgres_data:
