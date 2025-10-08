@@ -240,7 +240,7 @@ EMAIL_HOST_PASSWORD = ""
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = False
 
-DOMAIN = "localhost"  # "example.com"
+DOMAIN = "localhost"
 DEFAULT_FROM_EMAIL = f"support@{DOMAIN}"
 SERVER_EMAIL = f"server-errors@{DOMAIN}"
 
@@ -248,12 +248,8 @@ SERVER_EMAIL = f"server-errors@{DOMAIN}"
 DEFAULT_FILE_STORAGE = "minio_storage.storage.MinioMediaStorage"
 
 MINIO_STORAGE_ENDPOINT = "localhost:9000"
-MINIO_STORAGE_ACCESS_KEY = "minioadmin"
-MINIO_STORAGE_SECRET_KEY = "supersecretpassword"
-MINIO_STORAGE_USE_HTTPS = (
-    False  # Set to True if MinIO uses TLS/SSL (recommended for production)
-)
-MINIO_STORAGE_MEDIA_BUCKET_NAME = (
-    "produit-media-bucket"  # The bucket where media files will be stored
-)
+MINIO_STORAGE_ACCESS_KEY = os.environ.get("MINIO_ROOT_USER")
+MINIO_STORAGE_SECRET_KEY = os.environ.get("MINIO_ROOT_PASSWORD")
+MINIO_STORAGE_USE_HTTPS = False
+MINIO_STORAGE_MEDIA_BUCKET_NAME = os.environ.get("MINIO_DEFAULT_BUCKETS")
 MEDIA_URL = "/media/"
