@@ -26,11 +26,14 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
+  padding: 0;
+  display: block;
+  overflow-x: hidden;
+  min-width: 100vw;
   min-height: 100vh;
+  background-color: #d9aa6e;
 }
+
 
 h1 {
   font-size: 3.2em;
@@ -68,3 +71,13 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+/* Cacher la barre horizontale sur tous les navigateurs */
+.hide-scrollbar {
+  scrollbar-width: none; 
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; 
+}
+
+
+
