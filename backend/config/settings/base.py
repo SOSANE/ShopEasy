@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "drf_spectacular",
     "rest_framework_swagger",
     "rest_framework.authtoken",
+    "minio_storage",
 ]
 
 MIDDLEWARE = [
@@ -228,3 +229,27 @@ CACHES = {
         "LOCATION": "redis://redis:6379",
     }
 }
+
+# Email Setup
+## Config pour envoyer email: https://docs.djangoproject.com/en/5.2/topics/email/
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "mailhog"
+EMAIL_PORT = 1025
+EMAIL_HOST_USER = ""
+EMAIL_HOST_PASSWORD = ""
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = False
+
+DOMAIN = "localhost"
+DEFAULT_FROM_EMAIL = f"support@{DOMAIN}"
+SERVER_EMAIL = f"server-errors@{DOMAIN}"
+
+# MinIO Setup
+DEFAULT_FILE_STORAGE = "minio_storage.storage.MinioMediaStorage"
+
+MINIO_STORAGE_ENDPOINT = "localhost:9000"
+MINIO_STORAGE_ACCESS_KEY = os.environ.get("MINIO_ROOT_USER")
+MINIO_STORAGE_SECRET_KEY = os.environ.get("MINIO_ROOT_PASSWORD")
+MINIO_STORAGE_USE_HTTPS = False
+MINIO_STORAGE_MEDIA_BUCKET_NAME = os.environ.get("MINIO_DEFAULT_BUCKETS")
+MEDIA_URL = "/media/"
