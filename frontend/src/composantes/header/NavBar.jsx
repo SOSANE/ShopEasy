@@ -23,7 +23,7 @@ function NavBar() {
 
         <div className="flex w-1/3 items-center justify-end">
           <Link to={PATH.login} className="pr-3">
-            {LOCALIZE.loginpage.title}
+            {LOCALIZE.loginpage.navTitle}
           </Link>
           <ChangeLanguage />
         </div>

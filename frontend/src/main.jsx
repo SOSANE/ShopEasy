@@ -1,13 +1,13 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { LocalizationProvider } from "./state/contexts/LocalizationProvider.jsx";
+import { Provider } from "./state/contexts/Provider.jsx";
 import "./index.css";
 import App from "./App.jsx";
 
 createRoot(document.getElementById("root")).render(
-  <LocalizationProvider>
+  <Provider>
     <StrictMode>
       <App />
     </StrictMode>
-  </LocalizationProvider>
+  </Provider>
 );

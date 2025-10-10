@@ -1,5 +1,5 @@
 // Components & fonction
-import PageTemplate from "../components/PageTemplate";
+import PageTemplate from "../composantes/PageTemplate";
 import { useLocalization } from "../state/contexts/LocalizationContext";
 
 // Constants
