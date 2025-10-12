@@ -29,7 +29,9 @@ jobs:
           docker commit shopeasy_frontend shopeasy_frontend:latest
           docker commit shopeasy_nginx shopeasy_nginx:latest
           docker commit shopeasy_redis shopeasy_redis:latest
-          docker save shopeasy_db:latest shopeasy_backend:latest shopeasy_frontend:latest shopeasy_nginx:latest shopeasy_redis:latest -o shopeasy.tar
+          docker commit shopeasy_mailhog shopeasy_mailhog:latest
+          docker commit shopeasy_minio shopeasy_minio:latest
+          docker save shopeasy_db:latest shopeasy_backend:latest shopeasy_frontend:latest shopeasy_nginx:latest shopeasy_redis:latest shopeasy_mailhog:latest shopeasy_minio:latest-o shopeasy.tar
 
       - name: Uploader une image en tant qu'artifact
         uses: actions/upload-artifact@v4
@@ -71,13 +73,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install dependencies
-        uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # v4.3.0
-        with:
-          node-version: "20"
-
-      - run: npm install eslint eslint-plugin-react-hooks eslint-plugin-react-refresh -D
-
       - name: (Backend) Analyse du code
         uses: dciborow/action-pylint@0.1.0
         with:
@@ -95,7 +90,16 @@ jobs:
           workdir: backend
           black_args: "--check ."
           level: warning
+      
+      - name: Install dependencies
+        uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # v4.3.0
+        with:
+          node-version: "20"
 
+      - run: |
+          cd frontend
+          npm install eslint eslint-plugin-react-hooks eslint-plugin-react-refresh -D
+      
       - name: (Frontend) Analyse du code
         uses: reviewdog/action-eslint@2fee6dd72a5419ff4113f694e2068d2a03bb35dd # v1.33.2
         with:

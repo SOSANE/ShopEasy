@@ -1,4 +1,5 @@
 import { AUTH_TOKEN } from "./constants";
+import { getToken } from "./helpers";
 
 export async function login(username, password) {
   const response = await fetch("/api/auth/token/login/", {
@@ -19,7 +20,7 @@ export async function login(username, password) {
 }
 
 export async function logout() {
-  const token = JSON.parse(sessionStorage.getItem(AUTH_TOKEN));
+  const token = getToken();
   const response = await fetch("/api/auth/token/logout/", {
     method: "POST",
     headers: {
@@ -29,7 +30,7 @@ export async function logout() {
 
   if (response.ok) {
     sessionStorage.clear();
-    return true; // .
+    return true;
   }
   return false;
 }
@@ -50,8 +51,10 @@ export async function signup(email, username, password) {
   return null;
 }
 
+// NP: verifier l'existence de auth_token en premier
 export async function userInfo() {
-  const token = JSON.parse(sessionStorage.getItem(AUTH_TOKEN));
+  const token = getToken();
+
   const response = await fetch("/api/auth/users/me/", {
     method: "GET",
     headers: {

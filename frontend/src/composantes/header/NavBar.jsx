@@ -14,14 +14,16 @@ import LOCALIZE from "../../ressources/text/localize";
 
 function NavBar() {
   const language = useLocalization();
-  const { currentUser, setCurrentUser } = useContext(AuthContext);
+  const { currentUser, setCurrentUser, setIsLoggedIn } = useContext(AuthContext);
 
   async function handleLogout() {
     const isLoggedOut = await logout();
     if (isLoggedOut) {
       setCurrentUser(null);
+      setIsLoggedIn(false);
     }
   }
+
   return (
     <nav className="py-5 shadow-md">
       <div className="mx-auto flex items-center px-8 lg:container">
@@ -35,11 +37,11 @@ function NavBar() {
         <div className="flex w-1/3 items-center justify-end">
           {currentUser ? (
             <button onClick={() => handleLogout()} className="mr-2 bg-stone-50 text-stone-950">
-              Log out
+              {LOCALIZE.header.navbarLogoutTitle}
             </button>
           ) : (
             <Link to={PATH.login} className="pr-3">
-              {LOCALIZE.loginpage.navTitle}
+              {LOCALIZE.header.navbarLoginTitle}
             </Link>
           )}
           <ChangeLanguage />

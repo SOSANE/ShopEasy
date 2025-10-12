@@ -64,13 +64,13 @@ services:
 
   mailhog:
     image: mailhog/mailhog:latest
-    container_name: mailhog
+    container_name: shopeasy_mailhog
     ports:
       - "1025:1025"
 
   minio:
     image: minio/minio:latest
-    container_name: minio
+    container_name: shopeasy_minio
     ports:
       - "9000:9000"
       - "9001:9001"

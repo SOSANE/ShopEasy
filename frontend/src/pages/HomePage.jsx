@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { Link } from "react-router";
 
 // Components & fonction
 import PageTemplate from "../composantes/PageTemplate";
@@ -14,8 +15,11 @@ function HomePage() {
 
   return (
     <PageTemplate title={LOCALIZE.homepage.title}>
-      {/* a ajouter dans ressources */}
-      {currentUser && <p>Bonjour, {currentUser.username}</p>}
+      {currentUser && (
+        <p>
+          {LOCALIZE.homepage.text2} {currentUser.username}
+        </p>
+      )}
       <p>{LOCALIZE.homepage.text1}</p>
     </PageTemplate>
   );

@@ -5,17 +5,15 @@ import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/in
 
 // Components & fonction
 import { useLocalization } from "../../state/contexts/LocalizationContext";
-import { AuthContext } from "../../state/contexts/AuthContext";
 import { login, userInfo } from "../../api/authentification";
 
 // Constants
 import LOCALIZE from "../../ressources/text/localize";
 import PATH from "../../ressources/routes/paths";
 
-function LoginForm() {
+function LoginForm({ setCurrentUser, setIsLoggedIn }) {
   const language = useLocalization();
   let navigate = useNavigate();
-  const { setCurrentUser } = useContext(AuthContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showError, setShowError] = useState(false);
@@ -30,6 +28,7 @@ function LoginForm() {
         email: info.email,
       });
       setShowError(false);
+      setIsLoggedIn(true);
       navigate(PATH.home);
     } else {
       setShowError(true);
@@ -39,8 +38,8 @@ function LoginForm() {
   return (
     <div className="max-w-lg overflow-hidden rounded shadow-lg">
       <div className="px-6 py-6">
-        <form id="login-form" className="flex flex-col px-5" onSubmit={e => handleSubmit(e)}>
-          <div className="flex flex-col gap-3 py-4">
+        <form id="login-form" className="flex flex-col gap-4 px-5" onSubmit={e => handleSubmit(e)}>
+          <div className="flex flex-col gap-3">
             <InputGroup>
               <InputGroupAddon>
                 <User />
@@ -72,7 +71,13 @@ function LoginForm() {
               />
             </InputGroup>
           </div>
-          {showError && <p>Erreur!!</p>}
+          <div>
+            {showError && (
+              <p className="text-lg font-medium text-red-700">
+                {LOCALIZE.loginpage.form.errorMessage}
+              </p>
+            )}
+          </div>
 
           <input
             type="submit"

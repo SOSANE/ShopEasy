@@ -109,7 +109,19 @@ function RegisterForm() {
             />
           </div>
 
-          {showError && <p>Erreur</p>}
+          {/* Inclure des messages d'erreur plus variées du genre:
+          - A user with that username already exists.
+          - Your password can’t be too similar to your other personal information.
+          - This password is too short. It must contain at least %d character.
+          - Your password must contain at least %(min_length)d character.
+          ce sont des messages de validation venant de django.contrib.auth.password_validation qu'on peut intégrer
+          */}
+          {showError && (
+            <p className="text-lg font-medium text-red-700">
+              {LOCALIZE.registerPage.form.errorMessage}
+            </p>
+          )}
+
           <input
             type="submit"
             id="register-form-submit"

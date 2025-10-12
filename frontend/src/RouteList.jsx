@@ -1,21 +1,29 @@
+import { useContext } from "react";
 import { Route, Routes } from "react-router";
 
-// Pages
+// Pages & fonctions
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import Error404Page from "./pages/Error404Page";
 import RegisterPage from "./pages/RegisterPage";
+import PrivateRoute from "./composantes/commons/PrivateRoute";
+import { AuthContext } from "./state/contexts/AuthContext";
 
 // Constants
 import PATH from "./ressources/routes/paths";
 
 function RouteList() {
+  const { isLoggedIn } = useContext(AuthContext);
+
   return (
     <Routes>
       <Route path={PATH.home} element={<HomePage />} />
-      <Route path={PATH.login} element={<LoginPage />} />
-      <Route path={PATH.signup} element={<RegisterPage />} />
+      <Route element={<PrivateRoute isAllowed={!isLoggedIn} redirect={PATH.home} />}>
+        <Route path={PATH.login} element={<LoginPage />} />
+        <Route path={PATH.signup} element={<RegisterPage />} />
+      </Route>
 
+      {/* Page non trouvée */}
       <Route path="*" element={<Error404Page />} />
     </Routes>
   );

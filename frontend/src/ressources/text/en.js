@@ -9,20 +9,23 @@ export const EN = {
   header: {
     changeLanguage: "Français",
     logoAltText: "ShopEasy Logo",
+    navbarLogoutTitle: "Log out",
+    navbarLoginTitle: "Sign in",
   },
 
   homepage: {
     title: "Home",
     text1: "Homepage",
+    text2: "Hello, ",
   },
 
   loginpage: {
     title: "Welcome Back!",
-    navTitle: "Sign in",
     text1: "Sign in in to buy from ShopEasy",
     form: {
       usernameLabel: "Username",
       passwordLabel: "Password",
+      errorMessage: "Log in error, please try again.",
       buttonLabel: "Log in",
       registerAccount: "No account? Sign up here",
     },
@@ -45,6 +48,7 @@ export const EN = {
       passwordPlaceholder: "Password",
       confirmPasswordLabel: "Confirm your password",
       confirmPasswordPlaceholder: "Password confirmation",
+      errorMessage: "Sign up error, please try again.",
       buttonLabel: "Sign up",
       loginAccount: "Already own an account? Log in here.",
     },

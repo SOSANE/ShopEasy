@@ -9,20 +9,23 @@ export const FR = {
   header: {
     changeLanguage: "English",
     logoAltText: "Logo ShopEasy",
+    navbarLogoutTitle: "Déconnexion",
+    navbarLoginTitle: "Connexion",
   },
 
   homepage: {
     title: "Acceuil",
     text1: "Page d'acceuil",
+    text2: "Bonjour, ",
   },
 
   loginpage: {
     title: "Bienvenue",
-    navTitle: "Connexion",
     text1: "Connectez-vous pour acheter sur ShopEasy",
     form: {
       usernameLabel: "Nom d'utilisateur",
       passwordLabel: "Mot de passe",
+      errorMessage: "Erreur de connexion, veuillez réessayer s'il-vous-plaît.",
       buttonLabel: "Connexion",
       registerAccount: "Pas de compte? Créez un nouveau compte ici",
     },
@@ -45,6 +48,7 @@ export const FR = {
       passwordPlaceholder: "Mot de passe",
       confirmPasswordLabel: "Confirmez votre mot de passe",
       confirmPasswordPlaceholder: "Confirmation du mot de passe",
+      errorMessage: "Erreur lors de la création du compte, veuillez réessayer s'il-vous-plaît.",
       buttonLabel: "Créez votre compte",
       loginAccount: "Vous avez déjà un compte? Connectez-vous ici.",
     },
