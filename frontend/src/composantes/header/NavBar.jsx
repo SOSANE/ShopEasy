@@ -1,8 +1,12 @@
+import { useContext } from "react";
+
 // Components & fonction
 import { useLocalization } from "../../state/contexts/LocalizationContext";
 import ChangeLanguage from "./ChangeLanguage";
 import shopEasyLogo from "../../assets/shopping-bag.svg";
 import { Link } from "react-router";
+import { AuthContext } from "../../state/contexts/AuthContext";
+import { logout } from "../../api/authentification";
 
 // Constants
 import PATH from "../../ressources/routes/paths";
@@ -10,7 +14,14 @@ import LOCALIZE from "../../ressources/text/localize";
 
 function NavBar() {
   const language = useLocalization();
+  const { currentUser, setCurrentUser } = useContext(AuthContext);
 
+  async function handleLogout() {
+    const isLoggedOut = await logout();
+    if (isLoggedOut) {
+      setCurrentUser(null);
+    }
+  }
   return (
     <nav className="py-5 shadow-md">
       <div className="mx-auto flex items-center px-8 lg:container">
@@ -22,9 +33,15 @@ function NavBar() {
         </div>
 
         <div className="flex w-1/3 items-center justify-end">
-          <Link to={PATH.login} className="pr-3">
-            {LOCALIZE.loginpage.navTitle}
-          </Link>
+          {currentUser ? (
+            <button onClick={() => handleLogout()} className="mr-2 bg-stone-50 text-stone-950">
+              Log out
+            </button>
+          ) : (
+            <Link to={PATH.login} className="pr-3">
+              {LOCALIZE.loginpage.navTitle}
+            </Link>
+          )}
           <ChangeLanguage />
         </div>
       </div>

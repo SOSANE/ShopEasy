@@ -1,24 +1,40 @@
 import { useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 // Components & fonction
 import { useLocalization } from "../../state/contexts/LocalizationContext";
+import { signup } from "../../api/authentification";
 
 // Constants
 import LOCALIZE from "../../ressources/text/localize";
 import PATH from "../../ressources/routes/paths";
 
+// validation tres preliminaire
 function RegisterForm() {
   const language = useLocalization();
-  const username = useState("");
-  const email = useState("");
-  const password = useState("");
-  const confirmPassword = useState("");
+  let navigate = useNavigate();
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [showError, setShowError] = useState(false);
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
+
+    if (confirmPassword !== password) {
+      setShowError(true);
+    } else {
+      const data = await signup(email, username, password);
+      if (data) {
+        setShowError(false);
+        navigate(PATH.login);
+      } else {
+        setShowError(true);
+      }
+    }
   }
 
   return (
@@ -42,6 +58,7 @@ function RegisterForm() {
                 name={username}
                 aria-label={LOCALIZE.registerPage.form.usernameLabel}
                 placeholder={LOCALIZE.registerPage.form.usernameLabel}
+                onChange={e => setUsername(e.target.value)}
               />
             </div>
 
@@ -57,6 +74,7 @@ function RegisterForm() {
                 name={email}
                 aria-label={LOCALIZE.registerPage.form.emailLabel}
                 placeholder={LOCALIZE.registerPage.form.emailPlaceholder}
+                onChange={e => setEmail(e.target.value)}
               />
             </div>
           </div>
@@ -73,22 +91,25 @@ function RegisterForm() {
               name={password}
               aria-label={LOCALIZE.registerPage.form.passwordLabel}
               placeholder={LOCALIZE.registerPage.form.passwordPlaceholder}
+              onChange={e => setPassword(e.target.value)}
             />
 
             <Label htmlFor="register-form-confirm-password-input" className="pl-1">
               {LOCALIZE.registerPage.form.confirmPasswordLabel}
             </Label>
             <Input
-              type="email"
+              type="password"
               id="register-form-confirm-password-input"
               required
               aria-required
               name={confirmPassword}
               aria-label={LOCALIZE.registerPage.form.confirmPasswordLabel}
               placeholder={LOCALIZE.registerPage.form.confirmPasswordPlaceholder}
+              onChange={e => setConfirmPassword(e.target.value)}
             />
           </div>
 
+          {showError && <p>Erreur</p>}
           <input
             type="submit"
             id="register-form-submit"

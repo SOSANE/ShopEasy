@@ -1,4 +1,5 @@
 import { LocalizationProvider } from "./LocalizationProvider";
+import { AuthProvider } from "./AuthProvider";
 
 /**
  * Pour composer plusieurs providers ensemble.
@@ -12,4 +13,4 @@ function compose(providers) {
   ));
 }
 
-export const Provider = compose([LocalizationProvider]); // NP: Inclure tous les autres providers crees ici
+export const Provider = compose([LocalizationProvider, AuthProvider]); // NP: Inclure tous les autres providers crees ici

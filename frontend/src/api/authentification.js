@@ -1,12 +1,12 @@
 import { AUTH_TOKEN } from "./constants";
 
-export async function login({ username, password }) {
+export async function login(username, password) {
   const response = await fetch("/api/auth/token/login/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ password, username }),
+    body: JSON.stringify({ password: password, username: username }),
   });
 
   if (response.ok) {
@@ -18,22 +18,23 @@ export async function login({ username, password }) {
   return null;
 }
 
-export function verify() {
-  const auth_token = JSON.parse(sessionStorage.getItem(AUTH_TOKEN));
-  // .........................
-}
-
 export async function logout() {
-  const auth_token = JSON.parse(sessionStorage.getItem(AUTH_TOKEN));
+  const token = JSON.parse(sessionStorage.getItem(AUTH_TOKEN));
   const response = await fetch("/api/auth/token/logout/", {
     method: "POST",
     headers: {
-      Authorization: `Token ${auth_token}`,
+      Authorization: `Token ${token.auth_token}`,
     },
   });
+
+  if (response.ok) {
+    sessionStorage.clear();
+    return true; // .
+  }
+  return false;
 }
 
-export async function signup({ email, username, password }) {
+export async function signup(email, username, password) {
   const response = await fetch("/api/auth/users/", {
     method: "POST",
     headers: {
@@ -44,6 +45,23 @@ export async function signup({ email, username, password }) {
 
   if (response.ok) {
     return await response.json();
+  }
+
+  return null;
+}
+
+export async function userInfo() {
+  const token = JSON.parse(sessionStorage.getItem(AUTH_TOKEN));
+  const response = await fetch("/api/auth/users/me/", {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization: `Token ${token.auth_token}`,
+    },
+  });
+  if (response.ok) {
+    const res = await response.json();
+    return res;
   }
 
   return null;

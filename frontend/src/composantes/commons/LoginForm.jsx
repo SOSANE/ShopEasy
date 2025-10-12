@@ -1,10 +1,12 @@
-import { useState } from "react";
-import { Link } from "react-router";
+import { useState, useContext } from "react";
+import { Link, useNavigate } from "react-router";
 import { Lock, User } from "lucide-react";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
 
 // Components & fonction
 import { useLocalization } from "../../state/contexts/LocalizationContext";
+import { AuthContext } from "../../state/contexts/AuthContext";
+import { login, userInfo } from "../../api/authentification";
 
 // Constants
 import LOCALIZE from "../../ressources/text/localize";
@@ -12,11 +14,26 @@ import PATH from "../../ressources/routes/paths";
 
 function LoginForm() {
   const language = useLocalization();
+  let navigate = useNavigate();
+  const { setCurrentUser } = useContext(AuthContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [showError, setShowError] = useState(false);
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
+    const data = await login(username, password);
+    if (data) {
+      const info = await userInfo();
+      setCurrentUser({
+        username: info.username,
+        email: info.email,
+      });
+      setShowError(false);
+      navigate(PATH.home);
+    } else {
+      setShowError(true);
+    }
   }
 
   return (
@@ -55,6 +72,8 @@ function LoginForm() {
               />
             </InputGroup>
           </div>
+          {showError && <p>Erreur!!</p>}
+
           <input
             type="submit"
             id="login-form-submit"
