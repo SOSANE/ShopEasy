@@ -6,12 +6,12 @@ import { Label } from "@/components/ui/label";
 // Components & fonction
 import { useLocalization } from "../../state/contexts/LocalizationContext";
 import { signup } from "../../api/authentification";
+import { ErrorMessages } from "../../api/helpers";
 
 // Constants
 import LOCALIZE from "../../ressources/text/localize";
 import PATH from "../../ressources/routes/paths";
 
-// validation tres preliminaire
 function RegisterForm() {
   const language = useLocalization();
   let navigate = useNavigate();
@@ -19,6 +19,7 @@ function RegisterForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [errorMessages, setErrorMessages] = useState({});
   const [showError, setShowError] = useState(false);
 
   async function handleSubmit(e) {
@@ -28,11 +29,11 @@ function RegisterForm() {
       setShowError(true);
     } else {
       const data = await signup(email, username, password);
-      if (data) {
-        setShowError(false);
+      setShowError(false);
+      if (data.id) {
         navigate(PATH.login);
       } else {
-        setShowError(true);
+        setErrorMessages(ErrorMessages(data));
       }
     }
   }
@@ -109,18 +110,20 @@ function RegisterForm() {
             />
           </div>
 
-          {/* Inclure des messages d'erreur plus variées du genre:
-          - A user with that username already exists.
-          - Your password can’t be too similar to your other personal information.
-          - This password is too short. It must contain at least %d character.
-          - Your password must contain at least %(min_length)d character.
-          ce sont des messages de validation venant de django.contrib.auth.password_validation qu'on peut intégrer
-          */}
-          {showError && (
-            <p className="text-lg font-medium text-red-700">
-              {LOCALIZE.registerPage.form.errorMessage}
-            </p>
-          )}
+          {/* Petit soucis de traductions, errorMessages ne change pas de langues lors d'un re-render.... */}
+          <ul className="text-lg font-medium text-red-700">
+            {errorMessages && (
+              <>
+                {Object.keys(errorMessages).map((e, v) => {
+                  return errorMessages[e].map(value => {
+                    return <li key={v}>{value}</li>;
+                  });
+                })}
+              </>
+            )}
+
+            {showError && <li>{LOCALIZE.registerPage.form.passwordsDoNotMatchErrorMessage}</li>}
+          </ul>
 
           <input
             type="submit"

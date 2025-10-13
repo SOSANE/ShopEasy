@@ -48,6 +48,16 @@ export const EN = {
       passwordPlaceholder: "Password",
       confirmPasswordLabel: "Confirm your password",
       confirmPasswordPlaceholder: "Password confirmation",
+      userAlreadyExistErrorMessage: "A user with that username already exists.",
+      invalidUsernameErrorMessage:
+        "Enter a valid username. This value may contain only letters, numbers, and @/./+/-/_ characters.",
+      passwordTooShortErrorMessage:
+        "This password is too short. It must contain at least 8 characters.",
+      passwordTooSimilarToAnotherFieldErrorMessage:
+        "The password is too similar to another field (username/email).",
+      passwordTooCommonErrorMessage: "This password is too common.",
+      passwordEntirelyNumericErrorMessage: "This password is entirely numeric.",
+      passwordsDoNotMatchErrorMessage: "The passwords do not match.",
       errorMessage: "Sign up error, please try again.",
       buttonLabel: "Sign up",
       loginAccount: "Already own an account? Log in here.",

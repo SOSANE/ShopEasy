@@ -52,6 +52,16 @@ jobs:
           path: .
 
       # Téléchargement de l'image à corriger
+      # On devrait run les container immédiatement après
+      # Genre
+      # docker network create shopeasy-network
+      # docker run --name shopeasy_db -d shopeasy_db:latest
+      # docker run --name shopeasy_redis -d shopeasy_redis:latest
+      # docker run --name shopeasy_backend -d --link shopeasy_redis --link shopeasy_db shopeasy_backend:latest
+      # docker run --name shopeasy_frontend -d shopeasy_frontend:latest
+      # ...
+      # Je n'ai pas encore réussie à faire fonctionner shopeasy_frontend correctement
+
       - name: Télécharger l'image
         run: |
           docker load -i shopeasy.tar

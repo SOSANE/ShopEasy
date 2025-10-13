@@ -7,7 +7,7 @@ export async function login(username, password) {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ password: password, username: username }),
+    body: JSON.stringify({ password, username }),
   });
 
   if (response.ok) {
@@ -44,16 +44,21 @@ export async function signup(email, username, password) {
     body: JSON.stringify({ email, username, password }),
   });
 
-  if (response.ok) {
-    return await response.json();
+  const res = await response.json();
+
+  if (response.ok || response.status == 400) {
+    return res;
   }
 
   return null;
 }
 
-// NP: verifier l'existence de auth_token en premier
 export async function userInfo() {
   const token = getToken();
+
+  if (!token) {
+    return null;
+  }
 
   const response = await fetch("/api/auth/users/me/", {
     method: "GET",
@@ -62,6 +67,7 @@ export async function userInfo() {
       Authorization: `Token ${token.auth_token}`,
     },
   });
+
   if (response.ok) {
     const res = await response.json();
     return res;
