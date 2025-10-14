@@ -1,8 +1,8 @@
-// Components & fonction
+// Composantes & fonctions
 import { useLocalization } from "../../state/contexts/LocalizationContext";
 import { Link } from "react-router";
 
-// Constants
+// Constantes
 import LOCALIZE from "../../ressources/text/localize";
 import PATH from "../../ressources/routes/paths";
 

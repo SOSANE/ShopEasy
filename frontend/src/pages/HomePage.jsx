@@ -1,17 +1,14 @@
-import { useContext } from "react";
-import { Link } from "react-router";
-
-// Components & fonction
+// Composantes & fonctions
 import PageTemplate from "../composantes/PageTemplate";
 import { useLocalization } from "../state/contexts/LocalizationContext";
-import { AuthContext } from "../state/contexts/AuthContext";
+import { useAuth } from "../state/contexts/AuthContext";
 
-// Constants
+// Constantes
 import LOCALIZE from "../ressources/text/localize";
 
 function HomePage() {
   const language = useLocalization();
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser } = useAuth();
 
   return (
     <PageTemplate title={LOCALIZE.homepage.title}>

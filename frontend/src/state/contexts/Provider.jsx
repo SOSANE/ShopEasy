@@ -13,4 +13,4 @@ function compose(providers) {
   ));
 }
 
-export const Provider = compose([LocalizationProvider, AuthProvider]); // NP: Inclure tous les autres providers crees ici
+export const Provider = compose([LocalizationProvider, AuthProvider]);

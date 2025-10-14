@@ -1,8 +1,8 @@
-// Components & fonction
+// Composantes & fonctions
 import PageTemplate from "../composantes/PageTemplate";
 import { useLocalization } from "../state/contexts/LocalizationContext";
 
-// Constants
+// Constantes
 import LOCALIZE from "../ressources/text/localize";
 
 function Error404Page() {

@@ -72,6 +72,10 @@ jobs:
       - name: Exécuter test API
         run: |
           docker exec shopeasy_backend python manage.py test tests
+          
+      - name: Exécuter test Frontend
+        run: |
+          docker exec shopeasy_frontend npm run test
 
   quality_gate:
     runs-on: ubuntu-24.04

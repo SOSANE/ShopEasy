@@ -1,9 +1,9 @@
-// Components & fonction
+// Composantes & fonctions
 import { useLocalization } from "../state/contexts/LocalizationContext";
 import PageTemplate from "../composantes/PageTemplate";
 import RegisterForm from "../composantes/commons/RegisterForm";
 
-// Constants
+// Constantes
 import LOCALIZE from "../ressources/text/localize";
 
 function RegisterPage() {
@@ -11,7 +11,7 @@ function RegisterPage() {
 
   return (
     <PageTemplate title={LOCALIZE.registerPage.title}>
-      <p>{LOCALIZE.registerPage.text1}</p>
+      <p className="mb-12">{LOCALIZE.registerPage.text1}</p>
       <RegisterForm />
     </PageTemplate>
   );

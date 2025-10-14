@@ -1,13 +1,13 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router";
+
+// Composantes & fonctions
+import { useLocalization } from "../../state/contexts/LocalizationContext";
+import { login, userInfo } from "../../api/authentification";
 import { Lock, User } from "lucide-react";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
 
-// Components & fonction
-import { useLocalization } from "../../state/contexts/LocalizationContext";
-import { login, userInfo } from "../../api/authentification";
-
-// Constants
+// Constantes
 import LOCALIZE from "../../ressources/text/localize";
 import PATH from "../../ressources/routes/paths";
 
@@ -17,6 +17,7 @@ function LoginForm({ setCurrentUser, setIsLoggedIn }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showError, setShowError] = useState(false);
+  const [inputError, setInputError] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -35,12 +36,20 @@ function LoginForm({ setCurrentUser, setIsLoggedIn }) {
     }
   }
 
+  function handleBlur(e) {
+    if (e.target.value.trim() === "") {
+      setInputError(true);
+    } else {
+      setInputError(false);
+    }
+  }
+
   return (
-    <div className="max-w-lg overflow-hidden rounded shadow-lg">
+    <div className="overflow-hidden rounded p-24 shadow-lg">
       <div className="px-6 py-6">
         <form id="login-form" className="flex flex-col gap-4 px-5" onSubmit={e => handleSubmit(e)}>
           <div className="flex flex-col gap-3">
-            <InputGroup>
+            <InputGroup className={inputError && username === "" ? "border-red-700" : ""}>
               <InputGroupAddon>
                 <User />
               </InputGroupAddon>
@@ -53,9 +62,10 @@ function LoginForm({ setCurrentUser, setIsLoggedIn }) {
                 aria-label={LOCALIZE.loginpage.form.usernameLabel}
                 placeholder={LOCALIZE.loginpage.form.usernameLabel}
                 onChange={e => setUsername(e.target.value)}
+                onBlur={e => handleBlur(e)}
               />
             </InputGroup>
-            <InputGroup>
+            <InputGroup className={inputError && password === "" ? "border-red-700" : ""}>
               <InputGroupAddon>
                 <Lock />
               </InputGroupAddon>
@@ -68,6 +78,7 @@ function LoginForm({ setCurrentUser, setIsLoggedIn }) {
                 aria-label={LOCALIZE.loginpage.form.passwordLabel}
                 placeholder={LOCALIZE.loginpage.form.passwordLabel}
                 onChange={e => setPassword(e.target.value)}
+                onBlur={handleBlur}
               />
             </InputGroup>
           </div>

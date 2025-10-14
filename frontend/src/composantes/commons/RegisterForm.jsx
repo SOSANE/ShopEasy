@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 
-// Components & fonction
+// Composantes & fonctions
 import { useLocalization } from "../../state/contexts/LocalizationContext";
 import { signup } from "../../api/authentification";
 import { ErrorMessages } from "../../api/helpers";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
-// Constants
+// Constantes
 import LOCALIZE from "../../ressources/text/localize";
 import PATH from "../../ressources/routes/paths";
 
@@ -21,6 +21,7 @@ function RegisterForm() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessages, setErrorMessages] = useState({});
   const [showError, setShowError] = useState(false);
+  const [inputError, setInputError] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -38,8 +39,16 @@ function RegisterForm() {
     }
   }
 
+  function handleBlur(e) {
+    if (e.target.value.trim() === "") {
+      setInputError(true);
+    } else {
+      setInputError(false);
+    }
+  }
+
   return (
-    <div className="max-w-lg overflow-hidden rounded shadow-lg">
+    <div className="overflow-hidden rounded p-28 shadow-lg">
       <div className="p-4">
         <form
           id="registration-form"
@@ -60,6 +69,8 @@ function RegisterForm() {
                 aria-label={LOCALIZE.registerPage.form.usernameLabel}
                 placeholder={LOCALIZE.registerPage.form.usernameLabel}
                 onChange={e => setUsername(e.target.value)}
+                onBlur={e => handleBlur(e)}
+                className={inputError && username === "" ? "border-red-700" : ""}
               />
             </div>
 
@@ -76,6 +87,8 @@ function RegisterForm() {
                 aria-label={LOCALIZE.registerPage.form.emailLabel}
                 placeholder={LOCALIZE.registerPage.form.emailPlaceholder}
                 onChange={e => setEmail(e.target.value)}
+                onBlur={e => handleBlur(e)}
+                className={inputError && email === "" ? "border-red-700" : ""}
               />
             </div>
           </div>
@@ -93,6 +106,8 @@ function RegisterForm() {
               aria-label={LOCALIZE.registerPage.form.passwordLabel}
               placeholder={LOCALIZE.registerPage.form.passwordPlaceholder}
               onChange={e => setPassword(e.target.value)}
+              onBlur={e => handleBlur(e)}
+              className={inputError && password === "" ? "border-red-700" : ""}
             />
 
             <Label htmlFor="register-form-confirm-password-input" className="pl-1">
@@ -107,6 +122,8 @@ function RegisterForm() {
               aria-label={LOCALIZE.registerPage.form.confirmPasswordLabel}
               placeholder={LOCALIZE.registerPage.form.confirmPasswordPlaceholder}
               onChange={e => setConfirmPassword(e.target.value)}
+              onBlur={e => handleBlur(e)}
+              className={inputError && confirmPassword === "" ? "border-red-700" : ""}
             />
           </div>
 

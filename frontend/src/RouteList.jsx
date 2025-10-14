@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import { Route, Routes } from "react-router";
 
 // Pages & fonctions
@@ -7,13 +6,13 @@ import LoginPage from "./pages/LoginPage";
 import Error404Page from "./pages/Error404Page";
 import RegisterPage from "./pages/RegisterPage";
 import PrivateRoute from "./composantes/commons/PrivateRoute";
-import { AuthContext } from "./state/contexts/AuthContext";
+import { useAuth } from "./state/contexts/AuthContext";
 
-// Constants
+// Constantes
 import PATH from "./ressources/routes/paths";
 
 function RouteList() {
-  const { isLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn } = useAuth();
 
   return (
     <Routes>

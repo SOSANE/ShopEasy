@@ -15,4 +15,10 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  // https://testing-library.com/docs/react-testing-library/setup
+  // https://vitest.dev/config/
+  test: {
+    globals: true,
+    environment: "jsdom",
+  },
 });

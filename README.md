@@ -47,7 +47,7 @@ Créez un nouveau fichier pour les variables d'environement
 cp .env.local.exemple .env.local
 ```
 
-Changer le mot de passe de `.env.local`
+Changer les mots de passe de `.env.local`
 
 ```dotenv
 DATABASE_NAME=SHOPEASY
@@ -56,6 +56,10 @@ DATABASE_PASSWORD=<Insérez un mot de passe>
 DATABASE_HOST=db
 DATABASE_PORT=5432
 ...
+
+MINIO_ROOT_USER=minioadmin
+MINIO_ROOT_PASSWORD=<Insérez un mot de passe>
+MINIO_DEFAULT_BUCKETS=produit-media-bucket
 ```
 
 Exécuter avec Docker:
