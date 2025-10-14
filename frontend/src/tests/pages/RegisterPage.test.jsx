@@ -20,7 +20,7 @@ describe("Tests de la page de création de compte", () => {
     expect(elementTitre).toBeVisible();
   });
 
-  // Tester l'existence et la visbilité de quelques champs du formualaire
+  // Tester l'existence et la visbilité de quelques champs du formulaire
   it("Les champs du formulaire de création de compte devraient être affichés et visible", () => {
     const elementUsernameLabel = screen.getByPlaceholderText(
       LOCALIZE.registerPage.form.usernameLabel

@@ -20,7 +20,7 @@ describe("Tests de la page de connexion", () => {
     expect(elementTitre).toBeVisible();
   });
 
-  // Tester l'existence et la visbilité de quelques champs du formualaire
+  // Tester l'existence et la visbilité de quelques champs du formulaire
   it("Les champs du formulaire de connexion devraient être affichés et visible", () => {
     const elementUsernameLabel = screen.getByPlaceholderText(LOCALIZE.loginpage.form.usernameLabel);
     const elementPasswordLabel = screen.getByPlaceholderText(LOCALIZE.loginpage.form.passwordLabel);

@@ -26,6 +26,7 @@ def api_custom_exception_handler(exc, context):
             for error in errors:
                 message = str(error)
                 code = get_error_code(message)
+                # modification du format en ajoutant une propriété 'code'
                 error_list.append({"message": message, "code": code})
             api_response_data[field] = error_list
         response.data = api_response_data
