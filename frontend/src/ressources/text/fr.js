@@ -25,6 +25,21 @@ export const FR = {
     title: "Erreur 404",
     text1: "La page n'as pas été trouvée.",
   },
+
+  productDetailsPage: {
+    title: "Détails",
+    text1: "Consultez les détails d'un produit",
+  },
+
+  createProductPage: {
+    title: "Product details",
+    text1: "Find product details",
+  },
+
+  editProductPage: {
+    title: "Product details",
+    text1: "Find product details",
+  },
 };
 
 export default FR;
