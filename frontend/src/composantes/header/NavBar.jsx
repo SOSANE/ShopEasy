@@ -12,13 +12,13 @@ import LOCALIZE from "../../ressources/text/localize";
 
 function NavBar() {
   const language = useLocalization();
-  const { currentUser, setCurrentUser, setIsLoggedIn } = useAuth();
+  const { currentUser, setCurrentUser } = useAuth();
 
   async function handleLogout() {
     const isLoggedOut = await logout();
     if (isLoggedOut) {
       setCurrentUser(null);
-      setIsLoggedIn(false);
+      // setIsLoggedIn(false);
     }
   }
 

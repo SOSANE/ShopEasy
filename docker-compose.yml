@@ -41,6 +41,8 @@ services:
       - /home/node/node_modules
     build: ./frontend
     working_dir: /home/node
+    environment:
+      - CHOKIDAR_USEPOLLING=True
   # Nginx reverse proxy
   nginx:
     container_name: shopeasy_nginx

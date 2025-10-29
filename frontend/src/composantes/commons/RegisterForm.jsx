@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
+import { useForm } from "react-hook-form";
 
 // Composantes & fonctions
 import { useLocalization } from "../../state/contexts/LocalizationContext";
@@ -15,22 +16,28 @@ import PATH from "../../ressources/routes/paths";
 function RegisterForm() {
   const language = useLocalization();
   let navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessages, setErrorMessages] = useState({});
-  const [showError, setShowError] = useState(false);
-  const [inputError, setInputError] = useState(false);
+  const [showErrorMessages, setShowErrorMessages] = useState(false);
+  const [emptyFieldError, setEmptyFieldError] = useState(false);
 
-  async function handleSubmit(e) {
+  async function onSubmit(e) {
     e.preventDefault();
 
     if (confirmPassword !== password) {
-      setShowError(true);
+      setShowErrorMessages(true);
     } else {
       const data = await signup(email, username, password);
-      setShowError(false);
+      setShowErrorMessages(false);
       if (data.id) {
         navigate(PATH.login);
       } else {
@@ -41,9 +48,9 @@ function RegisterForm() {
 
   function handleBlur(e) {
     if (e.target.value.trim() === "") {
-      setInputError(true);
+      setEmptyFieldError(true);
     } else {
-      setInputError(false);
+      setEmptyFieldError(false);
     }
   }
 
@@ -53,7 +60,7 @@ function RegisterForm() {
         <form
           id="registration-form"
           className="flex flex-col gap-1"
-          onSubmit={e => handleSubmit(e)}
+          onSubmit={e => handleSubmit(onSubmit(e))}
         >
           <div className="flex flex-row gap-3">
             <div className="flex flex-col gap-3">
@@ -63,14 +70,20 @@ function RegisterForm() {
               <Input
                 type="text"
                 id="register-form-username-input"
-                required
+                // required
                 aria-required
-                name={username}
+                {...register("username", {
+                  required: true,
+                  value: username,
+                  onBlur: e => handleBlur(e),
+                  onChange: e => setUsername(e.target.value),
+                })}
+                // name={username}
                 aria-label={LOCALIZE.registerPage.form.usernameLabel}
                 placeholder={LOCALIZE.registerPage.form.usernameLabel}
-                onChange={e => setUsername(e.target.value)}
-                onBlur={e => handleBlur(e)}
-                className={inputError && username === "" ? "border-red-700" : ""}
+                // onChange={e => setUsername(e.target.value)}
+                // onBlur={e => handleBlur(e)}
+                className={emptyFieldError && username === "" ? "border-red-700" : ""}
               />
             </div>
 
@@ -81,14 +94,20 @@ function RegisterForm() {
               <Input
                 type="email"
                 id="register-form-email-input"
-                required
+                // required
+                {...register("email", {
+                  required: true,
+                  value: email,
+                  onBlur: e => handleBlur(e),
+                  onChange: e => setEmail(e.target.value),
+                })}
                 aria-required
-                name={email}
+                // name={email}
                 aria-label={LOCALIZE.registerPage.form.emailLabel}
                 placeholder={LOCALIZE.registerPage.form.emailPlaceholder}
-                onChange={e => setEmail(e.target.value)}
-                onBlur={e => handleBlur(e)}
-                className={inputError && email === "" ? "border-red-700" : ""}
+                // onChange={e => setEmail(e.target.value)}
+                // onBlur={e => handleBlur(e)}
+                className={emptyFieldError && email === "" ? "border-red-700" : ""}
               />
             </div>
           </div>
@@ -100,14 +119,20 @@ function RegisterForm() {
             <Input
               type="password"
               id="register-form-password-input"
-              required
+              // required
+              {...register("password", {
+                required: true,
+                value: password,
+                onBlur: e => handleBlur(e),
+                onChange: e => setEmail(e.target.value),
+              })}
               aria-required
-              name={password}
+              // name={password}
               aria-label={LOCALIZE.registerPage.form.passwordLabel}
               placeholder={LOCALIZE.registerPage.form.passwordPlaceholder}
-              onChange={e => setPassword(e.target.value)}
-              onBlur={e => handleBlur(e)}
-              className={inputError && password === "" ? "border-red-700" : ""}
+              // onChange={e => setPassword(e.target.value)}
+              // onBlur={e => handleBlur(e)}
+              className={emptyFieldError && password === "" ? "border-red-700" : ""}
             />
 
             <Label htmlFor="register-form-confirm-password-input" className="pl-1">
@@ -116,14 +141,20 @@ function RegisterForm() {
             <Input
               type="password"
               id="register-form-confirm-password-input"
-              required
+              // required
+              {...register("confirmPassword", {
+                required: true,
+                value: confirmPassword,
+                onBlur: e => handleBlur(e),
+                onChange: e => setConfirmPassword(e.target.value),
+              })}
               aria-required
-              name={confirmPassword}
+              // name={confirmPassword}
               aria-label={LOCALIZE.registerPage.form.confirmPasswordLabel}
               placeholder={LOCALIZE.registerPage.form.confirmPasswordPlaceholder}
-              onChange={e => setConfirmPassword(e.target.value)}
-              onBlur={e => handleBlur(e)}
-              className={inputError && confirmPassword === "" ? "border-red-700" : ""}
+              // onChange={e => setConfirmPassword(e.target.value)}
+              // onBlur={e => handleBlur(e)}
+              className={emptyFieldError && confirmPassword === "" ? "border-red-700" : ""}
             />
           </div>
 
@@ -139,7 +170,9 @@ function RegisterForm() {
               </>
             )}
 
-            {showError && <li>{LOCALIZE.registerPage.form.passwordsDoNotMatchErrorMessage}</li>}
+            {showErrorMessages && (
+              <li>{LOCALIZE.registerPage.form.passwordsDoNotMatchErrorMessage}</li>
+            )}
           </ul>
 
           <input

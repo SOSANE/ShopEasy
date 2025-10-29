@@ -194,7 +194,7 @@ DJOSER = {
     },
 }
 
-# Logging settings (https://docs.djangoproject.com/en/3.0/topics/logging/)
+# Logging settings (https://docs.djangoproject.com/en/5.2/topics/logging/)
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
@@ -208,7 +208,7 @@ LOGGING = {
         "file": {
             "level": "DEBUG",
             "class": "logging.FileHandler",
-            "filename": f"./{APP}/logs/debug.log",
+            "filename": "./logs/debug.log",
             "formatter": "simple",
         }
     },

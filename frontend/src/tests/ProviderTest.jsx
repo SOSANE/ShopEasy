@@ -12,7 +12,6 @@ const testUser = { username: "test-username", email: "test@email.com" };
 export function Provider({
   children,
   isLoggedIn = false,
-  setIsLoggedIn = vi.fn(),
   currentUser = null,
   setCurrentUser = vi.fn(),
 }) {
@@ -27,7 +26,6 @@ export function Provider({
             currentUser: user,
             setCurrentUser: setCurrentUser,
             isLoggedIn: isLoggedIn,
-            setIsLoggedIn: setIsLoggedIn,
           }}
         >
           {children}

@@ -17,7 +17,7 @@ function RouteList() {
   return (
     <Routes>
       <Route path={PATH.home} element={<HomePage />} />
-      <Route element={<PrivateRoute isAllowed={!isLoggedIn} redirect={PATH.home} />}>
+      <Route element={<PrivateRoute isAllowed={!isLoggedIn()} redirect={PATH.home} />}>
         <Route path={PATH.login} element={<LoginPage />} />
         <Route path={PATH.signup} element={<RegisterPage />} />
       </Route>

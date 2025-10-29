@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
+import { useForm } from "react-hook-form";
 
 // Composantes & fonctions
 import { useLocalization } from "../../state/contexts/LocalizationContext";
@@ -10,16 +11,22 @@ import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/in
 // Constantes
 import LOCALIZE from "../../ressources/text/localize";
 import PATH from "../../ressources/routes/paths";
-
-function LoginForm({ setCurrentUser, setIsLoggedIn }) {
+let counter = 0;
+function LoginForm({ setCurrentUser }) {
   const language = useLocalization();
   let navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [showError, setShowError] = useState(false);
-  const [inputError, setInputError] = useState(false);
+  const [showErrorMessages, setShowErrorMessages] = useState(false);
+  const [emptyFieldError, setEmptyFieldError] = useState(false);
 
-  async function handleSubmit(e) {
+  async function onSubmit(e) {
     e.preventDefault();
     const data = await login(username, password);
     if (data) {
@@ -28,62 +35,80 @@ function LoginForm({ setCurrentUser, setIsLoggedIn }) {
         username: info.username,
         email: info.email,
       });
-      setShowError(false);
-      setIsLoggedIn(true);
+      setShowErrorMessages(false);
+      // setIsLoggedIn(true);
       navigate(PATH.home);
     } else {
-      setShowError(true);
+      setShowErrorMessages(true);
     }
   }
 
   function handleBlur(e) {
     if (e.target.value.trim() === "") {
-      setInputError(true);
+      setEmptyFieldError(true);
     } else {
-      setInputError(false);
+      setEmptyFieldError(false);
     }
   }
 
   return (
     <div className="overflow-hidden rounded p-24 shadow-lg">
       <div className="px-6 py-6">
-        <form id="login-form" className="flex flex-col gap-4 px-5" onSubmit={e => handleSubmit(e)}>
+        <form
+          id="login-form"
+          className="flex flex-col gap-4 px-5"
+          onSubmit={e => handleSubmit(onSubmit(e))}
+        >
           <div className="flex flex-col gap-3">
-            <InputGroup className={inputError && username === "" ? "border-red-700" : ""}>
+            <InputGroup className={emptyFieldError && username === "" ? "border-red-700" : ""}>
               <InputGroupAddon>
                 <User />
               </InputGroupAddon>
               <InputGroupInput
                 type="text"
                 id="login-form-username"
-                name={username}
-                required
+                {...register("username", {
+                  required: true,
+                  value: username,
+                  onBlur: e => handleBlur(e),
+                  onChange: e => setUsername(e.target.value),
+                })}
+                // name={username}
+                // required
                 aria-required
                 aria-label={LOCALIZE.loginpage.form.usernameLabel}
                 placeholder={LOCALIZE.loginpage.form.usernameLabel}
-                onChange={e => setUsername(e.target.value)}
-                onBlur={e => handleBlur(e)}
+                // onChange={e => setUsername(e.target.value)}
+                // onBlur={e => handleBlur(e)}
               />
             </InputGroup>
-            <InputGroup className={inputError && password === "" ? "border-red-700" : ""}>
+            <span>username: {username}</span>
+            <InputGroup className={emptyFieldError && password === "" ? "border-red-700" : ""}>
               <InputGroupAddon>
                 <Lock />
               </InputGroupAddon>
               <InputGroupInput
                 type="password"
                 id="login-form-password"
-                name={password}
-                required
+                {...register("password", {
+                  required: true,
+                  value: password,
+                  onBlur: e => handleBlur(e),
+                  onChange: e => setPassword(e.target.value),
+                })}
+                // name={password}
+                // required
                 aria-required
                 aria-label={LOCALIZE.loginpage.form.passwordLabel}
                 placeholder={LOCALIZE.loginpage.form.passwordLabel}
-                onChange={e => setPassword(e.target.value)}
-                onBlur={handleBlur}
+                // onChange={e => setPassword(e.target.value)}
+                // onBlur={handleBlur}
               />
             </InputGroup>
+            <span>Password: {password}</span>
           </div>
           <div>
-            {showError && (
+            {showErrorMessages && (
               <p className="text-lg font-medium text-red-700">
                 {LOCALIZE.loginpage.form.errorMessage}
               </p>
@@ -100,6 +125,7 @@ function LoginForm({ setCurrentUser, setIsLoggedIn }) {
             {LOCALIZE.loginpage.form.registerAccount}
           </Link>
         </form>
+        <span>Render: {counter++}</span>
       </div>
     </div>
   );
