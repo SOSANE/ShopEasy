@@ -1,19 +1,6 @@
-// // Components & fonction
+// Components & fonction
 import NavBar from "./NavBar";
 import { useLocalization } from "../../state/contexts/LocalizationContext";
-
-// function Header() {
-//   const language = useLocalization();
-
-//   return (
-//     <header className="fixed top-0 left-0 w-full bg-white shadow-md flex items-center justify-between px-6 py-2 h-14">
-//     <NavBar />
-//     </header>
-//   );
-// }
-
-// export default Header;
-
 
 import { useEffect, useState } from "react";
 

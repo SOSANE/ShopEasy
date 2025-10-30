@@ -4,8 +4,8 @@ export default function CategoryFilters({ categories }) {
       {categories.map((cat, idx) => (
         <button
           key={idx}
-          className="bg-white text-gray-800 px-6 py-2 rounded-full shadow-md hover:bg-gray-200 transition-all duration-200"
-        >
+          className="bg-white text-gray-800 px-6 py-2 rounded-full shadow-md hover:bg-gray-200 transition">
+            
           {cat}
         </button>
       ))}
