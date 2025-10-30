@@ -18,13 +18,12 @@ function NavBar() {
     const isLoggedOut = await logout();
     if (isLoggedOut) {
       setCurrentUser(null);
-      // setIsLoggedIn(false);
     }
   }
 
   return (
-    <nav className="py-5 shadow-md">
-      <div className="mx-auto flex items-center px-8 lg:container">
+    <nav className="relative py-4 shadow-md after:absolute after:inset-x-0 after:bottom-0 after:h-px">
+      <div className="mx-auto flex items-center px-8">
         <div className="w-2/3 max-w-full">
           <Link to={PATH.home} className="flex w-full items-center justify-start">
             <img className="size-8" src={shopEasyLogo} alt={LOCALIZE.header.logoAltText} />

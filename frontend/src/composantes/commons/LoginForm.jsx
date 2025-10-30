@@ -15,12 +15,7 @@ let counter = 0;
 function LoginForm({ setCurrentUser }) {
   const language = useLocalization();
   let navigate = useNavigate();
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit } = useForm();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showErrorMessages, setShowErrorMessages] = useState(false);
@@ -36,7 +31,6 @@ function LoginForm({ setCurrentUser }) {
         email: info.email,
       });
       setShowErrorMessages(false);
-      // setIsLoggedIn(true);
       navigate(PATH.home);
     } else {
       setShowErrorMessages(true);
@@ -73,16 +67,11 @@ function LoginForm({ setCurrentUser }) {
                   onBlur: e => handleBlur(e),
                   onChange: e => setUsername(e.target.value),
                 })}
-                // name={username}
-                // required
                 aria-required
                 aria-label={LOCALIZE.loginpage.form.usernameLabel}
                 placeholder={LOCALIZE.loginpage.form.usernameLabel}
-                // onChange={e => setUsername(e.target.value)}
-                // onBlur={e => handleBlur(e)}
               />
             </InputGroup>
-            <span>username: {username}</span>
             <InputGroup className={emptyFieldError && password === "" ? "border-red-700" : ""}>
               <InputGroupAddon>
                 <Lock />
@@ -96,16 +85,11 @@ function LoginForm({ setCurrentUser }) {
                   onBlur: e => handleBlur(e),
                   onChange: e => setPassword(e.target.value),
                 })}
-                // name={password}
-                // required
                 aria-required
                 aria-label={LOCALIZE.loginpage.form.passwordLabel}
                 placeholder={LOCALIZE.loginpage.form.passwordLabel}
-                // onChange={e => setPassword(e.target.value)}
-                // onBlur={handleBlur}
               />
             </InputGroup>
-            <span>Password: {password}</span>
           </div>
           <div>
             {showErrorMessages && (
@@ -125,7 +109,6 @@ function LoginForm({ setCurrentUser }) {
             {LOCALIZE.loginpage.form.registerAccount}
           </Link>
         </form>
-        <span>Render: {counter++}</span>
       </div>
     </div>
   );

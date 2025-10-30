@@ -9,7 +9,7 @@ import { SET_LANGUAGE } from "../actions";
 export function setLanguage() {
   const language = localStorage.getItem("lang") || "fr";
   LOCALIZE.setLanguage(language);
-  return language;
+  return { language };
 }
 
 export function localizationReducer(state, action) {
@@ -21,6 +21,8 @@ export function localizationReducer(state, action) {
       language: action.language,
     };
   }
+
+  return state;
 }
 
 export default localizationReducer;
