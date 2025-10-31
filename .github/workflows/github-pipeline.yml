@@ -29,7 +29,9 @@ jobs:
           docker commit shopeasy_frontend shopeasy_frontend:latest
           docker commit shopeasy_nginx shopeasy_nginx:latest
           docker commit shopeasy_redis shopeasy_redis:latest
-          docker save shopeasy_db:latest shopeasy_backend:latest shopeasy_frontend:latest shopeasy_nginx:latest shopeasy_redis:latest -o shopeasy.tar
+          docker commit shopeasy_mailhog shopeasy_mailhog:latest
+          docker commit shopeasy_minio shopeasy_minio:latest
+          docker save shopeasy_db:latest shopeasy_backend:latest shopeasy_frontend:latest shopeasy_nginx:latest shopeasy_redis:latest shopeasy_mailhog:latest shopeasy_minio:latest -o shopeasy.tar
 
       - name: Uploader une image en tant qu'artifact
         uses: actions/upload-artifact@v4
@@ -50,6 +52,16 @@ jobs:
           path: .
 
       # Téléchargement de l'image à corriger
+      # On devrait run les container immédiatement après
+      # Genre
+      # docker network create shopeasy-network
+      # docker run --name shopeasy_db -d shopeasy_db:latest
+      # docker run --name shopeasy_redis -d shopeasy_redis:latest
+      # docker run --name shopeasy_backend -d --link shopeasy_redis --link shopeasy_db shopeasy_backend:latest
+      # docker run --name shopeasy_frontend -d shopeasy_frontend:latest
+      # ...
+      # Je n'ai pas encore réussie à faire fonctionner shopeasy_frontend correctement
+
       - name: Télécharger l'image
         run: |
           docker load -i shopeasy.tar
@@ -60,6 +72,10 @@ jobs:
       - name: Exécuter test API
         run: |
           docker exec shopeasy_backend python manage.py test tests
+          
+      - name: Exécuter test Frontend
+        run: |
+          docker exec shopeasy_frontend npm run test
 
   quality_gate:
     runs-on: ubuntu-24.04
@@ -70,13 +86,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Install dependencies
-        uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # v4.3.0
-        with:
-          node-version: "20"
-
-      - run: npm install eslint eslint-plugin-react-hooks eslint-plugin-react-refresh -D
 
       - name: (Backend) Analyse du code
         uses: dciborow/action-pylint@0.1.0
@@ -95,7 +104,16 @@ jobs:
           workdir: backend
           black_args: "--check ."
           level: warning
+      
+      - name: Install dependencies
+        uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # v4.3.0
+        with:
+          node-version: "20"
 
+      - run: |
+          cd frontend
+          npm install eslint eslint-plugin-react-hooks eslint-plugin-react-refresh -D
+      
       - name: (Frontend) Analyse du code
         uses: reviewdog/action-eslint@2fee6dd72a5419ff4113f694e2068d2a03bb35dd # v1.33.2
         with:

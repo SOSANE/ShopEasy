@@ -29,6 +29,8 @@ services:
         condition: service_healthy
       redis:
         condition: service_started
+      minio:
+        condition: service_healthy
     ports:
       - 8000:8000
   # Frontend React
@@ -39,6 +41,8 @@ services:
       - /home/node/node_modules
     build: ./frontend
     working_dir: /home/node
+    environment:
+      - CHOKIDAR_USEPOLLING=True
   # Nginx reverse proxy
   nginx:
     container_name: shopeasy_nginx
@@ -60,6 +64,30 @@ services:
       - redis_data:/data
     command: redis-server --appendonly yes
 
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: shopeasy_mailhog
+    ports:
+      - "1025:1025"
+
+  minio:
+    image: minio/minio:latest
+    container_name: shopeasy_minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    env_file:
+      - .env.local
+    volumes:
+      - minio_data:/media
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+    command: server /data --console-address :9001
+
 volumes:
   postgres_data:
   redis_data:
+  minio_data:

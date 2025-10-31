@@ -1,4 +1,4 @@
-// Components & fonction
+// Composantes & fonctions
 import NavBar from "./NavBar";
 import { useLocalization } from "../../state/contexts/LocalizationContext";
 

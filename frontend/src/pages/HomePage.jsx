@@ -1,12 +1,15 @@
-import Header from "../components/header/Header";
-import SearchBar from "../components/SearchBar";
-import CategoryFilters from "../components/CategoryFilters";
-import ImageGrid from "../components/ImageGrid";
-import RoundItemList from "../components/RoundItemList";
-import Footer from "../components/footer/Footer";
+import Header from "../composantes/header/Header";
+import SearchBar from "../composantes/commons/SearchBar";
+import CategoryFilters from "../composantes/commons/CategoryFilters";
+import ImageGrid from "../composantes/commons/ImageGrid";
+import RoundItemList from "../composantes/commons/RoundItemList";
+import Footer from "../composantes/footer/Footer";
+// Composantes & fonctions
+import PageTemplate from "../composantes/PageTemplate";
 import { useLocalization } from "../state/contexts/LocalizationContext";
-import PageTemplate from "../components/PageTemplate";
-// Constants
+import { useAuth } from "../state/contexts/AuthContext";
+
+// Constantes
 import LOCALIZE from "../ressources/text/localize";
 
 export default function HomePage() {
@@ -20,23 +23,28 @@ export default function HomePage() {
     "bijoux",
   ];
   const language = useLocalization();
+  const { currentUser } = useAuth();
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex min-h-screen flex-col">
+      {currentUser && (
+        <p>
+          {LOCALIZE.homepage.text2} {currentUser.username}
+        </p>
+      )}
       <Header />
       {/* ==== PARTIE SUPÉRIEURE : MARRON ==== */}
       <section className="bg-[#d9aa6e] pb-10">
-        <div className="w-full max-w-screen-xl mx-auto px-4 flex flex-col gap-6 pt-6">
+        <div className="mx-auto flex w-full max-w-screen-xl flex-col gap-6 px-4 pt-6">
           <SearchBar />
           <CategoryFilters categories={categories} />
           <ImageGrid />
-          
         </div>
       </section>
 
       {/* PARTIE INFÉRIEURE  */}
-      <section className="bg-[#ffffff] flex-1">
-        <div className="w-full max-w-screen-xl mx-auto px-4 mt-8">
+      <section className="flex-1 bg-[#ffffff]">
+        <div className="mx-auto mt-8 w-full max-w-screen-xl px-4">
           <RoundItemList />
         </div>
       </section>
