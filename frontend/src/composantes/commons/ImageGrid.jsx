@@ -1,26 +1,61 @@
 import { useRef } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import products from "../../ressources/products";
-
 export default function ImageGrid() {
   const scrollRef = useRef(null);
 
   const specialOffers = [
     {
       id: 1,
-      img: "https://via.placeholder.com/200x200/000000/FFFFFF?text=Promo+Montre",
+      img: "/image/casque.PNG",
       productId: 3,
     },
     {
       id: 2,
-      img: "https://via.placeholder.com/200x200/111111/FFFFFF?text=Promo+Casque",
+      img: "/image/bague.PNG",
       productId: 1,
     },
     {
       id: 3,
-      img: "https://via.placeholder.com/200x200/222222/FFFFFF?text=Promo+Sac",
-      productId: 5,
+      img: "/image/sac.PNG",
+      productId: 2,
     },
+    {
+      id: 4,
+      img: "/image/lunette.PNG",
+      productId: 7,
+    },
+      {
+      id: 5,
+      img: "/image/chaussure3.PNG",
+      productId: 10,
+    },
+    {
+      id: 6,
+      img: "/image/sac_diamant.PNG",
+      productId: 15,
+    },
+    {
+      id: 7,
+      img: "/image/ensemble_diamant.PNG",
+      productId: 20,
+    },
+    {
+      id: 8,
+      img: "/image/rouge a levre.PNG",
+      productId: 31,
+    },
+    {
+      id: 9,
+      img: "/image/ensemble.PNG",
+      productId: 26,
+    },
+    {
+      id: 10,
+      img: "/image/sac_en_cuir.PNG",
+      productId: 16,
+    },
+
   ];
 
   const scroll = direction => {
@@ -34,14 +69,7 @@ export default function ImageGrid() {
     <section className="w-full py-8">
       <div className="mb-4 flex items-center justify-between px-6">
         <h2 className="text-xl font-semibold text-black">Offres spéciales</h2>
-        <div className="flex gap-3">
-          <button onClick={() => scroll("left")}>
-            <FaChevronLeft />
-          </button>
-          <button onClick={() => scroll("right")}>
-            <FaChevronRight />
-          </button>
-        </div>
+        
       </div>
 
       <div

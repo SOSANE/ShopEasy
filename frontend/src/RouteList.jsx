@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router";
+import { Route, Routes } from "react-router-dom";
 
 // Pages & fonctions
 import HomePage from "./pages/HomePage";
@@ -8,6 +8,8 @@ import RegisterPage from "./pages/RegisterPage";
 import PrivateRoute from "./composantes/commons/PrivateRoute";
 import { useAuth } from "./state/contexts/AuthContext";
 import ProductPage from "./pages/ProductPage";
+import CategoryPage from "./pages/CategoryPage";
+
 // Constantes
 import PATH from "./ressources/routes/paths";
 
@@ -20,6 +22,7 @@ function RouteList() {
       <Route element={<PrivateRoute isAllowed={!isLoggedIn()} redirect={PATH.home} />}>
         <Route path={PATH.login} element={<LoginPage />} />
         <Route path={PATH.signup} element={<RegisterPage />} />
+        <Route path={PATH.category} element={<CategoryPage />} />
       </Route>
       <Route path={PATH.product} element={<ProductPage />} />
       {/* Page non trouvée */}
