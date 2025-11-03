@@ -26,7 +26,7 @@ export default function ProductPage() {
       <h1 className="text-3xl font-bold mt-6">{product.name}</h1>
       <p className="text-gray-600 mt-2">{product.description}</p>
       <p className="text-2xl font-semibold text-red-600 mt-4">{product.price} $</p>
-
+      
       {/* Sélecteur de quantité */}
       <div className="flex items-center gap-3 mt-4">
         <button
@@ -36,14 +36,16 @@ export default function ProductPage() {
           -
         </button>
         <span className="font-medium">{quantity}</span>
+        
         <button
           onClick={() => setQuantity((q) => q + 1)}
           className="px-3 py-1 bg-gray-200 rounded"
         >
           +
         </button>
+        
       </div>
-
+      
       {/* Ajouter au panier */}
       <button
         onClick={() => addToCart(product, quantity)}
@@ -51,6 +53,10 @@ export default function ProductPage() {
       >
         🛒 Ajouter {quantity} au panier
       </button>
+      
+      <button className="mt-4 bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition">
+          Passer la commande
+        </button>
     </div>
   );
 }

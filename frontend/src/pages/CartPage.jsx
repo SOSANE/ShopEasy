@@ -1,53 +1,77 @@
 import { useCart } from "../state/contexts/CartContext";
-import { Link } from "react-router-dom";
 
 export default function CartPage() {
-  const { cart, removeFromCart, clearCart, totalPrice } = useCart();
+  const { cart, removeFromCart, updateQuantity,clearCart, total } = useCart();
 
-  if (cart.length === 0) {
+  if (cart.length === 0)
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-[#d9aa6e]">
-        <h2 className="text-xl font-bold mb-2">Votre panier est vide 🛒</h2>
-        <Link to="/" className="text-black hover:underline">Retour à l'accueil</Link>
+      <div className="text-center mt-10">
+        <h2 className="text-xl font-semibold">Votre panier est vide 🛒</h2>
+        <a
+          href="/"
+          className="text-blue-500 underline mt-3 inline-block hover:text-blue-700"
+        >
+          Retour à l'accueil
+        </a>
       </div>
     );
-  }
 
   return (
-    <div className="max-w-3xl mx-auto mt-10 bg-white rounded-lg shadow-lg p-8">
-      <h2 className="text-2xl font-bold mb-4">🛍 Votre panier</h2>
+    <div className="max-w-3xl mx-auto mt-10 bg-white shadow-lg rounded-lg p-6">
+      <h1 className="text-2xl font-semibold mb-4">🛍️ Votre panier</h1>
       {cart.map((item) => (
-        <div key={item.id} className="flex justify-between items-center border-b py-3">
-          <div>
-            <p className="font-medium">{item.name}</p>
-            <p className="text-sm text-gray-500">Qté : {item.quantity}</p>
-            <p className="text-sm text-gray-700">
-              Prix unitaire : {item.price} $
-            </p>
-          </div>
+        <div
+          key={item.id}
+          className="flex justify-between items-center border-b py-3"
+        >
           <div className="flex items-center gap-3">
-            <p className="font-semibold">{(item.price * item.quantity).toFixed(2)} $</p>
+            <img
+              src={item.image}
+              alt={item.name}
+              className="w-20 h-20 object-cover rounded-md"
+            />
+            <div>
+              <p className="font-medium">{item.name}</p>
+              <p className="text-sm text-gray-500">{item.price.toFixed(2)} $</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => updateQuantity(item.id, item.quantity - 1)}
+              className="px-2 py-1 bg-gray-200 rounded"
+            >
+              −
+            </button>
+            <span className="w-6 text-center">{item.quantity}</span>
+            <button
+              onClick={() => updateQuantity(item.id, item.quantity + 1)}
+              className="px-2 py-1 bg-gray-200 rounded"
+            >
+              +
+            </button>
             <button
               onClick={() => removeFromCart(item.id)}
-              className="text-red-600 hover:text-red-800"
+              className="ml-4 text-red-600 hover:underline"
             >
-              ✖
+              Supprimer
             </button>
           </div>
         </div>
       ))}
-
-      <div className="mt-6 text-right font-bold text-lg">
-        Total : {totalPrice.toFixed(2)} $
-      </div>
-
-      <div className="mt-4 flex justify-between">
+        <div className="mt-4 flex justify-between">
         <button onClick={clearCart} className="text-red-600 hover:underline">
           Vider le panier
         </button>
-        <Link to="/" className="text-blue-600 hover:underline">
-          Continuer mes achats
-        </Link>
+        
+      </div>
+      <div className="text-right mt-6">
+        <p className="text-lg font-semibold">
+          Total : <span className="text-green-600">{total.toFixed(2)} $</span>
+        </p>
+        <button className="mt-4 bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition">
+          Passer la commande
+        </button>
       </div>
     </div>
   );

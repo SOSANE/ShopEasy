@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useEffect, useContext, useState } from "react";
 
 const CartContext = createContext();
 
@@ -12,41 +12,38 @@ export function CartProvider({ children }) {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
-  // ✅ Ajouter un produit (avec gestion de quantité)
-  const addToCart = (product, quantity = 1) => {
+  const addToCart = (product) => {
     setCart((prev) => {
-      const existing = prev.find((p) => p.id === product.id);
-      if (existing) {
-        // si le produit existe déjà, on incrémente sa quantité
+      const exists = prev.find((p) => p.id === product.id);
+      if (exists) {
+        // Incrémente la quantité si le produit existe déjà
         return prev.map((p) =>
-          p.id === product.id
-            ? { ...p, quantity: p.quantity + quantity }
-            : p
+          p.id === product.id ? { ...p, quantity: p.quantity + 1 } : p
         );
-      } else {
-        // sinon, on l’ajoute avec quantity = 1
-        return [...prev, { ...product, quantity }];
       }
+      return [...prev, { ...product, quantity: 1 }];
     });
   };
 
-  // ✅ Retirer un produit
   const removeFromCart = (id) => {
     setCart((prev) => prev.filter((p) => p.id !== id));
   };
 
-  // ✅ Vider le panier
+  const updateQuantity = (id, newQuantity) => {
+    setCart((prev) =>
+      prev.map((p) =>
+        p.id === id ? { ...p, quantity: Math.max(newQuantity, 1) } : p
+      )
+    );
+  };
+
   const clearCart = () => setCart([]);
 
-  // ✅ Calcul du total
-  const totalPrice = cart.reduce(
-    (sum, p) => sum + p.price * p.quantity,
-    0
-  );
+  const total = cart.reduce((sum, p) => sum + p.price * p.quantity, 0);
 
   return (
     <CartContext.Provider
-      value={{ cart, addToCart, removeFromCart, clearCart, totalPrice }}
+      value={{ cart, addToCart, removeFromCart, updateQuantity, clearCart, total }}
     >
       {children}
     </CartContext.Provider>
@@ -54,3 +51,4 @@ export function CartProvider({ children }) {
 }
 // eslint-disable-next-line react-refresh/only-export-components
 export const useCart = () => useContext(CartContext);
+
