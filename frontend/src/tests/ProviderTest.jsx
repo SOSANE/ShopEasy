@@ -4,6 +4,7 @@ import "@testing-library/jest-dom/vitest";
 
 import { AuthContext } from "../state/contexts/AuthContext";
 import { LocalizationProvider } from "../state/contexts/LocalizationProvider";
+import { CartProvider } from "../state/contexts/CartContext";
 
 // Utilisateur spécifique aux tests
 const testUser = { username: "test-username", email: "test@email.com" };
@@ -20,17 +21,19 @@ export function Provider({
 
   return (
     <BrowserRouter>
-      <LocalizationProvider>
-        <AuthContext
-          value={{
-            currentUser: user,
-            setCurrentUser: setCurrentUser,
-            isLoggedIn: isLoggedIn,
-          }}
-        >
-          {children}
-        </AuthContext>
-      </LocalizationProvider>
+      <CartProvider>
+        <LocalizationProvider>
+          <AuthContext
+            value={{
+              currentUser: user,
+              setCurrentUser: setCurrentUser,
+              isLoggedIn: isLoggedIn,
+            }}
+          >
+            {children}
+          </AuthContext>
+        </LocalizationProvider>
+      </CartProvider>
     </BrowserRouter>
   );
 }

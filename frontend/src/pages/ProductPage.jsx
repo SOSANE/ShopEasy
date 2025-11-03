@@ -2,61 +2,64 @@ import { useParams, useNavigate } from "react-router";
 import { useState } from "react";
 import products from "../ressources/products";
 import { useCart } from "../state/contexts/CartContext";
+import PageTemplate from "../composantes/PageTemplate";
 
 export default function ProductPage() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { addToCart } = useCart();
 
-  const product = products.find((p) => p.id === parseInt(id));
+  const product = products.find(p => p.id === parseInt(id));
   const [quantity, setQuantity] = useState(1);
 
   if (!product) return <p>Produit introuvable.</p>;
 
   return (
-    <div className="max-w-3xl mx-auto mt-10 bg-white rounded-lg shadow-lg p-8">
-      <button
-        onClick={() => navigate(-1)}
-        className="bg-[#d9aa6e] text-white px-4 py-2 rounded hover:bg-gray-600 transition"
-      >
-        ⬅ Retour
-      </button>
+    <PageTemplate>
+      <div className="mx-auto mt-10 max-w-3xl rounded-lg bg-white p-8 shadow-lg">
+        <button
+          onClick={() => navigate(-1)}
+          className="rounded bg-[#d9aa6e] px-4 py-2 text-white transition hover:bg-gray-600"
+        >
+          ⬅ Retour
+        </button>
 
-      <img src={product.image} alt={product.name} className="w-full h-80 object-contain rounded-lg" />
-      <h1 className="text-3xl font-bold mt-6">{product.name}</h1>
-      <p className="text-gray-600 mt-2">{product.description}</p>
-      <p className="text-2xl font-semibold text-red-600 mt-4">{product.price} $</p>
-      
-      {/* Sélecteur de quantité */}
-      <div className="flex items-center gap-3 mt-4">
+        <img
+          src={product.image}
+          alt={product.name}
+          className="h-80 w-full rounded-lg object-contain"
+        />
+        <h1 className="mt-6 text-3xl font-bold">{product.name}</h1>
+        <p className="mt-2 text-gray-600">{product.description}</p>
+        <p className="mt-4 text-2xl font-semibold text-red-600">{product.price} $</p>
+
+        {/* Sélecteur de quantité */}
+        <div className="mt-4 flex items-center gap-3">
+          <button
+            onClick={() => setQuantity(q => Math.max(1, q - 1))}
+            className="rounded bg-gray-200 px-3 py-1"
+          >
+            -
+          </button>
+          <span className="font-medium">{quantity}</span>
+
+          <button onClick={() => setQuantity(q => q + 1)} className="rounded bg-gray-200 px-3 py-1">
+            +
+          </button>
+        </div>
+
+        {/* Ajouter au panier */}
         <button
-          onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-          className="px-3 py-1 bg-gray-200 rounded"
+          onClick={() => addToCart(product, quantity)}
+          className="mt-6 rounded-lg bg-green-600 px-6 py-2 text-white transition hover:bg-green-700"
         >
-          -
+          🛒 Ajouter {quantity} au panier
         </button>
-        <span className="font-medium">{quantity}</span>
-        
-        <button
-          onClick={() => setQuantity((q) => q + 1)}
-          className="px-3 py-1 bg-gray-200 rounded"
-        >
-          +
-        </button>
-        
-      </div>
-      
-      {/* Ajouter au panier */}
-      <button
-        onClick={() => addToCart(product, quantity)}
-        className="mt-6 bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition"
-      >
-        🛒 Ajouter {quantity} au panier
-      </button>
-      
-      <button className="mt-4 bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition">
+
+        <button className="mt-4 rounded-lg bg-green-600 px-6 py-2 text-white transition hover:bg-green-700">
           Passer la commande
         </button>
-    </div>
+      </div>
+    </PageTemplate>
   );
 }

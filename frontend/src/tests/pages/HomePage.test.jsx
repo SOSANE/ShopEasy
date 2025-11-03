@@ -15,7 +15,7 @@ describe("Tests de la page d'acceuil", () => {
   });
 
   it("Visibilité du texte", () => {
-    const elementTitre = screen.getByText(LOCALIZE.homepage.title);
+    const elementTitre = screen.getByText(`${LOCALIZE.homepage.title}`);
     expect(elementTitre).toBeInTheDocument();
     expect(elementTitre).toBeVisible();
   });

@@ -1,78 +1,72 @@
 import { useCart } from "../state/contexts/CartContext";
+import PageTemplate from "../composantes/PageTemplate";
 
 export default function CartPage() {
-  const { cart, removeFromCart, updateQuantity,clearCart, total } = useCart();
+  const { cart, removeFromCart, updateQuantity, clearCart, total } = useCart();
 
   if (cart.length === 0)
     return (
-      <div className="text-center mt-10">
-        <h2 className="text-xl font-semibold">Votre panier est vide 🛒</h2>
-        <a
-          href="/"
-          className="text-blue-500 underline mt-3 inline-block hover:text-blue-700"
-        >
-          Retour à l'accueil
-        </a>
-      </div>
+      <PageTemplate>
+        <div className="mt-10 text-center">
+          <h2 className="text-xl font-semibold">Votre panier est vide 🛒</h2>
+          <a href="/" className="mt-3 inline-block text-blue-500 underline hover:text-blue-700">
+            Retour à l'accueil
+          </a>
+        </div>
+      </PageTemplate>
     );
 
   return (
-    <div className="max-w-3xl mx-auto mt-10 bg-white shadow-lg rounded-lg p-6">
-      <h1 className="text-2xl font-semibold mb-4">🛍️ Votre panier</h1>
-      {cart.map((item) => (
-        <div
-          key={item.id}
-          className="flex justify-between items-center border-b py-3"
-        >
-          <div className="flex items-center gap-3">
-            <img
-              src={item.image}
-              alt={item.name}
-              className="w-20 h-20 object-cover rounded-md"
-            />
-            <div>
-              <p className="font-medium">{item.name}</p>
-              <p className="text-sm text-gray-500">{item.price.toFixed(2)} $</p>
+    <PageTemplate>
+      <div className="mx-auto mt-10 max-w-3xl rounded-lg bg-white p-6 shadow-lg">
+        <h1 className="mb-4 text-2xl font-semibold">🛍️ Votre panier</h1>
+        {cart.map(item => (
+          <div key={item.id} className="flex items-center justify-between border-b py-3">
+            <div className="flex items-center gap-3">
+              <img src={item.image} alt={item.name} className="h-20 w-20 rounded-md object-cover" />
+              <div>
+                <p className="font-medium">{item.name}</p>
+                <p className="text-sm text-gray-500">{item.price.toFixed(2)} $</p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                className="rounded bg-gray-200 px-2 py-1"
+              >
+                −
+              </button>
+              <span className="w-6 text-center">{item.quantity}</span>
+              <button
+                onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                className="rounded bg-gray-200 px-2 py-1"
+              >
+                +
+              </button>
+              <button
+                onClick={() => removeFromCart(item.id)}
+                className="ml-4 text-red-600 hover:underline"
+              >
+                Supprimer
+              </button>
             </div>
           </div>
-
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => updateQuantity(item.id, item.quantity - 1)}
-              className="px-2 py-1 bg-gray-200 rounded"
-            >
-              −
-            </button>
-            <span className="w-6 text-center">{item.quantity}</span>
-            <button
-              onClick={() => updateQuantity(item.id, item.quantity + 1)}
-              className="px-2 py-1 bg-gray-200 rounded"
-            >
-              +
-            </button>
-            <button
-              onClick={() => removeFromCart(item.id)}
-              className="ml-4 text-red-600 hover:underline"
-            >
-              Supprimer
-            </button>
-          </div>
-        </div>
-      ))}
+        ))}
         <div className="mt-4 flex justify-between">
-        <button onClick={clearCart} className="text-red-600 hover:underline">
-          Vider le panier
-        </button>
-        
+          <button onClick={clearCart} className="text-red-600 hover:underline">
+            Vider le panier
+          </button>
+        </div>
+        <div className="mt-6 text-right">
+          <p className="text-lg font-semibold">
+            Total : <span className="text-green-600">{total.toFixed(2)} $</span>
+          </p>
+          <button className="mt-4 rounded-lg bg-green-600 px-6 py-2 text-white transition hover:bg-green-700">
+            Passer la commande
+          </button>
+        </div>
       </div>
-      <div className="text-right mt-6">
-        <p className="text-lg font-semibold">
-          Total : <span className="text-green-600">{total.toFixed(2)} $</span>
-        </p>
-        <button className="mt-4 bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition">
-          Passer la commande
-        </button>
-      </div>
-    </div>
+    </PageTemplate>
   );
 }
