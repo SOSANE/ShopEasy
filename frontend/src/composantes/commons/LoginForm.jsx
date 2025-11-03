@@ -11,7 +11,7 @@ import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/in
 // Constantes
 import LOCALIZE from "../../ressources/text/localize";
 import PATH from "../../ressources/routes/paths";
-let counter = 0;
+
 function LoginForm({ setCurrentUser }) {
   const language = useLocalization();
   let navigate = useNavigate();
@@ -92,7 +92,6 @@ function LoginForm({ setCurrentUser }) {
             {LOCALIZE.loginpage.form.registerAccount}
           </Link>
         </form>
-        <span>Counter: {counter++}</span>
       </div>
     </div>
   );
