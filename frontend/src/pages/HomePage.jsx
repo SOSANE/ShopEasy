@@ -1,4 +1,5 @@
 // Components & fonction
+import { Link } from "react-router";
 import PageTemplate from "../components/PageTemplate";
 import { useLocalization } from "../state/contexts/LocalizationContext";
 
@@ -19,9 +20,11 @@ function HomePage() {
         <p className="text-xl mb-6">
           Vos achats en ligne, simplifiés
         </p>
-        <button className="bg-white text-purple-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
-          Découvrir nos produits
-        </button>
+          <Link to="/pay">
+            <button className="bg-white text-purple-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
+            Aller au paiement
+            </button>
+          </Link>
       </div>
 
       {/* Section Catégories */}
