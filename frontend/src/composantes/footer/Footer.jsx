@@ -1,45 +1,53 @@
-import { FaHome, FaUser, FaShoppingCart, FaBook } from "react-icons/fa";
-// Composantes & fonctions
-import { useLocalization } from "../../state/contexts/LocalizationContext";
-import { Link } from "react-router";
 
-// Constantes
-import LOCALIZE from "../../ressources/text/localize";
-import PATH from "../../ressources/routes/paths";
+import { Link, useLocation } from "react-router";
+import { useCart } from "../../state/contexts/CartContext";
 
-export function Footer() {
-  const language = useLocalization();
-
+export default function Footer() {
+  const location = useLocation();
+  const { cart } = useCart();
+  
   return (
-    <footer
-      className="fixed bottom-0 left-0 z-[9999] flex w-full justify-around border-t border-gray-300 bg-purple-100 py-3 text-center shadow-inner"
-      style={{
-        position: "fixed",
-        bottom: 0,
-        left: 0,
-        width: "100%",
-        backgroundColor: "#E9D5FF",
-        height: "70px",
-      }}
-    >
-      <button className="flex flex-col items-center text-gray-800 transition hover:text-purple-700">
-        <FaHome className="text-xl" />
-        <span className="text-sm">home</span>
-      </button>
-      <button className="flex flex-col items-center text-gray-800 transition hover:text-purple-700">
-        <FaUser className="text-xl" />
-        <span className="text-sm">compte</span>
-      </button>
-      <button className="flex flex-col items-center text-gray-800 transition hover:text-purple-700">
-        <FaShoppingCart className="text-xl" />
-        <span className="text-sm">panier</span>
-      </button>
-      <button className="flex flex-col items-center text-gray-800 transition hover:text-purple-700">
-        <FaBook className="text-xl" />
-        <span className="text-sm">ressources</span>
-      </button>
+    <footer className="fixed bottom-0 left-0 w-full bg-purple-100 py-3 flex justify-around shadow-inner z-50">
+      <Link
+        to="/"
+        className={`bg-white px-4 py-2 rounded shadow-md hover:bg-gray-100 ${
+          location.pathname === "/" ? "border border-black" : ""
+        }`}
+      >
+        🏠 home
+      </Link>
+
+      <Link
+        to="/account"
+        className={`bg-white px-4 py-2 rounded shadow-md hover:bg-gray-100 ${
+          location.pathname === "/account" ? "border border-black" : ""
+        }`}
+      >
+        👤 compte
+      </Link>
+
+      <Link
+        to="/cart"
+        className={`bg-white px-4 py-2 rounded shadow-md hover:bg-gray-100 relative ${
+          location.pathname === "/cart" ? "border border-black" : ""
+        }`}
+      >
+        🛒 panier
+        {cart.length > 0 && (
+          <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1.5">
+            {cart.length}
+          </span>
+        )}
+      </Link>
+
+      <Link
+        to="/resources"
+        className={`bg-white px-4 py-2 rounded shadow-md hover:bg-gray-100 ${
+          location.pathname === "/resources" ? "border border-black" : ""
+        }`}
+      >
+        📚 ressources
+      </Link>
     </footer>
   );
 }
-
-export default Footer;

@@ -3,7 +3,8 @@ export const PATH = {
   login: "/login",
   signup: "/signup",
   product: "/product/:id",
-  category:"/category/:categoryName",
+  category: "/category/:categoryName",
+  cart: "/cart",
 };
 
 export default PATH;

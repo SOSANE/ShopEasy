@@ -9,7 +9,7 @@ import PrivateRoute from "./composantes/commons/PrivateRoute";
 import { useAuth } from "./state/contexts/AuthContext";
 import ProductPage from "./pages/ProductPage";
 import CategoryPage from "./pages/CategoryPage";
-
+import CartPage from "./pages/CartPage";
 // Constantes
 import PATH from "./ressources/routes/paths";
 
@@ -23,6 +23,7 @@ function RouteList() {
         <Route path={PATH.login} element={<LoginPage />} />
         <Route path={PATH.signup} element={<RegisterPage />} />
         <Route path={PATH.category} element={<CategoryPage />} />
+        <Route path={PATH.cart} element={<CartPage />} />
       </Route>
       <Route path={PATH.product} element={<ProductPage />} />
       {/* Page non trouvée */}

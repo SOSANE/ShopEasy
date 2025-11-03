@@ -167,7 +167,7 @@ const products = [
     image: "/image/ensemble_diamant.PNG",
     category: "bijoux",
   },
-    {
+  {
     id: 21,
     name: "Stylos Bic",
     description: "Paquet de stylos Bic bleus, écriture fluide et durable.",

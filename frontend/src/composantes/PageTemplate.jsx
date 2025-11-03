@@ -3,6 +3,7 @@ import Header from "./header/Header";
 import Footer from "./footer/Footer";
 import { useLocalization } from "../state/contexts/LocalizationContext";
 
+
 function PageTemplate({ children, title }) {
   const language = useLocalization();
 
