@@ -84,9 +84,10 @@ export async function userInfo() {
 
     if (response.ok) {
       const res = await response.json();
+      if (!res.username || !res.email) {
+        throw new Error("Champs manquants");
+      }
       return res;
-    } else {
-      throw Error();
     }
   } catch (e) {
     return null;
