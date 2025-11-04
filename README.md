@@ -16,21 +16,23 @@ Documentation supplémentaire:
 - [Architecture du projet](docs/Architecture.md)
 - [Endpoints du backend](docs/API.md)
 - [Ressources supplémentaires](docs/Ressources.md)
+- [Definition of Done (DoD)](/docs/DEFINITION_OF_DONE.md)
+- [Exécuter et créer des tests](/docs/TESTING.md)
 
 ## Tech Stack
 
 On se met d'accord sur la tech stack suivante, risque à être modifié:
 
-- Backend & API: Django 5.x (Python), Django Rest Framework (avec drf-spectacular)
-- Cache: Redis
-- Base de données: PostgreSQL +14
-- Frontend: React/Redux +18 (Styling avec React Bootstrap, Tailwind CSS, Styled Components)
-- Frontend testing: Vitest + React Testing Library
-- Backend testing: Django's TestCase/DRF's APITestCase
+- Backend & API: `Django` 5.2 (`Python`), `djangorestframework` (avec `drf-spectacular`)
+- Cache: `Redis`
+- Base de données: `PostgreSQL` v14.19
+- Frontend: `React` (Styling avec `TailwindCSS`, `shadcn`)
+- Frontend testing: `vitest` + `react-testing-library`
+- Backend testing: `TestCase`(`Django`)/`APITestCase`(`djangorestframework`)
 - Outils CI/CD: Github Actions
-- Containerisation: Docker
-- Monitoring: Prometheus/Grafana
-- Reverse proxy + web server: Nginx
+- Containerisation: `Docker`
+- Monitoring: `Prometheus`/`Grafana`
+- Reverse proxy + web server: `Nginx`
 
 ## Exécuter le projet
 
@@ -83,6 +85,11 @@ python manage.py createsuperuser
 En accédant sur http://localhost:8000/api/admin, on peut se connecter sur le dashboard d'administrateur
 ![django-admin-login-page](/docs/images/django-admin-login-page.png)
 ![django-admin-interface](/docs/images/django-admin-interface.png)
+
+## Documents (Livrables):
+- [Rapport des évènements Scrum]()
+- [Rapport technique]()
+- [Contrat d'équipe]()
 
 
 ## Membres de l'équipe 9
