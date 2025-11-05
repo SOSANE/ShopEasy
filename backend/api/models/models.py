@@ -66,7 +66,7 @@ class Image(models.Model):
     produit = models.ForeignKey(
         Produit, on_delete=models.CASCADE, related_name="images"
     )
-    lien = models.URLField()  # models.ImageField()
+    lien = models.ImageField()
 
 
 class Panier(models.Model):
