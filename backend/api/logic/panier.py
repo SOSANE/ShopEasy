@@ -28,10 +28,6 @@ def add_to_cart(utilisateur: Utilisateur, product_id: int) -> None:
     cart_item.quantity += 1
     cart_item.save()
 
-    # if created:
-    #     panier = Panier.objects.get(client=utilisateur.client)
-    #     panier.produits.add(product)
-
 
 def remove_from_cart(utilisateur: Utilisateur, item_id: int) -> None:
     assert (
