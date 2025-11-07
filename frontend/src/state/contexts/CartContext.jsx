@@ -4,51 +4,86 @@ const CartContext = createContext();
 
 export function CartProvider({ children }) {
   const [cart, setCart] = useState(() => {
-  const saved = localStorage.getItem("cart");
-  return saved ? JSON.parse(saved) : [];
+    try {
+      const saved = localStorage.getItem("cart");
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
   });
 
+  // ✅ Sauvegarde dans localStorage dès que le panier change
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
-  const addToCart = (product) => {
+  // ✅ Calcul automatique du total
+  const total = cart.reduce((sum, p) => sum + p.price * p.quantity, 0);
+
+  // ✅ Ajouter un produit
+  const addToCart = (product, quantity = 1) => {
     setCart((prev) => {
       const exists = prev.find((p) => p.id === product.id);
+      let updated;
+
       if (exists) {
-        // Incrémente la quantité si le produit existe déjà
-        return prev.map((p) =>
-          p.id === product.id ? { ...p, quantity: p.quantity + 1 } : p
+        updated = prev.map((p) =>
+          p.id === product.id
+            ? { ...p, quantity: p.quantity + quantity }
+            : p
         );
+      } else {
+        updated = [...prev, { ...product, quantity }];
       }
-      return [...prev, { ...product, quantity: 1 }];
+
+      localStorage.setItem("cart", JSON.stringify(updated)); // 🔥 mise à jour immédiate
+      return updated;
     });
   };
 
-  const removeFromCart = (id) => {
-    setCart((prev) => prev.filter((p) => p.id !== id));
-  };
-
+  // ✅ Modifier la quantité
   const updateQuantity = (id, newQuantity) => {
-    setCart((prev) =>
-      prev.map((p) =>
-        p.id === id ? { ...p, quantity: Math.max(newQuantity, 1) } : p
-      )
-    );
+    setCart((prev) => {
+      const updated = prev.map((p) =>
+        p.id === id ? { ...p, quantity: Math.max(1, newQuantity) } : p
+      );
+
+      localStorage.setItem("cart", JSON.stringify(updated)); // 🔥 mise à jour immédiate
+      return updated;
+    });
   };
 
-  const clearCart = () => setCart([]);
+  // ✅ Supprimer un produit
+  const removeFromCart = (id) => {
+    setCart((prev) => {
+      const updated = prev.filter((p) => p.id !== id);
+      localStorage.setItem("cart", JSON.stringify(updated));
+      return updated;
+    });
+  };
 
-  const total = cart.reduce((sum, p) => sum + p.price * p.quantity, 0);
+  // ✅ Vider le panier
+  const clearCart = () => {
+    setCart([]);
+    localStorage.removeItem("cart");
+  };
 
   return (
     <CartContext.Provider
-      value={{ cart, addToCart, removeFromCart, updateQuantity, clearCart, total }}
+      value={{
+        cart,
+        total,
+        addToCart,
+        updateQuantity,
+        removeFromCart,
+        clearCart,
+      }}
     >
       {children}
     </CartContext.Provider>
   );
 }
+
+// ✅ Hook personnalisé
 // eslint-disable-next-line react-refresh/only-export-components
 export const useCart = () => useContext(CartContext);
-

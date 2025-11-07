@@ -7,21 +7,16 @@ import PageTemplate from "../composantes/PageTemplate";
 import { useLocalization } from "../state/contexts/LocalizationContext";
 import { useAuth } from "../state/contexts/AuthContext";
 
+
 // Constantes
 import LOCALIZE from "../ressources/text/localize";
 
 export default function HomePage() {
-  const categories = [
-    "électronique",
-    "école",
-    "vêtement",
-    "chaussures",
-    "sac",
-    "maquillage",
-    "bijoux",
-  ];
-  const language = useLocalization();
+  const language = useLocalization(); // ✅ récupération depuis le context
   const { currentUser } = useAuth();
+
+  // ✅ on prend les catégories traduites
+  const categories = LOCALIZE.homepage.categories;
 
   return (
     <PageTemplate title={LOCALIZE.homepage.title}>
@@ -31,9 +26,9 @@ export default function HomePage() {
             {LOCALIZE.homepage.text2} {currentUser.username}
           </p>
         )}
-        {/* <Header /> */}
-        {/* ==== PARTIE SUPÉRIEURE : MARRON ==== */}
-        <section className="bg-[#d9aa6e] pb-10">
+
+        {/* ==== PARTIE SUPÉRIEURE ==== */}
+        <section className="bg-[#c0bdbd1e] pb-10">
           <div className="mx-auto flex w-full max-w-screen-xl flex-col gap-6 px-4 pt-6">
             <SearchBar />
             <CategoryFilters categories={categories} />
@@ -41,14 +36,16 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* PARTIE INFÉRIEURE  */}
-        <section className="flex-1 bg-[#ffffff]">
-          <div className="mx-auto mt-8 w-full max-w-screen-xl px-4">
+        {/* ==== PARTIE INFÉRIEURE ==== */}
+        <section className="flex-1 bg-[#ff0707bd] py-2">
+          <h2 className="text-xl font-semibold text-black">
+            {LOCALIZE.homepage.allProducts}
+          </h2>
+
+          <div className="mx-auto mt-8 w-full max-w-screen-xl px-8">
             <RoundItemList />
           </div>
         </section>
-
-        {/* <Footer /> */}
       </div>
     </PageTemplate>
   );

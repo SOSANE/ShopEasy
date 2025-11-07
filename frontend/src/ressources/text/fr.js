@@ -17,7 +17,18 @@ export const FR = {
     title: "Acceuil",
     text1: "Page d'acceuil",
     text2: "Bonjour, ",
+    categories: [
+      "Électronique",
+      "École",
+      "Vêtements",
+      "Chaussures",
+      "Sacs",
+      "Maquillage",
+      "Bijoux"
+    ],
+    allProducts: "Tous nos produits"
   },
+  
 
   loginpage: {
     title: "Bienvenue",
@@ -63,6 +74,58 @@ export const FR = {
       loginAccount: "Vous avez déjà un compte? Connectez-vous ici.",
     },
   },
+  categoryPage: {
+  "title": "Catégorie",
+  "noProductFound": "Aucun produit trouvé pour la catégorie",
+  "backToHome": "Retour à l’accueil",
+  "currencySymbol": "$"
+  },
+  productPage: {
+  "notFound": "Product not found.",
+  "backButton": "⬅ Back",
+  "freeShipping": "Free shipping",
+  "addToCart": "Add to cart",
+  "buyNow": "Buy now",
+  "currencySymbol": "$"
+  },
+  imageGrid: {
+  title: "Offres spéciales",
+  unknownProduct: "Produit inconnu",
+  currencySymbol: "$"
+    },
+  footer: {
+  home: "Accueil",
+  search: "Recherche",
+  cart: "Panier",
+  account: "Compte",
+  },
+  searchBar: {
+  placeholder: "Recherchez un produit...",
+  },
+  cartPage: {
+  empty: "Votre panier est vide 🛒",
+  backHome: "Retour à l'accueil",
+  title: "🛍️ Votre panier",
+  remove: "Supprimer",
+  clear: "Vider le panier",
+  total: "Total",
+  checkout: "Passer la commande",
+  currencySymbol: "$",
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 };
 
 export default FR;

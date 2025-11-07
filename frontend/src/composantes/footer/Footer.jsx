@@ -1,11 +1,13 @@
-
 import { Link, useLocation } from "react-router";
 import { useCart } from "../../state/contexts/CartContext";
+import { useLocalization } from "../../state/contexts/LocalizationContext";
+import LOCALIZE from "../../ressources/text/localize";
 
 export default function Footer() {
   const location = useLocation();
   const { cart } = useCart();
-  
+  const { language } = useLocalization();
+
   return (
     <footer className="fixed bottom-0 left-0 w-full bg-purple-100 py-3 flex justify-around shadow-inner z-50">
       <Link
@@ -14,7 +16,7 @@ export default function Footer() {
           location.pathname === "/" ? "border border-black" : ""
         }`}
       >
-        🏠 home
+        🏠 {LOCALIZE.footer.home}
       </Link>
 
       <Link
@@ -23,7 +25,7 @@ export default function Footer() {
           location.pathname === "/account" ? "border border-black" : ""
         }`}
       >
-        👤 compte
+        🔍 {LOCALIZE.footer.search}
       </Link>
 
       <Link
@@ -32,7 +34,7 @@ export default function Footer() {
           location.pathname === "/cart" ? "border border-black" : ""
         }`}
       >
-        🛒 panier
+        🛒 {LOCALIZE.footer.cart}
         {cart.length > 0 && (
           <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1.5">
             {cart.length}
@@ -46,7 +48,7 @@ export default function Footer() {
           location.pathname === "/resources" ? "border border-black" : ""
         }`}
       >
-        📚 ressources
+        👤 {LOCALIZE.footer.account}
       </Link>
     </footer>
   );

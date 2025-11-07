@@ -11,7 +11,7 @@ function RegisterPage() {
 
   return (
     <PageTemplate title={LOCALIZE.registerPage.title}>
-      <p className="mb-12">{LOCALIZE.registerPage.text1}</p>
+      <p className="mb-12">{LOCALIZE.registerPage.text1} </p>
       <RegisterForm />
     </PageTemplate>
   );

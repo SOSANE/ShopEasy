@@ -1,8 +1,12 @@
 import { useRef } from "react";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+
 import products from "../../ressources/products";
+import { useLocalization } from "../../state/contexts/LocalizationContext";
+import LOCALIZE from "../../ressources/text/localize";
+
 export default function ImageGrid() {
   const scrollRef = useRef(null);
+  const language  = useLocalization();
 
   const specialOffers = [
     {
@@ -25,7 +29,7 @@ export default function ImageGrid() {
       img: "/image/lunette.PNG",
       productId: 7,
     },
-      {
+    {
       id: 5,
       img: "/image/chaussure3.PNG",
       productId: 10,
@@ -55,10 +59,9 @@ export default function ImageGrid() {
       img: "/image/sac_en_cuir.PNG",
       productId: 16,
     },
-
   ];
 
-  const scroll = direction => {
+  const scroll = (direction) => {
     if (scrollRef.current) {
       const scrollAmount = direction === "left" ? -300 : 300;
       scrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
@@ -68,7 +71,9 @@ export default function ImageGrid() {
   return (
     <section className="w-full py-8">
       <div className="mb-4 flex items-center justify-between px-6">
-        <h2 className="text-xl font-semibold text-black">Offres spéciales</h2>
+        <h2 className="text-xl font-semibold text-black">
+          {LOCALIZE.imageGrid.title}
+        </h2>
         
       </div>
 
@@ -76,8 +81,8 @@ export default function ImageGrid() {
         ref={scrollRef}
         className="hide-scrollbar flex gap-4 overflow-x-scroll scroll-smooth px-6 pb-4"
       >
-        {specialOffers.map(offer => {
-          const product = products.find(p => p.id === offer.productId);
+        {specialOffers.map((offer) => {
+          const product = products.find((p) => p.id === offer.productId);
 
           return (
             <a
@@ -85,12 +90,18 @@ export default function ImageGrid() {
               href={`/product/${offer.productId}`}
               className="flex w-[200px] flex-shrink-0 flex-col rounded-lg bg-white shadow-md transition-transform duration-300 hover:scale-105"
             >
-              <img src={offer.img} className="h-[200px] w-full rounded-t-lg object-cover" />
+              <img
+                src={offer.img}
+                className="h-[200px] w-full rounded-t-lg object-cover"
+              />
               <div className="p-3 text-left">
                 <p className="text-sm font-medium text-gray-700">
-                  {product?.name || "Produit inconnu"}
+                  {product?.name || LOCALIZE.imageGrid.unknownProduct}
                 </p>
-                <p className="mt-1 font-semibold text-red-600">{product?.price?.toFixed(2)} $</p>
+                <p className="mt-1 font-semibold text-red-600">
+                  {product?.price?.toFixed(2)}{" "}
+                  {LOCALIZE.imageGrid.currencySymbol}
+                </p>
               </div>
             </a>
           );

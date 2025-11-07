@@ -10,7 +10,7 @@ const products = [
   },
   {
     id: 2,
-    name: "sac a main",
+    name: "sac en cuir pour femme",
     description: " qualité premium et durable.",
     price: 29.99,
     image: "/image/sac.PNG",
@@ -23,8 +23,8 @@ const products = [
     price: 39.99,
     image: "/image/casque.PNG",
     category: "électronique",
-    },
-   {
+  },
+  {
     id: 4,
     name: "Montre connectée",
     price: 149.99,
@@ -53,7 +53,7 @@ const products = [
     name: "Lunettes de soleil",
     price: 49.99,
     description: "Lunettes de soleil UV400, design unisexe et monture légère.",
-    image: "/image/lunette.PNG"
+    image: "/image/lunette.PNG",
   },
   {
     id: 8,
@@ -63,7 +63,7 @@ const products = [
     image: "/image/chaussure_sport.PNG",
     category: "chaussures",
   },
-    {
+  {
     id: 8,
     name: "Chaussure élégante noire",
     description: "Chaussure en cuir noir idéale pour les occasions formelles.",
@@ -271,25 +271,22 @@ const products = [
     image: "/image/teeshirt.PNG",
     category: "vêtement",
   },
-
   {
-  id: 34,
-  name: "Jean classique bleu",
-  description: "Jean coupe droite en denim, confortable et indémodable.",
-  price: 59.99,
-  image: "/image/jeans.PNG",
-  category: "vêtement",
-},
-{
-  id: 35,
-  name: "Veste matelassée rose",
-  description: "Veste légère et élégante, parfaite pour la mi-saison.",
-  price: 79.99,
-  image: "/image/veste.PNG",
-  category: "vêtement",
-},
-
-
+    id: 34,
+    name: "Jean classique bleu",
+    description: "Jean coupe droite en denim, confortable et indémodable.",
+    price: 59.99,
+    image: "/image/jeans.PNG",
+    category: "vêtement",
+  },
+  {
+    id: 35,
+    name: "Veste matelassée rose",
+    description: "Veste légère et élégante, parfaite pour la mi-saison.",
+    price: 79.99,
+    image: "/image/veste.PNG",
+    category: "vêtement",
+  },
 ];
 
 export default products;

@@ -7,7 +7,7 @@ export default function CategoryFilters({ categories }) {
         <Link
           key={idx}
           to={`/category/${cat.toLowerCase()}`}
-          className="rounded-full bg-[#ffffff] px-6 py-2 text-white shadow-md transition hover:bg-[#b5895b]"
+          className="rounded-full bg-[#ffffff] px-6 py-2 text-white shadow-md transition hover:bg-[#000000]"
         >
           {cat}
         </Link>
