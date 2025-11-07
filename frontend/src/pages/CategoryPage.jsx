@@ -13,7 +13,7 @@ export default function CategoryPage() {
   const filteredProducts = products.filter(
     (p) => p.category && p.category.toLowerCase() === categoryName.toLowerCase()
   );
-
+  
   // Si aucun produit trouvé
   if (filteredProducts.length === 0) {
     return (

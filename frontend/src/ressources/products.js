@@ -3,23 +3,23 @@ const products = [
   {
     id: 1,
     name: "Bague MK",
-    description: " excellent choix pour vos souvenir.",
+    description: "Excellent choix pour vos souvenirs.",
     price: 99.99,
     image: "/image/bague.PNG",
     category: "bijoux",
   },
   {
     id: 2,
-    name: "sac en cuir pour femme",
-    description: " qualité premium et durable.",
+    name: "Sac en cuir pour femme",
+    description: "Qualité premium et durable.",
     price: 29.99,
     image: "/image/sac.PNG",
-    category: "sac",
+    category: "sacs",
   },
   {
     id: 3,
     name: "Casque JBL",
-    description: " notre coup de cœur client.",
+    description: "Notre coup de cœur client.",
     price: 39.99,
     image: "/image/casque.PNG",
     category: "électronique",
@@ -46,7 +46,7 @@ const products = [
     price: 119.99,
     description: "Sac à dos spacieux en cuir véritable, parfait pour le quotidien.",
     image: "/image/sac_en_cuir.PNG",
-    category: "sac",
+    category: "sacs",
   },
   {
     id: 7,
@@ -64,7 +64,7 @@ const products = [
     category: "chaussures",
   },
   {
-    id: 8,
+    id: 36,
     name: "Chaussure élégante noire",
     description: "Chaussure en cuir noir idéale pour les occasions formelles.",
     price: 79.99,
@@ -125,7 +125,7 @@ const products = [
     description: "Sac chic et élégant, orné de détails brillants.",
     price: 129.99,
     image: "/image/sac_diamant.PNG",
-    category: "sac",
+    category: "sacs",
   },
   {
     id: 16,
@@ -133,7 +133,7 @@ const products = [
     description: "Sac robuste et stylé, idéal pour le travail ou les voyages.",
     price: 119.99,
     image: "/image/sac_en_cuir.PNG",
-    category: "sac",
+    category: "sacs",
   },
   {
     id: 17,
@@ -181,7 +181,7 @@ const products = [
     description: "Blouson tendance en jean, confortable et décontracté.",
     price: 49.99,
     image: "/image/blouson.PNG",
-    category: "vêtement",
+    category: "vêtements",
   },
   {
     id: 23,
@@ -213,7 +213,7 @@ const products = [
     description: "Tenue de sport confortable pour l’entraînement ou la détente.",
     price: 39.99,
     image: "/image/ensemble.PNG",
-    category: "vêtement",
+    category: "vêtements",
   },
   {
     id: 27,
@@ -269,7 +269,7 @@ const products = [
     description: "T-shirt bleu à imprimé Bitcoin, 100 % coton.",
     price: 29.99,
     image: "/image/teeshirt.PNG",
-    category: "vêtement",
+    category: "vêtements",
   },
   {
     id: 34,
@@ -277,7 +277,7 @@ const products = [
     description: "Jean coupe droite en denim, confortable et indémodable.",
     price: 59.99,
     image: "/image/jeans.PNG",
-    category: "vêtement",
+    category: "vêtements",
   },
   {
     id: 35,
@@ -285,7 +285,7 @@ const products = [
     description: "Veste légère et élégante, parfaite pour la mi-saison.",
     price: 79.99,
     image: "/image/veste.PNG",
-    category: "vêtement",
+    category: "vêtements",
   },
 ];
 
