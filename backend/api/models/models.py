@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from minio_storage.storage import MinioMediaStorage
 
 
 class Utilisateur(AbstractUser):
@@ -66,7 +67,7 @@ class Image(models.Model):
     produit = models.ForeignKey(
         Produit, on_delete=models.CASCADE, related_name="images"
     )
-    lien = models.ImageField()
+    lien = models.ImageField(upload_to="media/", storage=MinioMediaStorage)
 
 
 class Panier(models.Model):

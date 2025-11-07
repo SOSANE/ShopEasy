@@ -4,13 +4,15 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from ..models.models import Produit
 from ..serializer.produit import ProduitSerializer
+from rest_framework import serializers
+
+
+class ProduitViewSet(viewsets.ModelViewSet):
+    queryset = Produit.objects.all()
+    serializer_class = ProduitSerializer
 
 
 class DashboardViewSet(viewsets.ViewSet):
-    """
-    A simple ViewSet for the merchant dashboard.
-    """
-
     def list(self, request):
         # Logic to gather dashboard data
         data = {
@@ -45,6 +47,8 @@ class PanierViewSet(viewsets.ViewSet):
 
 
 class CommandeViewSet(viewsets.ViewSet):
+    serializer_class = serializers.Serializer
+
     def list(self, request):
         if request.user.is_authenticated:
             orders_data = commande.view_orders(request.user)
@@ -56,12 +60,3 @@ class CommandeViewSet(viewsets.ViewSet):
             commande.check_out_cart(request.user)
             return Response({"status": "checkout successful"})
         return Response({"status": "user not authenticated"}, status=401)
-
-
-class ProduitViewSet(viewsets.ModelViewSet):
-    """
-    A simple ViewSet for viewing and editing accounts.
-    """
-
-    queryset = Produit.objects.all()
-    serializer_class = ProduitSerializer

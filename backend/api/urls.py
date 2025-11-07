@@ -11,7 +11,7 @@
 #     path("orders/", orders_view, name="view_orders"),
 # ]
 
-from .views.views import CommandeViewSet, PanierViewSet, ProduitViewSet
+from .views.views import *
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
