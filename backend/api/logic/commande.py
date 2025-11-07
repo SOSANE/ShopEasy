@@ -1,5 +1,5 @@
 from ..models.models import Panier, ProduitPanier, Commande, ItemCommande, Utilisateur
-from .produit import _reduire_stock
+from .produit import reduire_stock
 from .paiement import SystèmePaiement
 from .panier import _prix_total_panier
 
@@ -9,8 +9,14 @@ def check_out_cart(utilisateur: Utilisateur) -> None:
         utilisateur.is_authenticated
     ), "L'Utilisateur doit être authentifier pour faire une commande."
 
-    panier = Panier.objects.get(client=utilisateur.client)
+    client = getattr(utilisateur, "client_profile", None)
+    assert client is not None, "Seulement un Clien peut faire une commande."
+
+    panier = Panier.objects.get(client=client)
     produits_panier = ProduitPanier.objects.filter(panier=panier)
+
+    if not produits_panier.exists():
+        raise ValueError("Le panier est vide.")
 
     if not SystèmePaiement().traiter_paiement(
         utilisateur, _prix_total_panier(produits_panier)
@@ -18,14 +24,15 @@ def check_out_cart(utilisateur: Utilisateur) -> None:
         raise ValueError("Le paiement a échoué.")
 
     # Logic to process the checkout
-    commande = Commande.objects.create(client=utilisateur.client)
+    commande = Commande.objects.create(client=client)
     for item in produits_panier:
         ItemCommande.objects.create(
             commande=commande,
             produit=item.produit,
             quantité=item.quantité,
+            prix=item.produit.prix,
         )
-        _reduire_stock(item.produit, item.quantité)
+        reduire_stock(item.produit, item.quantité)
 
     panier.produits.clear()
 
@@ -35,9 +42,10 @@ def view_orders(utilisateur: Utilisateur) -> dict:
         utilisateur.is_authenticated
     ), "L'Utilisateur doit être authentifier pour voir ses commandes."
 
-    commandes = Commande.objects.filter(client=utilisateur.client).order_by(
-        "-timestamp"
-    )
+    client = getattr(utilisateur, "client_profile", None)
+    assert client is not None, "Seulement un Clien peut voir ses commandes."
+
+    commandes = Commande.objects.filter(client=client).order_by("-timestamp")
     commandes_items = {}
     for commande in commandes:
         items = ItemCommande.objects.filter(commande=commande)
