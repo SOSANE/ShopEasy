@@ -38,18 +38,23 @@ def augmente_stock(produit: Produit, quantité: int) -> None:
     produit.save()
 
 
+def _notification_email_rupture_de_stock(produit: Produit):
+    send_mail(
+        "Stock épuisé pour le produit {}".format(produit.titre),
+        "Votre produit '{}' est en rupture de stock.".format(produit.titre),
+        None,
+        [produit.marchand.utilisateur.email],
+        fail_silently=False,
+    )
+
+
 def reduire_stock(produit: Produit, quantité: int) -> None:
     if produit.stock >= quantité:
         produit.stock -= quantité
         produit.save()
         if produit.stock == 0:
             # envoyer notification au marchand
-            send_mail(
-                "Stock épuisé pour le produit {}".format(produit.titre),
-                "Votre produit '{}' est en rupture de stock.".format(produit.titre),
-                None,
-                [produit.marchand.utilisateur.email],
-                fail_silently=False,
-            )
+            _notification_email_rupture_de_stock(produit)
+
     else:
         raise ValueError("Stock insuffisant pour le produit {}".format(produit.titre))

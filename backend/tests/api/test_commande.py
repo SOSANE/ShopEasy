@@ -1,4 +1,5 @@
 from rest_framework.test import APITestCase, APIClient
+from unittest.mock import patch
 
 from api.logic.commande import check_out_cart, view_orders
 from api.models import models as m
@@ -12,7 +13,7 @@ class CommandeTest(APITestCase):
         self.client_profile = m.Client.objects.create(utilisateur=self.user)
 
         self.marchand_user = m.Utilisateur.objects.create_user(
-            username="marchand", password="pw"
+            username="marchand", password="pw", email="marchard@localhost"
         )
         self.marchand = m.Marchand.objects.create(utilisateur=self.marchand_user)
 
@@ -70,3 +71,19 @@ class CommandeTest(APITestCase):
         self.assertIn(commande.id, commandes_items)
         qs = commandes_items[commande.id]
         self.assertEqual(qs.count(), 1)
+
+    @patch("api.logic.produit._notification_email_rupture_de_stock")
+    def test_notification_email_pour_rupture_de_stock(self, mock_notification):
+        autre_produit = m.Produit.objects.create(
+            marchand=self.marchand,
+            titre="Test produit 2",
+            description="desc",
+            prix=10.00,
+            stock=5,
+        )
+        m.ProduitPanier.objects.create(
+            panier=self.panier, produit=autre_produit, quantité=5
+        )
+        check_out_cart(self.user)
+
+        mock_notification.assert_called_once_with(autre_produit)
