@@ -8,6 +8,7 @@ from .models import (
     Produit,
     Panier,
     ProduitPanier,
+    Image,
 )
 
 admin.site.register(Utilisateur)
@@ -18,3 +19,4 @@ admin.site.register(Catégorie)
 admin.site.register(Produit)
 admin.site.register(Panier)
 admin.site.register(ProduitPanier)
+admin.site.register(Image)

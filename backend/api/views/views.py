@@ -2,8 +2,11 @@ from ..logic import commande, panier, produit
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 from rest_framework.response import Response
-from ..models.models import Produit
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import action
+from ..models.models import Produit, ProduitPanier
 from ..serializer.produit import ProduitSerializer
+from ..serializer.produit_panier import ProduitPanierSerializer
 from rest_framework import serializers
 
 
@@ -12,51 +15,68 @@ class ProduitViewSet(viewsets.ModelViewSet):
     serializer_class = ProduitSerializer
 
 
-class DashboardViewSet(viewsets.ViewSet):
-    def list(self, request):
-        # Logic to gather dashboard data
-        data = {
-            "total_sales": 1000,
-            "total_orders": 150,
-            "top_products": [
-                {"id": 1, "name": "Product A", "sales": 300},
-                {"id": 2, "name": "Product B", "sales": 200},
-            ],
-        }
-        return Response(data)
-
-
 class PanierViewSet(viewsets.ViewSet):
-    def retrieve(self, request, pk=None):
-        if request.user.is_authenticated:
-            cart_data = panier.view_cart(request.user)
-            return Response(cart_data)
-        return Response({"produits_panier": [], "prix_total": 0.0})
+    def list(self, request):
+        if not request.user.is_authenticated:
+            return Response({"produits_panier": [], "prix_total": 0.0})
+        cart_data = panier.view_cart(request.user)
+        return Response(cart_data)
 
-    def update(self, request, product_id):
-        if request.user.is_authenticated:
-            panier.add_to_cart(request.user, product_id)
-            return Response({"status": "product added to cart"})
-        return Response({"status": "user not authenticated"}, status=401)
 
-    def destroy(self, request, item_id):
-        if request.user.is_authenticated:
-            panier.remove_from_cart(request.user, item_id)
-            return Response({"status": "product removed from cart"})
-        return Response({"status": "user not authenticated"}, status=401)
+class ProduitPanierViewSet(viewsets.ViewSet):
+    serializer_class = ProduitPanierSerializer
+
+    # Les PK utilisé sont les id de produit et non produitpanier
+
+    def create(self, request):
+        if not request.user.is_authenticated:
+            return Response({"status": "user not authenticated"}, status=403)
+
+        serializer = self.serializer_class(data=request.data)
+        if not serializer.is_valid() and "produit" not in serializer.validated_data:
+            return Response({"status": "serializer error"})
+
+        produit = serializer.validated_data["produit"]
+        quantité = serializer.validated_data["quantité"]
+
+        panier.add_to_cart(request.user, produit, quantité)
+        return Response({"status": "product added to cart"})
+
+    def partial_update(self, request, pk=None):
+        if not request.user.is_authenticated:
+            return Response({"status": "user not authenticated"}, status=403)
+
+        if pk is None:
+            return Response({"status": "missing id"}, status=401)
+
+        serializer = self.serializer_class(data=request.data)
+        if not serializer.is_valid():
+            return Response({"status": "serializer error"}, status=401)
+
+        quantité = serializer.validated_data["quantité"]
+
+        panier.update_cart_item(request.user, pk, quantité)
+        return Response({"status": "product quantity updated"})
+
+    def destroy(self, request, pk=None):
+        if not request.user.is_authenticated and pk is not None:
+            return Response({"status": "user not authenticated"}, status=401)
+        panier.remove_from_cart(request.user, pk)
+        return Response({"status": "product removed from cart"})
 
 
 class CommandeViewSet(viewsets.ViewSet):
     serializer_class = serializers.Serializer
 
     def list(self, request):
-        if request.user.is_authenticated:
-            orders_data = commande.view_orders(request.user)
-            return Response(orders_data)
-        return Response({})
+        if not request.user.is_authenticated:
+            return Response({})
+
+        orders_data = commande.view_orders(request.user)
+        return Response(orders_data)
 
     def create(self, request):
-        if request.user.is_authenticated:
-            commande.check_out_cart(request.user)
-            return Response({"status": "checkout successful"})
-        return Response({"status": "user not authenticated"}, status=401)
+        if not request.user.is_authenticated:
+            return Response({"status": "user not authenticated"}, status=401)
+        commande.check_out_cart(request.user)
+        return Response({"status": "checkout successful"})
