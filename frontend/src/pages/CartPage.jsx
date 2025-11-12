@@ -5,19 +5,14 @@ import LOCALIZE from "../ressources/text/localize";
 
 export default function CartPage() {
   const { cart, removeFromCart, updateQuantity, clearCart, total } = useCart();
-  const language  = useLocalization();
+  const language = useLocalization();
 
   if (cart.length === 0)
     return (
       <PageTemplate>
         <div className="mt-10 text-center">
-          <h2 className="text-xl font-semibold">
-            {LOCALIZE.cartPage.empty}
-          </h2>
-          <a
-            href="/"
-            className="mt-3 inline-block text-blue-500 underline hover:text-blue-700"
-          >
+          <h2 className="text-xl font-semibold">{LOCALIZE.cartPage.empty}</h2>
+          <a href="/" className="mt-3 inline-block text-blue-500 underline hover:text-blue-700">
             {LOCALIZE.cartPage.backHome}
           </a>
         </div>
@@ -27,21 +22,12 @@ export default function CartPage() {
   return (
     <PageTemplate>
       <div className="mx-auto mt-10 max-w-3xl rounded-lg bg-white p-6 shadow-lg">
-        <h1 className="mb-4 text-2xl font-semibold">
-          {LOCALIZE.cartPage.title}
-        </h1>
+        <h1 className="mb-4 text-2xl font-semibold">{LOCALIZE.cartPage.title}</h1>
 
-        {cart.map((item) => (
-          <div
-            key={item.id}
-            className="flex items-center justify-between border-b py-3"
-          >
+        {cart.map(item => (
+          <div key={item.id} className="flex items-center justify-between border-b py-3">
             <div className="flex items-center gap-3">
-              <img
-                src={item.image}
-                alt={item.name}
-                className="h-20 w-20 rounded-md object-cover"
-              />
+              <img src={item.image} alt={item.name} className="h-20 w-20 rounded-md object-cover" />
               <div>
                 <p className="font-medium">{item.name}</p>
                 <p className="text-sm text-gray-500">
@@ -53,14 +39,14 @@ export default function CartPage() {
             <div className="flex items-center gap-2">
               <button
                 onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                className="rounded bg-gray-200 px-2 py-1"
+                className="rounded bg-gray-200! px-2 py-1"
               >
                 −
               </button>
               <span className="w-6 text-center">{item.quantity}</span>
               <button
                 onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                className="rounded bg-gray-200 px-2 py-1"
+                className="rounded bg-gray-200! px-2 py-1"
               >
                 +
               </button>
