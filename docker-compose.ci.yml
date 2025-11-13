@@ -93,6 +93,23 @@ services:
       timeout: 20s
       retries: 3
     command: server /data --console-address :9001
+  minio-init:
+    image: minio/mc:latest
+    container_name: shopeasy_minio_init
+    depends_on:
+      minio:
+        condition: service_healthy
+    environment:
+      - MINIO_ROOT_USER=minioadmin
+      - MINIO_ROOT_PASSWORD=supersecretpassword
+      - MINIO_DEFAULT_BUCKETS=produit-media-bucket
+    entrypoint: >
+      /bin/sh -c "
+      mc alias set storage http://minio:9000 $${MINIO_ROOT_USER} $${MINIO_ROOT_PASSWORD};
+      mc mb storage/$${MINIO_DEFAULT_BUCKETS} --ignore-existing;
+      mc anonymous set download storage/$${MINIO_DEFAULT_BUCKETS};
+      exit 0;
+      "
 
 volumes:
   postgres_data:
