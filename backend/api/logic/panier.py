@@ -82,5 +82,5 @@ def update_cart_item(utilisateur: Utilisateur, produit_id: int, quantité: int) 
         cart_item.delete()
         return
 
-    _ajouté_quantité_produit_panier(cart_item, quantité)
+    cart_item.quantité = quantité
     cart_item.save()
