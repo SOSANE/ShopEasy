@@ -1,0 +1,40 @@
+[
+    {
+        "model": "models.marchand",
+        "pk": 1,
+        "fields": {
+            "utilisateur": 1
+        }
+    },
+    {
+        "model": "models.catégorie",
+        "pk": 1,
+        "fields": {
+            "title": "Accessoires",
+            "description": "une tonne d'accessoires",
+            "parent": null
+        }
+    },
+    {
+        "model": "models.produit",
+        "pk": 1,
+        "fields": {
+            "marchand": 1,
+            "titre": "lunettes",
+            "description": "lunettes",
+            "prix": "25.00",
+            "stock": 10,
+            "catégories": [
+                1
+            ]
+        }
+    },
+    {
+        "model": "models.image",
+        "pk": 1,
+        "fields": {
+            "produit": 1,
+            "lien": "media/lunettes.jpg"
+        }
+    }
+]
