@@ -11,7 +11,70 @@
         "pk": 1,
         "fields": {
             "title": "Accessoires",
-            "description": "une tonne d'accessoires",
+            "description": "Variété d'accessoires",
+            "parent": null
+        }
+    },
+    {
+        "model": "models.catégorie",
+        "pk": 2,
+        "fields": {
+            "title": "Sacs",
+            "description": "Variété de sacs",
+            "parent": 1
+        }
+    },
+    {
+        "model": "models.catégorie",
+        "pk": 3,
+        "fields": {
+            "title": "Électronique",
+            "description": "Variété d'électroniques",
+            "parent": null
+        }
+    },
+    {
+        "model": "models.catégorie",
+        "pk": 4,
+        "fields": {
+            "title": "Chaussures",
+            "description": "Variété de bottes et chaussures",
+            "parent": null
+        }
+    },
+    {
+        "model": "models.catégorie",
+        "pk": 5,
+        "fields": {
+            "title": "Bijoux",
+            "description": "Variété de bijoux",
+            "parent": 1
+        }
+    },
+    {
+        "model": "models.catégorie",
+        "pk": 6,
+        "fields": {
+            "title": "École",
+            "description": "Variété d'articles pour la rentrée scolaire",
+            "parent": null
+        }
+    },
+    {
+        "model": "models.catégorie",
+        "pk": 7,
+        "fields": {
+            "title": "Vêtements",
+            "description": "Variété de vêtements",
+            "parent": null
+        }
+    },
+    {
+        "model": "models.catégorie",
+        "pk": 8,
+        "fields": {
+            "title": "Maquillage",
+            "description": "Produits de beauté et maquillage",
             "parent": null
         }
     },
@@ -20,8 +83,8 @@
         "pk": 1,
         "fields": {
             "marchand": 1,
-            "titre": "lunettes",
-            "description": "lunettes",
+            "titre": "Lunettes",
+            "description": "Lunettes de vue avec design unisexe.",
             "prix": "25.00",
             "stock": 10,
             "catégories": [
@@ -35,6 +98,798 @@
         "fields": {
             "produit": 1,
             "lien": "media/lunettes.jpg"
+        }
+    },
+    {
+        "model": "models.produit",
+        "pk": 2,
+        "fields": {
+            "marchand": 1,
+            "titre": "Bague MK",
+            "description": "Excellent choix pour vos souvenirs.",
+            "prix": "99.99",
+            "stock": 15,
+            "catégories": [
+                5
+            ]
+        }
+    },
+    {
+        "model": "models.image",
+        "pk": 2,
+        "fields": {
+            "produit": 2,
+            "lien": "media/bague.PNG"
+        }
+    },
+    {
+        "model": "models.produit",
+        "pk": 3,
+        "fields": {
+            "marchand": 1,
+            "titre": "Sac en cuir pour femme",
+            "description": "Qualité premium et durable.",
+            "prix": "29.99",
+            "stock": 18,
+            "catégories": [
+                2
+            ]
+        }
+    },
+    {
+        "model": "models.image",
+        "pk": 3,
+        "fields": {
+            "produit": 3,
+            "lien": "media/sac.PNG"
+        }
+    },
+    {
+        "model": "models.produit",
+        "pk": 4,
+        "fields": {
+            "marchand": 1,
+            "titre": "Casque JBL",
+            "description": "Notre coup de coeur client.",
+            "prix": "39.99",
+            "stock": 12,
+            "catégories": [
+                3
+            ]
+        }
+    },
+    {
+        "model": "models.image",
+        "pk": 4,
+        "fields": {
+            "produit": 4,
+            "lien": "media/casque.PNG"
+        }
+    },
+    {
+        "model": "models.produit",
+        "pk": 5,
+        "fields": {
+            "marchand": 1,
+            "titre": "Montre connectée",
+            "description": "Montre élégante avec suivi d’activité et notifications.",
+            "prix": "149.99",
+            "stock": 25,
+            "catégories": [
+                3
+            ]
+        }
+    },
+    {
+        "model": "models.image",
+        "pk": 5,
+        "fields": {
+            "produit": 5,
+            "lien": "media/montre.PNG"
+        }
+    },
+    {
+        "model": "models.produit",
+        "pk": 6,
+        "fields": {
+            "marchand": 1,
+            "titre": "Casque Bluetooth",
+            "description": "Casque sans fil à réduction de bruit, autonomie 30h.",
+            "prix": "89.99",
+            "stock": 25,
+            "catégories": [
+                3
+            ]
+        }
+    },
+    {
+        "model": "models.image",
+        "pk": 6,
+        "fields": {
+            "produit": 6,
+            "lien": "media/casque_sony.PNG"
+        }
+    },
+    {
+        "model": "models.produit",
+        "pk": 7,
+        "fields": {
+            "marchand": 1,
+            "titre": "Sac à dos en cuir",
+            "description": "Sac à dos spacieux en cuir véritable, parfait pour le quotidien.",
+            "prix": "119.99",
+            "stock": 25,
+            "catégories": [
+                2
+            ]
+        }
+    },
+    {
+        "model": "models.image",
+        "pk": 7,
+        "fields": {
+            "produit": 7,
+            "lien": "media/sac_en_cuir.PNG"
+        }
+    },
+    {
+        "model": "models.produit",
+        "pk": 8,
+        "fields": {
+            "marchand": 1,
+            "titre": "Lunettes de soleil",
+            "description": "Lunettes de soleil UV400, design unisexe et monture légère.",
+            "prix": "49.99",
+            "stock": 25,
+            "catégories": [
+                1
+            ]
+        }
+    },
+    {
+        "model": "models.image",
+        "pk": 8,
+        "fields": {
+            "produit": 8,
+            "lien": "media/lunette.PNG"
+        }
+    },
+    {
+        "model": "models.produit",
+        "pk": 9,
+        "fields": {
+            "marchand": 1,
+            "titre": "Chaussures de sport",
+            "description": "Chaussures respirantes et confortables pour le sport et la marche.",
+            "prix": "59.99",
+            "stock": 25,
+            "catégories": [
+                4
+            ]
+        }
+    },
+    {
+        "model": "models.image",
+        "pk": 9,
+        "fields": {
+            "produit": 9,
+            "lien": "media/chaussure_sport.PNG"
+        }
+    },
+    {
+        "model": "models.produit",
+        "pk": 10,
+        "fields": {
+            "marchand": 1,
+            "titre": "Chaussure élégante noire",
+            "description": "Chaussure en cuir noir idéale pour les occasions formelles.",
+            "prix": "79.99",
+            "stock": 25,
+            "catégories": [
+                4
+            ]
+        }
+    },
+    {
+        "model": "models.image",
+        "pk": 10,
+        "fields": {
+            "produit": 10,
+            "lien": "media/chaussure1.PNG"
+        }
+    },
+    {
+        "model": "models.produit",
+        "pk": 11,
+        "fields": {
+            "marchand": 1,
+            "titre": "Chaussure brune classique",
+            "description": "Modèle confortable et résistant, parfait pour un usage quotidien.",
+            "prix": "69.99",
+            "stock": 25,
+            "catégories": [
+                4
+            ]
+        }
+    },
+    {
+        "model": "models.image",
+        "pk": 11,
+        "fields": {
+            "produit": 11,
+            "lien": "media/chaussure2.PNG"
+        }
+    },
+    {
+        "model": "models.produit",
+        "pk": 12,
+        "fields": {
+            "marchand": 1,
+            "titre": "Chaussure de sport rose",
+            "description": "Design sportif et léger, excellent maintien du pied.",
+            "prix": "59.99",
+            "stock": 25,
+            "catégories": [
+                4
+            ]
+        }
+    },
+    {
+        "model": "models.image",
+        "pk": 12,
+        "fields": {
+            "produit": 12,
+            "lien": "media/chaussure3.jpg"
+        }
+    },
+    {
+        "model": "models.produit",
+        "pk": 13,
+        "fields": {
+            "marchand": 1,
+            "titre": "Chaussure de course grise",
+            "description": "Chaussure respirante avec semelle antidérapante.",
+            "prix": "64.99",
+            "stock": 25,
+            "catégories": [
+                4
+            ]
+        }
+    },
+    {
+        "model": "models.image",
+        "pk": 13,
+        "fields": {
+            "produit": 13,
+            "lien": "media/chaussure4.PNG"
+        }
+    },
+    {
+        "model": "models.produit",
+        "pk": 14,
+        "fields": {
+            "marchand": 1,
+            "titre": "Chaussure Adidas blanche",
+            "description": "Modèle intemporel et confortable pour le sport ou la marche.",
+            "prix": "89.99",
+            "stock": 25,
+            "catégories": [
+                4
+            ]
+        }
+    },
+    {
+        "model": "models.image",
+        "pk": 14,
+        "fields": {
+            "produit": 14,
+            "lien": "media/chaussure5.PNG"
+        }
+    },
+    {
+        "model": "models.produit",
+        "pk": 15,
+        "fields": {
+            "marchand": 1,
+            "titre": "Chaussure décontractée beige",
+            "description": "Style urbain avec confort optimal pour vos journées actives.",
+            "prix": "74.99",
+            "stock": 25,
+            "catégories": [
+                4
+            ]
+        }
+    },
+    {
+        "model": "models.image",
+        "pk": 15,
+        "fields": {
+            "produit": 15,
+            "lien": "media/chaussure6.PNG"
+        }
+    },
+    {
+        "model": "models.produit",
+        "pk": 16,
+        "fields": {
+            "marchand": 1,
+            "titre": "Chaussure running bleue",
+            "description": "Chaussure de sport dynamique avec amorti amélioré.",
+            "prix": "84.99",
+            "stock": 25,
+            "catégories": [
+                4
+            ]
+        }
+    },
+    {
+        "model": "models.image",
+        "pk": 16,
+        "fields": {
+            "produit": 16,
+            "lien": "media/chaussure8.PNG"
+        }
+    },
+    {
+        "model": "models.produit",
+        "pk": 17,
+        "fields": {
+            "marchand": 1,
+            "titre": "Sac à main diamanté",
+            "description": "Sac chic et élégant, orné de détails brillants.",
+            "prix": "129.99",
+            "stock": 25,
+            "catégories": [
+                2
+            ]
+        }
+    },
+    {
+        "model": "models.image",
+        "pk": 17,
+        "fields": {
+            "produit": 17,
+            "lien": "media/sac_diamant.PNG"
+        }
+    },
+    {
+        "model": "models.produit",
+        "pk": 18,
+        "fields": {
+            "marchand": 1,
+            "titre": "Sac à dos en cuir",
+            "description": "Sac robuste et stylé, idéal pour le travail ou les voyages.",
+            "prix": "119.99",
+            "stock": 25,
+            "catégories": [
+                2
+            ]
+        }
+    },
+    {
+        "model": "models.image",
+        "pk": 18,
+        "fields": {
+            "produit": 18,
+            "lien": "media/sac_en_cuir.PNG"
+        }
+    },
+    {
+        "model": "models.produit",
+        "pk": 19,
+        "fields": {
+            "marchand": 1,
+            "titre": "Boucles d’oreilles dorées",
+            "description": "Bijoux raffinés pour compléter vos tenues élégantes.",
+            "prix": "49.99",
+            "stock": 25,
+            "catégories": [
+                5
+            ]
+        }
+    },
+    {
+        "model": "models.image",
+        "pk": 19,
+        "fields": {
+            "produit": 19,
+            "lien": "media/boucle1.PNG"
+        }
+    },
+    {
+        "model": "models.produit",
+        "pk": 20,
+        "fields": {
+            "marchand": 1,
+            "titre": "Boucles d’oreilles circulaires",
+            "description": "Anneaux dorés intemporels, légers et élégants.",
+            "prix": "54.99",
+            "stock": 25,
+            "catégories": [
+                5
+            ]
+        }
+    },
+    {
+        "model": "models.image",
+        "pk": 20,
+        "fields": {
+            "produit": 20,
+            "lien": "media/boucle2.PNG"
+        }
+    },
+    {
+        "model": "models.produit",
+        "pk": 21,
+        "fields": {
+            "marchand": 1,
+            "titre": "Chaîne et bracelet dorés",
+            "description": "Parure raffinée en métal doré, idéale pour les grandes occasions.",
+            "prix": "99.99",
+            "stock": 25,
+            "catégories": [
+                5
+            ]
+        }
+    },
+    {
+        "model": "models.image",
+        "pk": 21,
+        "fields": {
+            "produit": 21,
+            "lien": "media/chaine_bracelet.PNG"
+        }
+    },
+    {
+        "model": "models.produit",
+        "pk": 22,
+        "fields": {
+            "marchand": 1,
+            "titre": "Ensemble diamant",
+            "description": "Collier et boucles assortis, un incontournable de l’élégance.",
+            "prix": "149.99",
+            "stock": 25,
+            "catégories": [
+                5
+            ]
+        }
+    },
+    {
+        "model": "models.image",
+        "pk": 22,
+        "fields": {
+            "produit": 22,
+            "lien": "media/ensemble_diamant.PNG"
+        }
+    },
+    {
+        "model": "models.produit",
+        "pk": 23,
+        "fields": {
+            "marchand": 1,
+            "titre": "Stylos Bic",
+            "description": "Paquet de stylos Bic bleus, écriture fluide et durable.",
+            "prix": "5.99",
+            "stock": 50,
+            "catégories": [
+                6
+            ]
+        }
+    },
+    {
+        "model": "models.image",
+        "pk": 23,
+        "fields": {
+            "produit": 23,
+            "lien": "media/bic.PNG"
+        }
+    },
+    {
+        "model": "models.produit",
+        "pk": 24,
+        "fields": {
+            "marchand": 1,
+            "titre": "Chemise en jean",
+            "description": "Blouson tendance en jean, confortable et décontracté.",
+            "prix": "49.99",
+            "stock": 20,
+            "catégories": [
+                7
+            ]
+        }
+    },
+    {
+        "model": "models.image",
+        "pk": 24,
+        "fields": {
+            "produit": 24,
+            "lien": "media/blouson.PNG"
+        }
+    },
+    {
+        "model": "models.produit",
+        "pk": 25,
+        "fields": {
+            "marchand": 1,
+            "titre": "Cahier petit format",
+            "description": "Cahier de notes avec couverture rigide et 200 pages lignées.",
+            "prix": "3.99",
+            "stock": 40,
+            "catégories": [
+                6
+            ]
+        }
+    },
+    {
+        "model": "models.image",
+        "pk": 25,
+        "fields": {
+            "produit": 25,
+            "lien": "media/cahier.PNG"
+        }
+    },
+    {
+        "model": "models.produit",
+        "pk": 26,
+        "fields": {
+            "marchand": 1,
+            "titre": "Cahier grands carreaux",
+            "description": "Idéal pour les élèves, 96 pages grands carreaux.",
+            "prix": "4.49",
+            "stock": 40,
+            "catégories": [
+                6
+            ]
+        }
+    },
+    {
+        "model": "models.image",
+        "pk": 26,
+        "fields": {
+            "produit": 26,
+            "lien": "media/cahier_grand_carreaux.PNG"
+        }
+    },
+    {
+        "model": "models.produit",
+        "pk": 27,
+        "fields": {
+            "marchand": 1,
+            "titre": "Boîte de crayons Crayola",
+            "description": "24 crayons de couleur pour les projets artistiques.",
+            "prix": "7.99",
+            "stock": 35,
+            "catégories": [
+                6
+            ]
+        }
+    },
+    {
+        "model": "models.image",
+        "pk": 27,
+        "fields": {
+            "produit": 27,
+            "lien": "media/crayola.PNG"
+        }
+    },
+    {
+        "model": "models.produit",
+        "pk": 28,
+        "fields": {
+            "marchand": 1,
+            "titre": "Ensemble sportif femme",
+            "description": "Tenue de sport confortable pour l’entraînement ou la détente.",
+            "prix": "39.99",
+            "stock": 25,
+            "catégories": [
+                7
+            ]
+        }
+    },
+    {
+        "model": "models.image",
+        "pk": 28,
+        "fields": {
+            "produit": 28,
+            "lien": "media/ensemble.PNG"
+        }
+    },
+    {
+        "model": "models.produit",
+        "pk": 29,
+        "fields": {
+            "marchand": 1,
+            "titre": "Pack de maquillage complet",
+            "description": "Trousse complète contenant rouges à lèvres, fards et pinceaux.",
+            "prix": "89.99",
+            "stock": 25,
+            "catégories": [
+                8
+            ]
+        }
+    },
+    {
+        "model": "models.image",
+        "pk": 29,
+        "fields": {
+            "produit": 29,
+            "lien": "media/pack_makup.PNG"
+        }
+    },
+    {
+        "model": "models.produit",
+        "pk": 30,
+        "fields": {
+            "marchand": 1,
+            "titre": "Poudre bronzante",
+            "description": "Texture légère et effet naturel pour un teint lumineux.",
+            "prix": "24.99",
+            "stock": 25,
+            "catégories": [
+                8
+            ]
+        }
+    },
+    {
+        "model": "models.image",
+        "pk": 30,
+        "fields": {
+            "produit": 30,
+            "lien": "media/poudre.PNG"
+        }
+    },
+    {
+        "model": "models.produit",
+        "pk": 31,
+        "fields": {
+            "marchand": 1,
+            "titre": "Range documents A4",
+            "description": "Classeur rigide pour ranger et organiser vos papiers.",
+            "prix": "9.99",
+            "stock": 25,
+            "catégories": [
+                6
+            ]
+        }
+    },
+    {
+        "model": "models.image",
+        "pk": 31,
+        "fields": {
+            "produit": 31,
+            "lien": "media/range_doc.PNG"
+        }
+    },
+    {
+        "model": "models.produit",
+        "pk": 32,
+        "fields": {
+            "marchand": 1,
+            "titre": "Règle fluo 30 cm",
+            "description": "Règle transparente avec graduations précises et couleurs assorties.",
+            "prix": "2.49",
+            "stock": 50,
+            "catégories": [
+                6
+            ]
+        }
+    },
+    {
+        "model": "models.image",
+        "pk": 32,
+        "fields": {
+            "produit": 32,
+            "lien": "media/regle.PNG"
+        }
+    },
+    {
+        "model": "models.produit",
+        "pk": 33,
+        "fields": {
+            "marchand": 1,
+            "titre": "Rouge à lèvres classique",
+            "description": "Rouge intense longue tenue pour un look sophistiqué.",
+            "prix": "19.99",
+            "stock": 25,
+            "catégories": [
+                8
+            ]
+        }
+    },
+    {
+        "model": "models.image",
+        "pk": 33,
+        "fields": {
+            "produit": 33,
+            "lien": "media/rouge a levre.PNG"
+        }
+    },
+    {
+        "model": "models.produit",
+        "pk": 34,
+        "fields": {
+            "marchand": 1,
+            "titre": "Feutres Sharpie",
+            "description": "Marqueurs permanents assortis, couleurs vives et durables.",
+            "prix": "12.99",
+            "stock": 30,
+            "catégories": [
+                6
+            ]
+        }
+    },
+    {
+        "model": "models.image",
+        "pk": 34,
+        "fields": {
+            "produit": 34,
+            "lien": "media/sharpie.PNG"
+        }
+    },
+    {
+        "model": "models.produit",
+        "pk": 35,
+        "fields": {
+            "marchand": 1,
+            "titre": "T-shirt Bitcoin",
+            "description": "T-shirt bleu à imprimé Bitcoin, 100 % coton.",
+            "prix": "29.99",
+            "stock": 25,
+            "catégories": [
+                7
+            ]
+        }
+    },
+    {
+        "model": "models.image",
+        "pk": 35,
+        "fields": {
+            "produit": 35,
+            "lien": "media/teeshirt.PNG"
+        }
+    },
+    {
+        "model": "models.produit",
+        "pk": 36,
+        "fields": {
+            "marchand": 1,
+            "titre": "Jean classique bleu",
+            "description": "Jean coupe droite en denim, confortable et indémodable.",
+            "prix": "59.99",
+            "stock": 25,
+            "catégories": [
+                7
+            ]
+        }
+    },
+    {
+        "model": "models.image",
+        "pk": 36,
+        "fields": {
+            "produit": 36,
+            "lien": "media/jeans.PNG"
+        }
+    },
+    {
+        "model": "models.produit",
+        "pk": 37,
+        "fields": {
+            "marchand": 1,
+            "titre": "Veste matelassée rose",
+            "description": "Veste légère et élégante, parfaite pour la mi-saison.",
+            "prix": "79.99",
+            "stock": 25,
+            "catégories": [
+                7
+            ]
+        }
+    },
+    {
+        "model": "models.image",
+        "pk": 37,
+        "fields": {
+            "produit": 37,
+            "lien": "media/veste.PNG"
         }
     }
 ]
