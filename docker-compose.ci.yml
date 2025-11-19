@@ -30,6 +30,9 @@ services:
       - DATABASE_PASSWORD=postgres
       - DATABASE_HOST=db
       - DATABASE_PORT=5432
+      - DJANGO_SUPERUSER_USERNAME=django_admin
+      - DJANGO_SUPERUSER_PASSWORD=supersecretdjangopasswordci
+      - DJANGO_SUPERUSER_EMAIL=django_admin@localhost.ca
       - MINIO_ROOT_USER=minioadmin
       - MINIO_ROOT_PASSWORD=supersecretpassword
       - MINIO_DEFAULT_BUCKETS=produit-media-bucket
@@ -99,6 +102,8 @@ services:
     depends_on:
       minio:
         condition: service_healthy
+    volumes:
+      - ./db/media/:/media
     environment:
       - MINIO_ROOT_USER=minioadmin
       - MINIO_ROOT_PASSWORD=supersecretpassword
@@ -108,6 +113,7 @@ services:
       mc alias set storage http://minio:9000 $${MINIO_ROOT_USER} $${MINIO_ROOT_PASSWORD};
       mc mb storage/$${MINIO_DEFAULT_BUCKETS} --ignore-existing;
       mc anonymous set download storage/$${MINIO_DEFAULT_BUCKETS};
+      mc cp /media storage/$${MINIO_DEFAULT_BUCKETS} --recursive;
       exit 0;
       "
 

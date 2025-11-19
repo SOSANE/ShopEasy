@@ -57,6 +57,12 @@ DATABASE_HOST=db
 DATABASE_PORT=5432
 ...
 
+DJANGO_SUPERUSER_USERNAME=django_admin
+DJANGO_SUPERUSER_PASSWORD=<Insérez un mot de passe>
+DJANGO_SUPERUSER_EMAIL=django_admin@localhost.ca
+
+...
+
 MINIO_ROOT_USER=minioadmin
 MINIO_ROOT_PASSWORD=<Insérez un mot de passe>
 MINIO_DEFAULT_BUCKETS=produit-media-bucket

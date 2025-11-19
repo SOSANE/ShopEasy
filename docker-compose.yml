@@ -93,6 +93,8 @@ services:
     depends_on:
       minio:
         condition: service_healthy
+    volumes:
+      - ./db/media/:/media
     env_file:
       - .env.local
     entrypoint: >
@@ -100,6 +102,7 @@ services:
       mc alias set storage http://minio:9000 $${MINIO_ROOT_USER} $${MINIO_ROOT_PASSWORD};
       mc mb storage/$${MINIO_DEFAULT_BUCKETS} --ignore-existing;
       mc anonymous set download storage/$${MINIO_DEFAULT_BUCKETS};
+      mc cp /media storage/$${MINIO_DEFAULT_BUCKETS} --recursive;
       exit 0;
       "
 
