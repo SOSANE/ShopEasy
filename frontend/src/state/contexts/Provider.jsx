@@ -1,5 +1,5 @@
 import { LocalizationProvider } from "./LocalizationProvider";
-import { CartProvider } from "./CartContext";
+import { CartProvider } from "./CartProvider";
 import { AuthProvider } from "./AuthProvider";
 
 /**

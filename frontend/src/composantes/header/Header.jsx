@@ -4,7 +4,7 @@ import { useLocalization } from "../../state/contexts/LocalizationContext";
 
 import { useEffect, useState } from "react";
 
-export default function Header() {
+function Header() {
   const [hidden, setHidden] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const language = useLocalization();
@@ -22,10 +22,8 @@ export default function Header() {
   }, [lastScrollY]);
 
   return (
-    
     <header
-      
-      className={`bg-[#ffffff] sticky top-0 w-full z-50 shadow-md transition-transform duration-500 ${
+      className={`sticky top-0 z-50 w-full bg-[#ffffff] shadow-md transition-transform duration-500 ${
         hidden ? "-translate-y-full" : "translate-y-0"
       }`}
     >
@@ -33,3 +31,5 @@ export default function Header() {
     </header>
   );
 }
+
+export default Header;

@@ -4,7 +4,7 @@ import "@testing-library/jest-dom/vitest";
 
 import { AuthContext } from "../state/contexts/AuthContext";
 import { LocalizationProvider } from "../state/contexts/LocalizationProvider";
-import { CartProvider } from "../state/contexts/CartContext";
+import { CartProvider } from "../state/contexts/CartProvider";
 
 // Utilisateur spécifique aux tests
 const testUser = { username: "test-username", email: "test@email.com" };

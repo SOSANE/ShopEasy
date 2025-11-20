@@ -1,19 +1,31 @@
+import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
-import { useState } from "react";
-import products from "../ressources/products";
-import { useCart } from "../state/contexts/CartContext";
+
+// Pages et fonctions
 import PageTemplate from "../composantes/PageTemplate";
+import { useCart } from "../state/contexts/CartContext";
 import { useLocalization } from "../state/contexts/LocalizationContext";
+import { getProductById } from "../api/produits";
+
+// Constantes
 import LOCALIZE from "../ressources/text/localize";
 
-export default function ProductPage() {
+function ProductPage() {
   const language = useLocalization();
   const { id } = useParams();
   const navigate = useNavigate();
   const { addToCart } = useCart();
-
-  const product = products.find(p => p.id === parseInt(id));
+  const [product, setProduct] = useState();
   const [quantity, setQuantity] = useState(1);
+
+  useEffect(() => {
+    async function fetchProduct(id) {
+      const data = await getProductById(id);
+      setProduct(data);
+    }
+
+    fetchProduct(id);
+  }, [id]);
 
   if (!product)
     return (
@@ -30,8 +42,8 @@ export default function ProductPage() {
         {/* Image produit */}
         <div className="flex w-full justify-center rounded-lg bg-[#f9f5ef] p-6 md:w-1/2">
           <img
-            src={product.image}
-            alt={product.name}
+            src={product?.images[0]?.lien}
+            alt={product.titre}
             className="h-80 object-contain transition-transform duration-300 hover:scale-105"
           />
         </div>
@@ -45,12 +57,12 @@ export default function ProductPage() {
             {LOCALIZE.productPage.backButton}
           </button>
 
-          <h1 className="text-3xl font-bold text-gray-800">{product.name}</h1>
+          <h1 className="text-3xl font-bold text-gray-800">{product.titre}</h1>
           <p className="leading-relaxed text-gray-600">{product.description}</p>
 
           <div className="flex items-center justify-between">
             <p className="text-3xl font-bold text-[#d9534f]">
-              {product.price} {LOCALIZE.productPage.currencySymbol}
+              {product.prix} {LOCALIZE.productPage.currencySymbol}
             </p>
             <span className="rounded-full bg-[#f1e1c3] px-3 py-1 text-sm text-[#705d3b]">
               {LOCALIZE.productPage.freeShipping}
@@ -92,3 +104,5 @@ export default function ProductPage() {
     </PageTemplate>
   );
 }
+
+export default ProductPage;

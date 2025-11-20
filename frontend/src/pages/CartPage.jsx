@@ -1,9 +1,13 @@
-import { useCart } from "../state/contexts/CartContext";
+// Pages et fonctions
 import PageTemplate from "../composantes/PageTemplate";
+import { useCart } from "../state/contexts/CartContext";
 import { useLocalization } from "../state/contexts/LocalizationContext";
-import LOCALIZE from "../ressources/text/localize";
 
-export default function CartPage() {
+// Constantes
+import LOCALIZE from "../ressources/text/localize";
+import PATH from "../ressources/routes/paths";
+
+function CartPage() {
   const { cart, removeFromCart, updateQuantity, clearCart, total } = useCart();
   const language = useLocalization();
 
@@ -12,7 +16,10 @@ export default function CartPage() {
       <PageTemplate>
         <div className="mt-10 text-center">
           <h2 className="text-xl font-semibold">{LOCALIZE.cartPage.empty}</h2>
-          <a href="/" className="mt-3 inline-block text-blue-500 underline hover:text-blue-700">
+          <a
+            href={PATH.home}
+            className="mt-3 inline-block text-blue-500 underline hover:text-blue-700"
+          >
             {LOCALIZE.cartPage.backHome}
           </a>
         </div>
@@ -27,11 +34,15 @@ export default function CartPage() {
         {cart.map(item => (
           <div key={item.id} className="flex items-center justify-between border-b py-3">
             <div className="flex items-center gap-3">
-              <img src={item.image} alt={item.name} className="h-20 w-20 rounded-md object-cover" />
+              <img
+                src={item.images[0].lien}
+                alt={item.name}
+                className="h-20 w-20 rounded-md object-cover"
+              />
               <div>
                 <p className="font-medium">{item.name}</p>
                 <p className="text-sm text-gray-500">
-                  {item.price.toFixed(2)} {LOCALIZE.cartPage.currencySymbol}
+                  {item.prix} {LOCALIZE.cartPage.currencySymbol}
                 </p>
               </div>
             </div>
@@ -81,3 +92,5 @@ export default function CartPage() {
     </PageTemplate>
   );
 }
+
+export default CartPage;

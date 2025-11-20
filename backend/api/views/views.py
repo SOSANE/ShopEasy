@@ -4,9 +4,10 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import action
-from ..models.models import Produit, ProduitPanier
+from ..models.models import Produit, ProduitPanier, Catégorie
 from ..serializer.produit import ProduitSerializer
 from ..serializer.produit_panier import ProduitPanierSerializer
+from ..serializer.categorie import CategorieSerializer
 from rest_framework import serializers
 
 
@@ -80,3 +81,7 @@ class CommandeViewSet(viewsets.ViewSet):
             return Response({"status": "user not authenticated"}, status=401)
         commande.check_out_cart(request.user)
         return Response({"status": "checkout successful"})
+
+class CategorieViewSet(viewsets.ModelViewSet):
+    queryset = Catégorie.objects.all()
+    serializer_class = CategorieSerializer
