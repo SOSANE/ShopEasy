@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router";
+import { ArrowLeft } from "lucide-react";
 
 // Composantes et fonctions
 import PageTemplate from "../composantes/PageTemplate";
@@ -47,9 +48,9 @@ function CategoryPage({ products }) {
           </h2>
           <Link
             to={PATH.home}
-            className="rounded-md bg-black px-6 py-2 text-white transition hover:bg-gray-800"
+            className="flex justify-around rounded-md bg-black px-6 py-2 text-white! transition hover:bg-gray-800"
           >
-            {LOCALIZE.categoryPage.backToHome}
+            <ArrowLeft /> <p className="ml-2">{LOCALIZE.categoryPage.backToHome}</p>
           </Link>
         </div>
       </PageTemplate>
@@ -68,9 +69,9 @@ function CategoryPage({ products }) {
             </h1>
             <Link
               to={PATH.home}
-              className="rounded-md bg-white px-6 py-2 text-black transition hover:bg-gray-900 hover:text-white"
+              className="flex justify-around rounded-md bg-white px-6 py-2 text-black transition hover:bg-gray-900 hover:text-white"
             >
-              ⬅ {LOCALIZE.categoryPage.backToHome}
+              <ArrowLeft /> <p className="ml-2">{LOCALIZE.categoryPage.backToHome}</p>
             </Link>
           </div>
 

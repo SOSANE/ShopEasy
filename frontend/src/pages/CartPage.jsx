@@ -1,5 +1,3 @@
-import { ShoppingCart } from "lucide-react";
-
 // Pages et fonctions
 import PageTemplate from "../composantes/PageTemplate";
 import { useCart } from "../state/contexts/CartContext";
