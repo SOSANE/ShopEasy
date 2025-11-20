@@ -5,6 +5,7 @@ export const EN = {
   langueContraire: "fr",
   language: "Language",
   title: "ShopEasy",
+  currencySymbol: "$",
 
   header: {
     changeLanguage: "Français",
@@ -17,17 +18,8 @@ export const EN = {
     title: "Home",
     text1: "Homepage",
     text2: "Hello, ",
-    categories: [
-    "Electronics",
-    "School",
-    "Clothing",
-    "Shoes",
-    "Bags",
-    "Makeup",
-    "Jewelry"
-  ],
-  allProducts: "All our products"
-
+    categories: ["Electronics", "School", "Clothing", "Shoes", "Bags", "Makeup", "Jewelry"],
+    allProducts: "All our products",
   },
 
   loginpage: {
@@ -75,56 +67,40 @@ export const EN = {
     },
   },
   categoryPage: {
-    "title": "Category",
-    "noProductFound": "No products found for category",
-    "backToHome": "Back to home",
-    "currencySymbol": "$"
+    title: "Category",
+    noProductFound: "No products found for category",
+    backToHome: "Back to home",
   },
   productPage: {
-    "notFound": "Produit introuvable.",
-    "backButton": "⬅ Retour",
-    "freeShipping": "Livraison gratuite",
-    "addToCart": "Ajouter au panier",
-    "buyNow": "Acheter maintenant",
-    "currencySymbol": "$"
+    notFound: "Produit introuvable.",
+    backButton: "Retour",
+    freeShipping: "Livraison gratuite",
+    addToCart: "Ajouter au panier",
+    buyNow: "Acheter maintenant",
   },
 
   imageGrid: {
-  title: "Special Offers",
-  unknownProduct: "Unknown Product",
-  currencySymbol: "$"
+    title: "Special Offers",
+    unknownProduct: "Unknown Product",
   },
   footer: {
-  home: "Home",
-  search: "Search",
-  cart: "Cart",
-  account: "Account",
-},
+    home: "Home",
+    search: "Search",
+    cart: "Cart",
+    account: "Account",
+  },
   searchBar: {
     placeholder: "Search for a product...",
   },
   cartPage: {
-  empty: "Your cart is empty 🛒",
-  backHome: "Back to home",
-  title: "🛍️ Your Cart",
-  remove: "Remove",
-  clear: "Clear cart",
-  total: "Total",
-  checkout: "Proceed to checkout",
-  currencySymbol: "$",
-}
-
-
-
-
-
-
-
-
-
-
-
-
+    empty: "Your cart is empty",
+    backHome: "Back to home",
+    title: "Your Cart",
+    remove: "Remove",
+    clear: "Clear cart",
+    total: "Total",
+    checkout: "Proceed to checkout",
+  },
 };
 
 export default EN;

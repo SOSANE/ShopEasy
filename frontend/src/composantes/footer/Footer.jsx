@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router";
-
+import { Search, User, ShoppingCart, Store } from "lucide-react";
 // Fonctions
 import { useCart } from "../../state/contexts/CartContext";
 import { useLocalization } from "../../state/contexts/LocalizationContext";
@@ -17,29 +17,29 @@ function Footer() {
     <footer className="fixed bottom-0 left-0 z-50 flex w-full justify-around bg-purple-100 py-3 shadow-inner">
       <Link
         to={PATH.home}
-        className={`rounded bg-white px-4 py-2 shadow-md hover:bg-gray-100 ${
+        className={`flex items-center rounded bg-white px-4 py-2 shadow-md hover:bg-gray-100 ${
           location.pathname === PATH.home ? "border border-black" : ""
         }`}
       >
-        🏠 {LOCALIZE.footer.home}
+        <Store /> <p className="ml-2">{LOCALIZE.footer.home}</p>
       </Link>
 
       <Link
         to={PATH.search}
-        className={`rounded bg-white px-4 py-2 shadow-md hover:bg-gray-100 ${
+        className={`flex items-center rounded bg-white px-4 py-2 shadow-md hover:bg-gray-100 ${
           location.pathname === PATH.search ? "border border-black" : ""
         }`}
       >
-        🔍 {LOCALIZE.footer.search}
+        <Search /> <p className="ml-2">{LOCALIZE.footer.search}</p>
       </Link>
 
       <Link
         to={PATH.cart}
-        className={`relative rounded bg-white px-4 py-2 shadow-md hover:bg-gray-100 ${
+        className={`relative flex items-center rounded bg-white px-4 py-2 shadow-md hover:bg-gray-100 ${
           location.pathname === PATH.cart ? "border border-black" : ""
         }`}
       >
-        🛒 {LOCALIZE.footer.cart}
+        <ShoppingCart /> <p className="ml-2">{LOCALIZE.footer.cart}</p>
         {cart.length > 0 && (
           <span className="absolute -top-2 -right-2 rounded-full bg-red-500 px-1.5 text-xs text-white">
             {cart.length}
@@ -49,11 +49,11 @@ function Footer() {
 
       <Link
         to={PATH.profile}
-        className={`rounded bg-white px-4 py-2 shadow-md hover:bg-gray-100 ${
+        className={`flex items-center rounded bg-white px-4 py-2 shadow-md hover:bg-gray-100 ${
           location.pathname === PATH.profile ? "border border-black" : ""
         }`}
       >
-        👤 {LOCALIZE.footer.account}
+        <User /> <p className="ml-2">{LOCALIZE.footer.account}</p>
       </Link>
     </footer>
   );

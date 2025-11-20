@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
+import { ArrowLeft, ShoppingCart, Zap } from "lucide-react";
 
 // Pages et fonctions
 import PageTemplate from "../composantes/PageTemplate";
@@ -52,9 +53,9 @@ function ProductPage() {
         <div className="flex w-full flex-col gap-4 md:w-1/2">
           <button
             onClick={() => navigate(-1)}
-            className="self-start text-sm text-[#d9aa6e] hover:underline"
+            className="flex justify-around self-start text-sm text-[#d9aa6e] hover:underline"
           >
-            {LOCALIZE.productPage.backButton}
+            <ArrowLeft /> <p className="ml-2">{LOCALIZE.productPage.backButton}</p>
           </button>
 
           <h1 className="text-3xl font-bold text-gray-800">{product.titre}</h1>
@@ -62,7 +63,7 @@ function ProductPage() {
 
           <div className="flex items-center justify-between">
             <p className="text-3xl font-bold text-[#d9534f]">
-              {product.prix} {LOCALIZE.productPage.currencySymbol}
+              {product.prix} {LOCALIZE.currencySymbol}
             </p>
             <span className="rounded-full bg-[#f1e1c3] px-3 py-1 text-sm text-[#705d3b]">
               {LOCALIZE.productPage.freeShipping}
@@ -90,13 +91,13 @@ function ProductPage() {
           <div className="mt-6 flex flex-col gap-4 md:flex-row">
             <button
               onClick={() => addToCart(product, quantity)}
-              className="flex-1 rounded-lg bg-green-600 px-6 py-3 text-center font-semibold text-white shadow-md transition hover:scale-105 hover:bg-green-700"
+              className="flex flex-1 justify-around rounded-lg bg-green-600 px-6 py-3 text-center font-semibold text-white shadow-md transition hover:scale-105 hover:bg-green-700"
             >
-              🛒 {LOCALIZE.productPage.addToCart}
+              <ShoppingCart /> {LOCALIZE.productPage.addToCart}
             </button>
 
-            <button className="flex-1 rounded-lg bg-[#d9aa6e] px-6 py-3 text-center font-semibold text-white shadow-md transition hover:scale-105 hover:bg-[#b8864b]">
-              ⚡ {LOCALIZE.productPage.buyNow}
+            <button className="flex flex-1 justify-around rounded-lg bg-[#d9aa6e] px-6 py-3 text-center font-semibold text-white shadow-md transition hover:scale-105 hover:bg-[#b8864b]">
+              <Zap /> {LOCALIZE.productPage.buyNow}
             </button>
           </div>
         </div>

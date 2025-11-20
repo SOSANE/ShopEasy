@@ -1,3 +1,5 @@
+import { ShoppingCart } from "lucide-react";
+
 // Pages et fonctions
 import PageTemplate from "../composantes/PageTemplate";
 import { useCart } from "../state/contexts/CartContext";
@@ -42,7 +44,7 @@ function CartPage() {
               <div>
                 <p className="font-medium">{item.name}</p>
                 <p className="text-sm text-gray-500">
-                  {item.prix} {LOCALIZE.cartPage.currencySymbol}
+                  {item.prix} {LOCALIZE.currencySymbol}
                 </p>
               </div>
             </div>
@@ -81,7 +83,7 @@ function CartPage() {
           <p className="text-lg font-semibold">
             {LOCALIZE.cartPage.total} :{" "}
             <span className="text-green-600">
-              {total.toFixed(2)} {LOCALIZE.cartPage.currencySymbol}
+              {total.toFixed(2)} {LOCALIZE.currencySymbol}
             </span>
           </p>
           <button className="mt-4 rounded-lg bg-green-600 px-6 py-2 text-white transition hover:bg-green-700">

@@ -5,6 +5,7 @@ export const FR = {
   langueContraire: "en",
   language: "Langue",
   title: "ShopEasy",
+  currencySymbol: "$",
 
   header: {
     changeLanguage: "English",
@@ -24,11 +25,10 @@ export const FR = {
       "Chaussures",
       "Sacs",
       "Maquillage",
-      "Bijoux"
+      "Bijoux",
     ],
-    allProducts: "Tous nos produits"
+    allProducts: "Tous nos produits",
   },
-  
 
   loginpage: {
     title: "Bienvenue",
@@ -75,57 +75,39 @@ export const FR = {
     },
   },
   categoryPage: {
-  "title": "Catégorie",
-  "noProductFound": "Aucun produit trouvé pour la catégorie",
-  "backToHome": "Retour à l’accueil",
-  "currencySymbol": "$"
+    title: "Catégorie",
+    noProductFound: "Aucun produit trouvé pour la catégorie",
+    backToHome: "Retour à l’accueil",
   },
   productPage: {
-  "notFound": "Product not found.",
-  "backButton": "⬅ Back",
-  "freeShipping": "Free shipping",
-  "addToCart": "Add to cart",
-  "buyNow": "Buy now",
-  "currencySymbol": "$"
+    notFound: "Product not found.",
+    backButton: "Back",
+    freeShipping: "Free shipping",
+    addToCart: "Add to cart",
+    buyNow: "Buy now",
   },
   imageGrid: {
-  title: "Offres spéciales",
-  unknownProduct: "Produit inconnu",
-  currencySymbol: "$"
-    },
+    title: "Offres spéciales",
+    unknownProduct: "Produit inconnu",
+  },
   footer: {
-  home: "Accueil",
-  search: "Recherche",
-  cart: "Panier",
-  account: "Compte",
+    home: "Accueil",
+    search: "Recherche",
+    cart: "Panier",
+    account: "Compte",
   },
   searchBar: {
-  placeholder: "Recherchez un produit...",
+    placeholder: "Recherchez un produit...",
   },
   cartPage: {
-  empty: "Votre panier est vide 🛒",
-  backHome: "Retour à l'accueil",
-  title: "🛍️ Votre panier",
-  remove: "Supprimer",
-  clear: "Vider le panier",
-  total: "Total",
-  checkout: "Passer la commande",
-  currencySymbol: "$",
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    empty: "Votre panier est vide",
+    backHome: "Retour à l'accueil",
+    title: "Votre panier",
+    remove: "Supprimer",
+    clear: "Vider le panier",
+    total: "Total",
+    checkout: "Passer la commande",
+  },
 };
 
 export default FR;

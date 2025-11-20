@@ -91,7 +91,7 @@ function CategoryPage({ products }) {
                   <h2 className="text-lg font-semibold text-gray-800">{product.titre}</h2>
                   <p className="mt-2 line-clamp-2 text-sm text-gray-600">{product.description}</p>
                   <p className="mt-3 font-bold text-red-600">
-                    {product.prix} {LOCALIZE.categoryPage.currencySymbol}
+                    {product.prix} {LOCALIZE.currencySymbol}
                   </p>
                 </div>
               </Link>

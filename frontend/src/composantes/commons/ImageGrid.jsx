@@ -40,7 +40,7 @@ function ImageGrid({ productList }) {
                   {product?.titre || LOCALIZE.imageGrid.unknownProduct}
                 </p>
                 <p className="mt-1 font-semibold text-red-600">
-                  {product?.prix} {LOCALIZE.imageGrid.currencySymbol}
+                  {product?.prix} {LOCALIZE.currencySymbol}
                 </p>
               </div>
             </a>

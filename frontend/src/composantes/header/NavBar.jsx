@@ -35,7 +35,7 @@ function NavBar() {
           {currentUser ? (
             <button
               onClick={() => handleLogout()}
-              className="mr-2 !bg-transparent !text-stone-950 hover:!bg-stone-200"
+              className="mr-2 bg-transparent! text-stone-950! hover:bg-stone-200!"
             >
               {LOCALIZE.header.navbarLogoutTitle}
             </button>
