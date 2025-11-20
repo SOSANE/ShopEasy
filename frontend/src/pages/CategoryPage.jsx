@@ -1,19 +1,18 @@
-// Importations nécessaires
-import { useParams, Link } from "react-router-dom"; // ✅ corrige l'import
+import { useParams, Link } from "react-router";
 import PageTemplate from "../composantes/PageTemplate";
 import products from "../ressources/products";
 import { useLocalization } from "../state/contexts/LocalizationContext";
 import LOCALIZE from "../ressources/text/localize";
 
 export default function CategoryPage() {
-  const  language  = useLocalization(); // ✅ pour accéder à la langue
+  const language = useLocalization();
   const { categoryName } = useParams();
 
   // On filtre les produits de cette catégorie
   const filteredProducts = products.filter(
-    (p) => p.category && p.category.toLowerCase() === categoryName.toLowerCase()
+    p => p.category && p.category.toLowerCase() === categoryName.toLowerCase()
   );
-  
+
   // Si aucun produit trouvé
   if (filteredProducts.length === 0) {
     return (
@@ -53,7 +52,7 @@ export default function CategoryPage() {
 
           {/* Grille des produits */}
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3">
-            {filteredProducts.map((product) => (
+            {filteredProducts.map(product => (
               <Link
                 key={product.id}
                 to={`/product/${product.id}`}
@@ -65,15 +64,10 @@ export default function CategoryPage() {
                   className="h-56 w-full rounded-t-lg object-contain p-4"
                 />
                 <div className="p-4">
-                  <h2 className="text-lg font-semibold text-gray-800">
-                    {product.name}
-                  </h2>
-                  <p className="mt-2 line-clamp-2 text-sm text-gray-600">
-                    {product.description}
-                  </p>
+                  <h2 className="text-lg font-semibold text-gray-800">{product.name}</h2>
+                  <p className="mt-2 line-clamp-2 text-sm text-gray-600">{product.description}</p>
                   <p className="mt-3 font-bold text-red-600">
-                    {product.price.toFixed(2)}{" "}
-                    {LOCALIZE.categoryPage.currencySymbol}
+                    {product.price.toFixed(2)} {LOCALIZE.categoryPage.currencySymbol}
                   </p>
                 </div>
               </Link>

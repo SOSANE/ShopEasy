@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from "react-router-dom"; // ✅ corrige import
+import { useParams, useNavigate } from "react-router";
 import { useState } from "react";
 import products from "../ressources/products";
 import { useCart } from "../state/contexts/CartContext";
@@ -7,7 +7,7 @@ import { useLocalization } from "../state/contexts/LocalizationContext";
 import LOCALIZE from "../ressources/text/localize";
 
 export default function ProductPage() {
-  const language = useLocalization(); // ✅ on récupère les textes selon la langue
+  const language = useLocalization();
   const { id } = useParams();
   const navigate = useNavigate();
   const { addToCart } = useCart();

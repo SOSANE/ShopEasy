@@ -16,23 +16,16 @@ import PATH from "../../ressources/routes/paths";
 function RegisterForm() {
   const language = useLocalization();
   let navigate = useNavigate();
-  const { register, handleSubmit } = useForm();
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const { register, handleSubmit } = useForm({ shouldUseNativeValidation: true });
   const [errorMessages, setErrorMessages] = useState({});
   const [showPasswordDoNotMatchErrorMessage, setShowPasswordDoNotMatchErrorMessage] =
     useState(false);
-  const [emptyFieldError, setEmptyFieldError] = useState(false);
 
-  async function onSubmit(e) {
-    e.preventDefault();
-
-    if (confirmPassword !== password) {
+  const onSubmit = async formData => {
+    if (formData.confirmPassword !== formData.password) {
       setShowPasswordDoNotMatchErrorMessage(true);
     } else {
-      const data = await signup(email, username, password);
+      const data = await signup(formData.email, formData.username, formData.password);
       setShowPasswordDoNotMatchErrorMessage(false);
       if (data.id) {
         navigate(PATH.login);
@@ -40,15 +33,7 @@ function RegisterForm() {
         setErrorMessages(ErrorMessages(data));
       }
     }
-  }
-
-  function handleBlur(e) {
-    if (e.target.value.trim() === "") {
-      setEmptyFieldError(true);
-    } else {
-      setEmptyFieldError(false);
-    }
-  }
+  };
 
   return (
     <div className="overflow-hidden rounded p-28 shadow-lg">
@@ -56,7 +41,7 @@ function RegisterForm() {
         <form
           id="registration-form"
           className="flex flex-col gap-1"
-          onSubmit={e => handleSubmit(onSubmit(e))}
+          onSubmit={handleSubmit(onSubmit)}
         >
           <div className="flex flex-row gap-3">
             <div className="flex flex-col gap-3">
@@ -68,14 +53,10 @@ function RegisterForm() {
                 id="register-form-username-input"
                 aria-required
                 {...register("username", {
-                  required: true,
-                  value: username,
-                  onBlur: e => handleBlur(e),
-                  onChange: e => setUsername(e.target.value),
+                  required: LOCALIZE.registerPage.form.usernameValidationMessage,
                 })}
                 aria-label={LOCALIZE.registerPage.form.usernameLabel}
                 placeholder={LOCALIZE.registerPage.form.usernameLabel}
-                className={emptyFieldError && username === "" ? "border-red-700" : ""}
               />
             </div>
 
@@ -87,15 +68,11 @@ function RegisterForm() {
                 type="email"
                 id="register-form-email-input"
                 {...register("email", {
-                  required: true,
-                  value: email,
-                  onBlur: e => handleBlur(e),
-                  onChange: e => setEmail(e.target.value),
+                  required: LOCALIZE.registerPage.form.emailValidationMessage,
                 })}
                 aria-required
                 aria-label={LOCALIZE.registerPage.form.emailLabel}
                 placeholder={LOCALIZE.registerPage.form.emailPlaceholder}
-                className={emptyFieldError && email === "" ? "border-red-700" : ""}
               />
             </div>
           </div>
@@ -108,15 +85,11 @@ function RegisterForm() {
               type="password"
               id="register-form-password-input"
               {...register("password", {
-                required: true,
-                value: password,
-                onBlur: e => handleBlur(e),
-                onChange: e => setPassword(e.target.value),
+                required: LOCALIZE.registerPage.form.passwordValidationMessage,
               })}
               aria-required
               aria-label={LOCALIZE.registerPage.form.passwordLabel}
               placeholder={LOCALIZE.registerPage.form.passwordPlaceholder}
-              className={emptyFieldError && password === "" ? "border-red-700" : ""}
             />
 
             <Label htmlFor="register-form-confirm-password-input" className="pl-1">
@@ -126,15 +99,11 @@ function RegisterForm() {
               type="password"
               id="register-form-confirm-password-input"
               {...register("confirmPassword", {
-                required: true,
-                value: confirmPassword,
-                onBlur: e => handleBlur(e),
-                onChange: e => setConfirmPassword(e.target.value),
+                required: LOCALIZE.registerPage.form.confirmPasswordValidationMessage,
               })}
               aria-required
               aria-label={LOCALIZE.registerPage.form.confirmPasswordLabel}
               placeholder={LOCALIZE.registerPage.form.confirmPasswordPlaceholder}
-              className={emptyFieldError && confirmPassword === "" ? "border-red-700" : ""}
             />
           </div>
 

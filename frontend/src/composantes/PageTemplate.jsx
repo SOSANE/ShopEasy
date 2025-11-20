@@ -11,7 +11,7 @@ function PageTemplate({ children, title }) {
     <>
       <Header />
       <main className="max-w-full text-stone-900">
-        <h1 className="mb-6 font-semibold"></h1>
+        <h1 className="mb-6 font-semibold">{title}</h1>
         {children}
       </main>
       <Footer />

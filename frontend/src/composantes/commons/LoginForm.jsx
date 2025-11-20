@@ -11,19 +11,16 @@ import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/in
 // Constantes
 import LOCALIZE from "../../ressources/text/localize";
 import PATH from "../../ressources/routes/paths";
-let counter = 0;
+
 function LoginForm({ setCurrentUser }) {
   const language = useLocalization();
   let navigate = useNavigate();
-  const { register, handleSubmit } = useForm();
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const { register, handleSubmit } = useForm({ shouldUseNativeValidation: true });
   const [showErrorMessages, setShowErrorMessages] = useState(false);
-  const [emptyFieldError, setEmptyFieldError] = useState(false);
 
-  async function onSubmit(e) {
-    e.preventDefault();
-    const data = await login(username, password);
+  const onSubmit = async formData => {
+    // e.preventDefault();
+    const data = await login(formData.username, formData.password);
     if (data) {
       const info = await userInfo();
       setCurrentUser({
@@ -35,15 +32,7 @@ function LoginForm({ setCurrentUser }) {
     } else {
       setShowErrorMessages(true);
     }
-  }
-
-  function handleBlur(e) {
-    if (e.target.value.trim() === "") {
-      setEmptyFieldError(true);
-    } else {
-      setEmptyFieldError(false);
-    }
-  }
+  };
 
   return (
     <div className="overflow-hidden rounded p-24 shadow-lg">
@@ -51,10 +40,10 @@ function LoginForm({ setCurrentUser }) {
         <form
           id="login-form"
           className="flex flex-col gap-4 px-5"
-          onSubmit={e => handleSubmit(onSubmit(e))}
+          onSubmit={handleSubmit(onSubmit)}
         >
           <div className="flex flex-col gap-3">
-            <InputGroup className={emptyFieldError && username === "" ? "border-red-700" : ""}>
+            <InputGroup>
               <InputGroupAddon>
                 <User />
               </InputGroupAddon>
@@ -62,17 +51,14 @@ function LoginForm({ setCurrentUser }) {
                 type="text"
                 id="login-form-username"
                 {...register("username", {
-                  required: true,
-                  value: username,
-                  onBlur: e => handleBlur(e),
-                  onChange: e => setUsername(e.target.value),
+                  required: LOCALIZE.loginpage.form.usernameValidationMessage,
                 })}
                 aria-required
                 aria-label={LOCALIZE.loginpage.form.usernameLabel}
                 placeholder={LOCALIZE.loginpage.form.usernameLabel}
               />
             </InputGroup>
-            <InputGroup className={emptyFieldError && password === "" ? "border-red-700" : ""}>
+            <InputGroup>
               <InputGroupAddon>
                 <Lock />
               </InputGroupAddon>
@@ -80,10 +66,7 @@ function LoginForm({ setCurrentUser }) {
                 type="password"
                 id="login-form-password"
                 {...register("password", {
-                  required: true,
-                  value: password,
-                  onBlur: e => handleBlur(e),
-                  onChange: e => setPassword(e.target.value),
+                  required: LOCALIZE.loginpage.form.passwordValidationMessage,
                 })}
                 aria-required
                 aria-label={LOCALIZE.loginpage.form.passwordLabel}
