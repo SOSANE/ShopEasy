@@ -4,10 +4,11 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import action
-from ..models.models import Produit, ProduitPanier, Catégorie
+from ..models.models import Produit, ProduitPanier, Catégorie, Client
 from ..serializer.produit import ProduitSerializer
 from ..serializer.produit_panier import ProduitPanierSerializer
 from ..serializer.categorie import CategorieSerializer
+from ..serializer.client import ClientSerializer
 from rest_framework import serializers
 
 
@@ -82,6 +83,12 @@ class CommandeViewSet(viewsets.ViewSet):
         commande.check_out_cart(request.user)
         return Response({"status": "checkout successful"})
 
+
 class CategorieViewSet(viewsets.ModelViewSet):
     queryset = Catégorie.objects.all()
     serializer_class = CategorieSerializer
+
+
+class ClientViewSet(viewsets.ModelViewSet):
+    queryset = Client.objects.all()
+    serializer_class = ClientSerializer
