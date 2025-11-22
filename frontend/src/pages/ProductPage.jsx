@@ -1,6 +1,14 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
 import { ArrowLeft, ShoppingCart, Zap } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 // Pages et fonctions
 import PageTemplate from "../composantes/PageTemplate";
@@ -17,18 +25,20 @@ function ProductPage() {
   const navigate = useNavigate();
   const { addToCart } = useCart();
   const [product, setProduct] = useState();
+  const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
     async function fetchProduct(id) {
       const data = await getProductById(id);
       setProduct(data);
+      setLoading(false);
     }
 
     fetchProduct(id);
   }, [id]);
 
-  if (!product)
+  if (!product && !loading)
     return (
       <PageTemplate>
         <div className="flex min-h-screen items-center justify-center">
@@ -39,16 +49,39 @@ function ProductPage() {
 
   return (
     <PageTemplate>
-      <div className="mx-auto mt-12 flex max-w-4xl flex-col items-center gap-10 rounded-xl bg-white p-10 shadow-lg md:flex-row">
+      <div className="mx-auto mt-12 flex max-w-4xl flex-col items-center gap-16 rounded-xl bg-white px-16 py-10 shadow-lg md:flex-row">
         {/* Image produit */}
-        <div className="flex w-full justify-center rounded-lg bg-[#f9f5ef] p-6 md:w-1/2">
-          <img
-            src={product?.images[0]?.lien}
-            alt={product.titre}
-            className="h-80 object-contain transition-transform duration-300 hover:scale-105"
-          />
-        </div>
-
+        {product?.images.length < 2 ? (
+          <div className="flex w-full justify-center rounded-lg bg-[#f9f5ef] p-6 md:w-1/2">
+            <img
+              src={product?.images[0]?.lien}
+              alt={product?.titre}
+              className="h-80 object-contain transition-transform duration-300 hover:scale-105"
+            />
+          </div>
+        ) : (
+          <Carousel className="w-full max-w-xs text-white!">
+            <CarouselContent>
+              {product?.images.map((image, index) => (
+                <CarouselItem key={index}>
+                  <div className="p-1">
+                    <Card>
+                      <CardContent className="flex aspect-square items-center justify-center p-6">
+                        <img
+                          src={image.lien}
+                          alt={product?.titre}
+                          className="h-80 object-contain transition-transform duration-300 hover:scale-105"
+                        />
+                      </CardContent>
+                    </Card>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
+        )}
         {/* Détails produit */}
         <div className="flex w-full flex-col gap-4 md:w-1/2">
           <button
@@ -58,12 +91,12 @@ function ProductPage() {
             <ArrowLeft /> <p className="ml-2">{LOCALIZE.productPage.backButton}</p>
           </button>
 
-          <h1 className="text-3xl font-bold text-gray-800">{product.titre}</h1>
-          <p className="leading-relaxed text-gray-600">{product.description}</p>
+          <h1 className="text-3xl font-bold text-gray-800">{product?.titre}</h1>
+          <p className="leading-relaxed text-gray-600">{product?.description}</p>
 
           <div className="flex items-center justify-between">
             <p className="text-3xl font-bold text-[#d9534f]">
-              {product.prix} {LOCALIZE.currencySymbol}
+              {product?.prix} {LOCALIZE.currencySymbol}
             </p>
             <span className="rounded-full bg-[#f1e1c3] px-3 py-1 text-sm text-[#705d3b]">
               {LOCALIZE.productPage.freeShipping}

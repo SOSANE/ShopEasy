@@ -19,7 +19,7 @@ function HomePage({ productList, categoryList }) {
   const { currentUser } = useAuth();
 
   return (
-    <PageTemplate title={LOCALIZE.homepage.title}>
+    <PageTemplate>
       <div className="flex min-h-screen flex-col">
         {currentUser && (
           <p>
