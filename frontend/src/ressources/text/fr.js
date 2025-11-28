@@ -12,6 +12,8 @@ export const FR = {
     logoAltText: "Logo ShopEasy",
     navbarLogoutTitle: "Déconnexion",
     navbarLoginTitle: "Connexion",
+    verifyCart: "Mon panier",
+    myProfile: "Mon profil",
   },
 
   homepage: {

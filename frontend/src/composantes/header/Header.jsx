@@ -27,7 +27,7 @@ function Header() {
         hidden ? "-translate-y-full" : "translate-y-0"
       }`}
     >
-      {<NavBar />}
+      <NavBar />
     </header>
   );
 }
