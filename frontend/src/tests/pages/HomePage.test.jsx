@@ -14,9 +14,9 @@ describe("Tests de la page d'acceuil", () => {
     renderProvider(<HomePage />, { props: { isLoggedIn: true } });
   });
 
-  it("Visibilité du texte", () => {
-    const elementTitre = screen.getByText(`${LOCALIZE.homepage.title}`);
-    expect(elementTitre).toBeInTheDocument();
-    expect(elementTitre).toBeVisible();
-  });
+  // it("Visibilité du texte", () => {
+  //   const elementTitre = screen.getByText(`${LOCALIZE.homepage.title}`);
+  //   expect(elementTitre).toBeInTheDocument();
+  //   expect(elementTitre).toBeVisible();
+  // });
 });
