@@ -18,6 +18,7 @@ export const FR = {
 
   homepage: {
     title: "Acceuil",
+    welcome: "Trouvez votre bonheur.",
     text1: "Page d'acceuil",
     text2: "Bonjour, ",
     categories: [
@@ -45,8 +46,10 @@ export const FR = {
   },
 
   error404page: {
-    title: "Erreur 404",
-    text1: "La page n'as pas été trouvée.",
+    error: "404",
+    title: "Page introuvable",
+    text1: "Désolé, la page que vous semblez rechercher n'as pas été trouvée.",
+    backHome: "Retour à l'acceuil",
   },
 
   registerPage: {
@@ -80,9 +83,12 @@ export const FR = {
     title: "Catégorie",
     noProductFound: "Aucun produit trouvé pour la catégorie",
     backToHome: "Retour à l’accueil",
+    collection: "Collection",
   },
   productPage: {
     notFound: "Product not found.",
+    inStock: "En stock",
+    quantity: "Quantité",
     backButton: "Back",
     freeShipping: "Free shipping",
     addToCart: "Add to cart",
@@ -100,9 +106,11 @@ export const FR = {
   },
   searchBar: {
     placeholder: "Recherchez un produit...",
+    searchButton: "Recherche",
   },
   cartPage: {
     empty: "Votre panier est vide",
+    emptytext: "On dirait que vous n'avez encore rien ajouté à votre panier.",
     backHome: "Retour à l'accueil",
     title: "Votre panier",
     remove: "Supprimer",

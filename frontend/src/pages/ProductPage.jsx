@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
-import { ArrowLeft, ShoppingCart, Zap } from "lucide-react";
+import { ArrowLeft, ShoppingCart, Truck, Check } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
@@ -41,97 +41,113 @@ function ProductPage() {
   if (!product && !loading)
     return (
       <PageTemplate>
-        <div className="flex min-h-screen items-center justify-center">
-          <p className="text-lg text-gray-600">{LOCALIZE.productPage.notFound}</p>
+        <div className="flex min-h-[50vh] items-center justify-center">
+          <p className="text-lg text-stone-500!">{LOCALIZE.productPage.notFound}</p>
         </div>
       </PageTemplate>
     );
 
   return (
     <PageTemplate>
-      <div className="mx-auto mt-12 flex max-w-4xl flex-col items-center gap-16 rounded-xl bg-white px-16 py-10 shadow-lg md:flex-row">
-        {/* Image produit */}
-        {product?.images.length < 2 ? (
-          <div className="flex w-full justify-center rounded-lg bg-[#f9f5ef] p-6 md:w-1/2">
-            <img
-              src={product?.images[0]?.lien}
-              alt={product?.titre}
-              className="h-80 object-contain transition-transform duration-300 hover:scale-105"
-            />
+      <div className="mx-auto max-w-7xl px-4 py-8">
+        <button
+          onClick={() => navigate(-1)}
+          className="mb-8 flex items-center gap-2 text-sm font-medium text-stone-50! transition hover:text-stone-200!"
+        >
+          <ArrowLeft className="h-4 w-4" /> {LOCALIZE.productPage.backButton}
+        </button>
+
+        <div className="grid gap-12 lg:grid-cols-2">
+          <div className="overflow-hidden rounded-2xl bg-white p-6 shadow-sm">
+            {product?.images.length < 2 ? (
+              <div className="flex h-full min-h-[400px] items-center justify-center rounded-xl bg-stone-50">
+                <img
+                  src={product?.images[0]?.lien}
+                  alt={product?.titre}
+                  className="max-h-[400px] w-full object-contain mix-blend-multiply"
+                />
+              </div>
+            ) : (
+              <Carousel className="w-full text-stone-50!">
+                <CarouselContent>
+                  {product?.images.map((image, index) => (
+                    <CarouselItem key={index}>
+                      <div className="p-1">
+                        <Card className="border-none shadow-none">
+                          <CardContent className="flex aspect-square items-center justify-center rounded-xl bg-stone-50! p-6">
+                            <img
+                              src={image.lien}
+                              alt={product?.titre}
+                              className="max-h-[400px] w-full object-contain mix-blend-multiply"
+                            />
+                          </CardContent>
+                        </Card>
+                      </div>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselPrevious className="left-4" />
+                <CarouselNext className="right-4" />
+              </Carousel>
+            )}
           </div>
-        ) : (
-          <Carousel className="w-full max-w-xs text-white!">
-            <CarouselContent>
-              {product?.images.map((image, index) => (
-                <CarouselItem key={index}>
-                  <div className="p-1">
-                    <Card>
-                      <CardContent className="flex aspect-square items-center justify-center p-6">
-                        <img
-                          src={image.lien}
-                          alt={product?.titre}
-                          className="h-80 object-contain transition-transform duration-300 hover:scale-105"
-                        />
-                      </CardContent>
-                    </Card>
+
+          <div className="flex flex-col gap-6 pt-4">
+            <div>
+              <h1 className="text-3xl font-bold text-stone-900 md:text-4xl">{product?.titre}</h1>
+              <div className="mt-4 flex items-center gap-4">
+                <p className="text-3xl font-bold text-stone-900">
+                  {product?.prix} {LOCALIZE.currencySymbol}
+                </p>
+                {product?.stock > 1 && (
+                  <div className="flex items-center gap-1 rounded-full bg-green-50! px-3 py-1 text-sm font-medium text-green-700!">
+                    <Check className="h-3 w-3" /> {LOCALIZE.productPage.inStock}
                   </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
-          </Carousel>
-        )}
-        {/* Détails produit */}
-        <div className="flex w-full flex-col gap-4 md:w-1/2">
-          <button
-            onClick={() => navigate(-1)}
-            className="flex justify-around self-start text-sm text-[#d9aa6e] hover:underline"
-          >
-            <ArrowLeft /> <p className="ml-2">{LOCALIZE.productPage.backButton}</p>
-          </button>
+                )}
+              </div>
+            </div>
 
-          <h1 className="text-3xl font-bold text-gray-800">{product?.titre}</h1>
-          <p className="leading-relaxed text-gray-600">{product?.description}</p>
+            <p className="text-lg leading-relaxed text-stone-600!">{product?.description}</p>
 
-          <div className="flex items-center justify-between">
-            <p className="text-3xl font-bold text-[#d9534f]">
-              {product?.prix} {LOCALIZE.currencySymbol}
-            </p>
-            <span className="rounded-full bg-[#f1e1c3] px-3 py-1 text-sm text-[#705d3b]">
-              {LOCALIZE.productPage.freeShipping}
-            </span>
-          </div>
+            <div className="flex items-center gap-2 text-sm text-stone-500!">
+              <Truck className="h-4 w-4" />
+              <span>{LOCALIZE.productPage.freeShipping}</span>
+            </div>
 
-          {/* Sélecteur de quantité */}
-          <div className="mt-3 flex items-center gap-3">
-            <button
-              onClick={() => setQuantity(q => Math.max(1, q - 1))}
-              className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-200! transition hover:bg-gray-300"
-            >
-              -
-            </button>
-            <span className="text-lg font-medium">{quantity}</span>
-            <button
-              onClick={() => setQuantity(q => q + 1)}
-              className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-200! transition hover:bg-gray-300"
-            >
-              +
-            </button>
-          </div>
+            <div className="my-2 h-px w-full bg-stone-200!" />
 
-          {/* Boutons d’action */}
-          <div className="mt-6 flex flex-col gap-4 md:flex-row">
-            <button
-              onClick={() => addToCart(product, quantity)}
-              className="flex flex-1 justify-around rounded-lg bg-green-600 px-6 py-3 text-center font-semibold text-white shadow-md transition hover:scale-105 hover:bg-green-700"
-            >
-              <ShoppingCart /> {LOCALIZE.productPage.addToCart}
-            </button>
+            <div className="flex flex-col gap-6">
+              <div className="flex items-center gap-4">
+                <span className="text-sm font-medium text-stone-900">
+                  {LOCALIZE.productPage.quantity}
+                </span>
+                <div className="flex items-center gap-4 rounded-full! border border-stone-200! px-4 py-2">
+                  <button
+                    onClick={() => setQuantity(q => Math.max(1, q - 1))}
+                    className="text-stone-50! hover:text-stone-900!"
+                  >
+                    -
+                  </button>
+                  <span className="w-4 text-center text-lg font-medium">{quantity}</span>
+                  <button
+                    onClick={() => setQuantity(q => q + 1)}
+                    className="text-stone-50! hover:text-stone-900!"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
 
-            <button className="flex flex-1 justify-around rounded-lg bg-[#d9aa6e] px-6 py-3 text-center font-semibold text-white shadow-md transition hover:scale-105 hover:bg-[#b8864b]">
-              <Zap /> {LOCALIZE.productPage.buyNow}
-            </button>
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <button
+                  onClick={() => addToCart(product, quantity)}
+                  className="flex flex-1 items-center justify-center gap-2 rounded-full bg-stone-900! px-8 py-4 font-bold text-white! transition-all hover:bg-stone-800! hover:shadow-lg active:scale-[0.98]"
+                >
+                  <ShoppingCart className="h-5 w-5" />
+                  {LOCALIZE.productPage.addToCart}
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

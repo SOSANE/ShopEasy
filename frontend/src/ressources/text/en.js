@@ -18,6 +18,7 @@ export const EN = {
 
   homepage: {
     title: "Home",
+    welcome: "Find what you love.",
     text1: "Homepage",
     text2: "Hello, ",
     categories: ["Electronics", "School", "Clothing", "Shoes", "Bags", "Makeup", "Jewelry"],
@@ -37,8 +38,10 @@ export const EN = {
   },
 
   error404page: {
-    title: "Error 404",
-    text1: "Page not found.",
+    error: "404",
+    title: "Page not found",
+    text1: "Sorry, we couldn't find the page you're looking for.",
+    backHome: "Back to home",
   },
 
   registerPage: {
@@ -72,9 +75,12 @@ export const EN = {
     title: "Category",
     noProductFound: "No products found for category",
     backToHome: "Back to home",
+    collection: "Collection",
   },
   productPage: {
     notFound: "Produit introuvable.",
+    inStock: "In Stock",
+    quantity: "Quantity",
     backButton: "Retour",
     freeShipping: "Livraison gratuite",
     addToCart: "Ajouter au panier",
@@ -93,9 +99,11 @@ export const EN = {
   },
   searchBar: {
     placeholder: "Search for a product...",
+    searchButton: "Search",
   },
   cartPage: {
     empty: "Your cart is empty",
+    emptytext: "Looks like you haven't added anything yet.",
     backHome: "Back to home",
     title: "Your Cart",
     remove: "Remove",

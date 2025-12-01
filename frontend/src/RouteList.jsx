@@ -10,6 +10,7 @@ import PrivateRoute from "./composantes/commons/PrivateRoute";
 import ProductPage from "./pages/ProductPage";
 import CategoryPage from "./pages/CategoryPage";
 import CartPage from "./pages/CartPage";
+import ProfilePage from "./pages/ProfilePage";
 import { getAllProducts } from "./api/produits";
 import { getAllCategories } from "./api/categorie";
 import { useAuth } from "./state/contexts/AuthContext";
@@ -44,6 +45,10 @@ function RouteList() {
         <Route path={PATH.signup} element={<RegisterPage />} />
         <Route path={PATH.category} element={<CategoryPage products={productList} />} />
         <Route path={PATH.cart} element={<CartPage />} />
+      </Route>
+
+      <Route element={<PrivateRoute isAllowed={isLoggedIn()} redirect={PATH.home} />}>
+        <Route path={PATH.profile} element={<ProfilePage />} />
       </Route>
       <Route path={PATH.product} element={<ProductPage />} />
       {/* Page non trouvée */}
