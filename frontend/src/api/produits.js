@@ -23,6 +23,30 @@ export async function getAllProducts() {
 }
 
 /**
+ * Fonction pour rechercher les produits
+ * @returns products Une liste de produits
+ */
+export async function searchProducts(searchTerm) {
+  try {
+    const response = await fetch(`/api/produits/?search=${searchTerm}`, {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+      },
+    });
+
+    if (response.ok) {
+      const res = await response.json();
+      return res;
+    } else {
+      throw new Error();
+    }
+  } catch (e) {
+    return null;
+  }
+}
+
+/**
  * Fonction pour recevoir un seul produit à partir du ID
  * @param {number} id
  * @returns {} product Un objet produit
