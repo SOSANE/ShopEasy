@@ -42,7 +42,7 @@ function NavBar() {
           <NavigationMenuItem>
             {currentUser ? (
               <>
-                <NavigationMenuTrigger className="text-stone-50!">
+                <NavigationMenuTrigger className="text-stone-950!">
                   <User className="mr-2 h-4 w-4" />
                   {LOCALIZE.header.myProfile}
                 </NavigationMenuTrigger>

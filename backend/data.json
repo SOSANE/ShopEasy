@@ -1,12 +1,5 @@
 [
     {
-        "model": "models.marchand",
-        "pk": 1,
-        "fields": {
-            "utilisateur": 1
-        }
-    },
-    {
         "model": "models.catégorie",
         "pk": 1,
         "fields": {

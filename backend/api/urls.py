@@ -7,5 +7,4 @@ router.register(r"panier", PanierViewSet, basename="panier")
 router.register(r"commande", CommandeViewSet, basename="commande")
 router.register(r"produit", ProduitViewSet, basename="produit")
 router.register(r"categorie", CategorieViewSet, basename="categorie")
-router.register(r"client", ClientViewSet, basename="client")
 urlpatterns = router.urls

@@ -18,6 +18,8 @@ class ProduitViewSet(viewsets.ModelViewSet):
 
 
 class PanierViewSet(viewsets.ViewSet):
+    serializer_class = serializers.Serializer
+
     def list(self, request):
         if not request.user.is_authenticated:
             return Response({"produits_panier": [], "prix_total": 0.0})
@@ -87,8 +89,3 @@ class CommandeViewSet(viewsets.ViewSet):
 class CategorieViewSet(viewsets.ModelViewSet):
     queryset = Catégorie.objects.all()
     serializer_class = CategorieSerializer
-
-
-class ClientViewSet(viewsets.ModelViewSet):
-    queryset = Client.objects.all()
-    serializer_class = ClientSerializer
