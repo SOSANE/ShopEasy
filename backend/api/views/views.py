@@ -1,3 +1,6 @@
+from rest_framework import generics, filters
+from django_filters.rest_framework import DjangoFilterBackend
+from api.filters import ProductFilter
 from ..logic import commande, panier, produit
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
@@ -8,6 +11,7 @@ from ..models.models import Produit, ProduitPanier
 from ..serializer.produit import ProduitSerializer
 from ..serializer.produit_panier import ProduitPanierSerializer
 from rest_framework import serializers
+from rest_framework.pagination import LimitOffsetPagination
 
 
 class ProduitViewSet(viewsets.ModelViewSet):
@@ -82,13 +86,6 @@ class CommandeViewSet(viewsets.ViewSet):
         return Response({"status": "checkout successful"})
 
 
-from rest_framework import generics, filters
-from django_filters.rest_framework import DjangoFilterBackend
-from api.filters import ProductFilter
-from ..models.models import Produit
-from api.serializers import ProduitSerializer
-
-
 class ProduitSearchView(generics.ListAPIView):
     """
     Vue API permettant :
@@ -99,6 +96,7 @@ class ProduitSearchView(generics.ListAPIView):
 
     queryset = Produit.objects.all()
     serializer_class = ProduitSerializer
+    pagination_class = LimitOffsetPagination
 
     # Filtres et recherche
     filter_backends = [
