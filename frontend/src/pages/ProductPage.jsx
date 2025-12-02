@@ -124,14 +124,14 @@ function ProductPage() {
                 <div className="flex items-center gap-4 rounded-full! border border-stone-200! px-4 py-2">
                   <button
                     onClick={() => setQuantity(q => Math.max(1, q - 1))}
-                    className="text-stone-50! hover:text-stone-900!"
+                    className="bg-stone-800! text-stone-50! hover:bg-stone-950! hover:text-stone-200!"
                   >
                     -
                   </button>
                   <span className="w-4 text-center text-lg font-medium">{quantity}</span>
                   <button
                     onClick={() => setQuantity(q => q + 1)}
-                    className="text-stone-50! hover:text-stone-900!"
+                    className="bg-stone-800! text-stone-50! hover:bg-stone-950! hover:text-stone-200!"
                   >
                     +
                   </button>
