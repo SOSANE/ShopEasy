@@ -43,13 +43,13 @@ function RouteList() {
       <Route element={<PrivateRoute isAllowed={!isLoggedIn()} redirect={PATH.home} />}>
         <Route path={PATH.login} element={<LoginPage />} />
         <Route path={PATH.signup} element={<RegisterPage />} />
-        <Route path={PATH.category} element={<CategoryPage products={productList} />} />
-        <Route path={PATH.cart} element={<CartPage />} />
       </Route>
 
       <Route element={<PrivateRoute isAllowed={isLoggedIn()} redirect={PATH.home} />}>
         <Route path={PATH.profile} element={<ProfilePage />} />
       </Route>
+      <Route path={PATH.category} element={<CategoryPage products={productList} />} />
+      <Route path={PATH.cart} element={<CartPage />} />
       <Route path={PATH.product} element={<ProductPage />} />
       {/* Page non trouvée */}
       <Route path="*" element={<Error404Page />} />
