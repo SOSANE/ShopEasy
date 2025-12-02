@@ -21,6 +21,7 @@ from django.conf import settings
 from django.urls import re_path, include
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from api.views.views import ProduitSearchView
+from api.signals import *
 
 urlpatterns = [
     re_path(

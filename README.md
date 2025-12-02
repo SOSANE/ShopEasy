@@ -66,6 +66,10 @@ DJANGO_SUPERUSER_EMAIL=django_admin@localhost.ca
 MINIO_ROOT_USER=minioadmin
 MINIO_ROOT_PASSWORD=<Insérez un mot de passe>
 MINIO_DEFAULT_BUCKETS=produit-media-bucket
+
+MINIO_ROOT_USER=minioadmin
+MINIO_ROOT_PASSWORD=<Insérez un mot de passe>
+MINIO_DEFAULT_BUCKETS=produit-media-bucket
 ```
 
 Exécuter avec Docker:

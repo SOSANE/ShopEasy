@@ -28,7 +28,7 @@ def view_cart(utilisateur: Utilisateur) -> dict:
         client is not None
     ), "Seulement un Clien peut ajouté un produit a sont panier."
 
-    panier, _ = Panier.objects.get_or_create(client=utilisateur.client)
+    panier, _ = Panier.objects.get_or_create(client=client)
     produits_panier = ProduitPanier.objects.filter(panier=panier)
     prix_total = _prix_total_panier(produits_panier)
     return {"produits_panier": produits_panier, "prix_total": prix_total}

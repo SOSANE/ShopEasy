@@ -7,9 +7,11 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import action
-from ..models.models import Produit, ProduitPanier
+from ..models.models import Produit, ProduitPanier, Catégorie, Client
 from ..serializer.produit import ProduitSerializer
 from ..serializer.produit_panier import ProduitPanierSerializer
+from ..serializer.categorie import CategorieSerializer
+from ..serializer.client import ClientSerializer
 from rest_framework import serializers
 from rest_framework.pagination import LimitOffsetPagination
 
@@ -20,6 +22,8 @@ class ProduitViewSet(viewsets.ModelViewSet):
 
 
 class PanierViewSet(viewsets.ViewSet):
+    serializer_class = serializers.Serializer
+
     def list(self, request):
         if not request.user.is_authenticated:
             return Response({"produits_panier": [], "prix_total": 0.0})
@@ -112,3 +116,8 @@ class ProduitSearchView(generics.ListAPIView):
     # Tri
     ordering_fields = ["prix", "titre", "stock"]
     ordering = ["titre"]
+
+
+class CategorieViewSet(viewsets.ModelViewSet):
+    queryset = Catégorie.objects.all()
+    serializer_class = CategorieSerializer

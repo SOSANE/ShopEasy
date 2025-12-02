@@ -1,4 +1,5 @@
 import { LocalizationProvider } from "./LocalizationProvider";
+import { CartProvider } from "./CartProvider";
 import { AuthProvider } from "./AuthProvider";
 
 /**
@@ -13,4 +14,4 @@ function compose(providers) {
   ));
 }
 
-export const Provider = compose([LocalizationProvider, AuthProvider]);
+export const Provider = compose([LocalizationProvider, AuthProvider, CartProvider]);

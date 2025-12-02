@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
+/* @custom-variant dark (&:is(.dark *)); */
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -61,11 +61,14 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
+  padding: 0;
+  display: block;
+  overflow-x: hidden;
+  min-width: 100vw;
   min-height: 100vh;
+  background-color: #ffffff;
 }
+
 
 h1 {
   font-size: 3.2em;
@@ -101,6 +104,7 @@ button:focus-visible {
   }
   button {
     background-color: #f9f9f9;
+    color: rgb(0, 0, 0) ;
   }
 }
 
@@ -184,3 +188,13 @@ button:focus-visible {
     @apply bg-background text-foreground;
   }
 }
+/* Cacher la barre horizontale sur tous les navigateurs */
+.hide-scrollbar {
+  scrollbar-width: none; 
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; 
+}
+
+
+
