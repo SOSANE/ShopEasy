@@ -226,7 +226,7 @@ LOGGING = {
 }
 
 # Test runner
-TEST_RUNNER = "tests.test_runner.NoDbTestRunner"
+TEST_RUNNER = "django.test.runner.DiscoverRunner"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -257,9 +257,10 @@ SERVER_EMAIL = f"server-errors@{DOMAIN}"
 
 # MinIO Setup
 DEFAULT_FILE_STORAGE = "minio_storage.storage.MinioMediaStorage"
-
-MINIO_STORAGE_ENDPOINT = "minio:9000"
+PORT = 9000
+MINIO_STORAGE_ENDPOINT = f"minio:{PORT}"
 MINIO_STORAGE_ACCESS_KEY = os.environ.get("MINIO_ROOT_USER")
 MINIO_STORAGE_SECRET_KEY = os.environ.get("MINIO_ROOT_PASSWORD")
 MINIO_STORAGE_USE_HTTPS = False
 MINIO_STORAGE_MEDIA_BUCKET_NAME = os.environ.get("MINIO_DEFAULT_BUCKETS")
+MINIO_STORAGE_MEDIA_URL = f"http://{DOMAIN}:{PORT}/{MINIO_STORAGE_MEDIA_BUCKET_NAME}"

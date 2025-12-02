@@ -31,5 +31,6 @@ urlpatterns = [
     re_path(r"^api/auth/", include("djoser.urls")),
     re_path(r"^api/auth/", include("djoser.urls.authtoken")),
     re_path(r"^api/auth/", include("rest_framework.urls", namespace="rest_framework")),
+    re_path(r"^api/", include("api.urls")),
     re_path(r"^api/produits/", ProduitSearchView.as_view(), name="produit-list"),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
