@@ -42,7 +42,7 @@ function NavBar() {
           <NavigationMenuItem>
             {currentUser ? (
               <>
-                <NavigationMenuTrigger className="text-stone-950!">
+                <NavigationMenuTrigger className="text-stone-50!">
                   <User className="mr-2 h-4 w-4" />
                   {LOCALIZE.header.myProfile}
                 </NavigationMenuTrigger>
@@ -73,7 +73,7 @@ function NavBar() {
               <NavigationMenuLink asChild>
                 <Link
                   to={PATH.login}
-                  className={`${navigationMenuTriggerStyle()} ${location.pathname === PATH.login ? "border border-black" : ""}`}
+                  className={`text-stone-950! ${navigationMenuTriggerStyle()} ${location.pathname === PATH.login ? "border border-black" : ""}`}
                 >
                   {LOCALIZE.header.navbarLoginTitle}
                 </Link>
@@ -84,7 +84,7 @@ function NavBar() {
             <NavigationMenuLink asChild>
               <Link
                 to={PATH.cart}
-                className={` ${navigationMenuTriggerStyle()} ${location.pathname === PATH.cart ? "border border-black" : ""}`}
+                className={`${navigationMenuTriggerStyle()} ${location.pathname === PATH.cart ? "border border-black" : ""}`}
               >
                 {LOCALIZE.header.verifyCart}
               </Link>
