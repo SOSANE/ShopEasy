@@ -20,7 +20,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.urls import re_path, include
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
-
+from api.views.views import ProduitSearchView
 
 urlpatterns = [
     re_path(
@@ -32,4 +32,5 @@ urlpatterns = [
     re_path(r"^api/auth/", include("djoser.urls.authtoken")),
     re_path(r"^api/auth/", include("rest_framework.urls", namespace="rest_framework")),
     re_path(r"^api/", include("api.urls")),
+    re_path(r"^api/produits/", ProduitSearchView.as_view(), name="produit-list"),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

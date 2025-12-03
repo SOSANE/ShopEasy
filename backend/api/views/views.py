@@ -1,3 +1,6 @@
+from rest_framework import generics, filters
+from django_filters.rest_framework import DjangoFilterBackend
+from api.filters import ProductFilter
 from ..logic import commande, panier, produit
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
@@ -10,6 +13,7 @@ from ..serializer.produit_panier import ProduitPanierSerializer
 from ..serializer.categorie import CategorieSerializer
 from ..serializer.client import ClientSerializer
 from rest_framework import serializers
+from rest_framework.pagination import LimitOffsetPagination
 
 
 class ProduitViewSet(viewsets.ModelViewSet):
@@ -84,11 +88,29 @@ class CommandeViewSet(viewsets.ViewSet):
         return Response({"status": "checkout successful"})
 
 
-class CategorieViewSet(viewsets.ModelViewSet):
-    queryset = Catégorie.objects.all()
-    serializer_class = CategorieSerializer
+class ProduitSearchView(generics.ListAPIView):
+    """
+    Vue API permettant :
+    - la recherche (titre, description)
+    - le filtrage (prix_min, prix_max via ProductFilter)
+    - le tri (par prix, titre, stock)
+    """
 
+    queryset = Produit.objects.all()
+    serializer_class = ProduitSerializer
+    pagination_class = LimitOffsetPagination
 
-class ClientViewSet(viewsets.ModelViewSet):
-    queryset = Client.objects.all()
-    serializer_class = ClientSerializer
+    # Filtres et recherche
+    filter_backends = [
+        DjangoFilterBackend,
+        filters.SearchFilter,
+        filters.OrderingFilter,
+    ]
+    filterset_class = ProductFilter
+
+    # Recherche textuelle
+    search_fields = ["titre", "description"]
+
+    # Tri
+    ordering_fields = ["prix", "titre", "stock"]
+    ordering = ["titre"]
