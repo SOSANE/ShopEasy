@@ -46,3 +46,20 @@ export async function getProductById(id) {
     return null;
   }
 }
+export async function searchProducts(query) {
+  try {
+    const response = await fetch(`/api/produits/search/?search=${encodeURIComponent(query)}`, {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+      },
+    });
+
+    if (!response.ok) throw new Error("API search error");
+
+    return await response.json();
+  } catch (e) {
+    console.error("searchProducts error", e);
+    return [];
+  }
+}

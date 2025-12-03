@@ -9,21 +9,20 @@ import {
 } from "@/components/ui/navigation-menu";
 
 import { User } from "lucide-react";
-// Composantes & fonctions
+import { Link } from "react-router";  
 import { useLocalization } from "../../state/contexts/LocalizationContext";
 import ChangeLanguage from "./ChangeLanguage";
 import shopEasyLogo from "../../assets/shopping-bag.svg";
-import { Link } from "react-router";
 import { useAuth } from "../../state/contexts/AuthContext";
 import { logout } from "../../api/authentification";
 
-// Constantes
 import PATH from "../../ressources/routes/paths";
 import LOCALIZE from "../../ressources/text/localize";
 
 function NavBar() {
   const language = useLocalization();
   const { currentUser, setCurrentUser } = useAuth();
+
   async function handleLogout() {
     const isLoggedOut = await logout();
     if (isLoggedOut) {
@@ -37,31 +36,34 @@ function NavBar() {
         <img className="size-8" src={shopEasyLogo} alt={LOCALIZE.header.logoAltText} />
         <span className="ml-2 text-2xl font-semibold text-stone-900">{LOCALIZE.title}</span>
       </Link>
+
       <NavigationMenu className="relative py-4 after:absolute after:inset-x-0 after:bottom-0 after:h-px">
         <NavigationMenuList className="gap-2">
           <NavigationMenuItem>
             {currentUser ? (
               <>
-                <NavigationMenuTrigger className="text-stone-50!">
+                <NavigationMenuTrigger className="!text-stone-50">
                   <User className="mr-2 h-4 w-4" />
                   {LOCALIZE.header.myProfile}
                 </NavigationMenuTrigger>
+
                 <NavigationMenuContent>
                   <ul className="grid w-[200px] gap-1 p-2">
                     <li>
                       <NavigationMenuLink asChild>
                         <Link
                           to={PATH.profile}
-                          className="hover:text-accent-foreground! focus:bg-accent! focus:text-accent-foreground! flex w-full items-center! rounded-md border-none! bg-transparent! p-3 text-sm! leading-none! font-medium! text-stone-950! no-underline! transition-colors! outline-none! select-none hover:bg-stone-200!"
+                          className="flex w-full items-center rounded-md p-3 text-sm font-medium text-stone-950 hover:bg-stone-200"
                         >
                           {LOCALIZE.header.myProfile}
                         </Link>
                       </NavigationMenuLink>
                     </li>
+
                     <li>
                       <button
                         onClick={handleLogout}
-                        className="mr-2 h-full w-full border-none! bg-transparent! text-sm! font-medium! text-stone-950! hover:border-none! hover:bg-stone-200! focus-visible:outline-none!"
+                        className="w-full bg-transparent text-sm font-medium text-stone-950 hover:bg-stone-200"
                       >
                         {LOCALIZE.header.navbarLogoutTitle}
                       </button>
@@ -73,23 +75,29 @@ function NavBar() {
               <NavigationMenuLink asChild>
                 <Link
                   to={PATH.login}
-                  className={`${navigationMenuTriggerStyle()} ${location.pathname === PATH.login ? "border border-black" : ""}`}
+                  className={`${navigationMenuTriggerStyle()} ${
+                    location.pathname === PATH.login ? "border border-black" : ""
+                  }`}
                 >
                   {LOCALIZE.header.navbarLoginTitle}
                 </Link>
               </NavigationMenuLink>
             )}
           </NavigationMenuItem>
+
           <NavigationMenuItem>
             <NavigationMenuLink asChild>
               <Link
                 to={PATH.cart}
-                className={` ${navigationMenuTriggerStyle()} ${location.pathname === PATH.cart ? "border border-black" : ""}`}
+                className={`${navigationMenuTriggerStyle()} ${
+                  location.pathname === PATH.cart ? "border border-black" : ""
+                }`}
               >
                 {LOCALIZE.header.verifyCart}
               </Link>
             </NavigationMenuLink>
           </NavigationMenuItem>
+
           <NavigationMenuItem>
             <ChangeLanguage />
           </NavigationMenuItem>

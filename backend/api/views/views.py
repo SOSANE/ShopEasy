@@ -114,3 +114,6 @@ class ProduitSearchView(generics.ListAPIView):
     # Tri
     ordering_fields = ["prix", "titre", "stock"]
     ordering = ["titre"]
+class CategorieViewSet(viewsets.ModelViewSet):
+    queryset = Catégorie.objects.all()
+    serializer_class = CategorieSerializer

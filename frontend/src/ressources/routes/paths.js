@@ -7,6 +7,7 @@ export const PATH = {
   cart: "/cart",
   profile: "/profile",
   search: "/search",
+  
 };
 
 export default PATH;

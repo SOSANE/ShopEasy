@@ -9,3 +9,8 @@ router.register(r"produit", ProduitViewSet, basename="produit")
 router.register(r"categorie", CategorieViewSet, basename="categorie")
 router.register(r"client", ClientViewSet, basename="client")
 urlpatterns = router.urls
+from api.views.produit import ProduitSearchView
+
+urlpatterns = [
+    path("produits/search/", ProduitSearchView.as_view(), name="produit-search"),
+]
