@@ -24,7 +24,7 @@ function CartPage() {
           <p className="mt-2 text-stone-500">{LOCALIZE.cartPage.emptytext}</p>
           <Link
             to={PATH.home}
-            className="mt-8 rounded-full bg-stone-900 px-8 py-3 text-sm font-medium text-white! transition-transform hover:scale-105 hover:bg-stone-800"
+            className="mt-8 rounded-full bg-stone-900 px-8 py-3 text-sm font-medium !text-white transition-transform hover:scale-105 hover:bg-stone-800"
           >
             {LOCALIZE.cartPage.backHome}
           </Link>
@@ -37,9 +37,10 @@ function CartPage() {
       <div className="mx-auto max-w-4xl px-4">
         <div className="flex items-center justify-between border-b border-stone-200 pb-4">
           <h1 className="text-2xl font-bold text-stone-900">{LOCALIZE.cartPage.title}</h1>
+
           <button
             onClick={clearCart}
-            className="text-xs font-medium text-stone-50 hover:text-stone-200 hover:underline"
+            className="text-xs font-medium text-stone-500 hover:text-stone-700 hover:underline"
           >
             {LOCALIZE.cartPage.clear}
           </button>
@@ -53,7 +54,7 @@ function CartPage() {
             >
               <div className="h-24 w-24 shrink-0 overflow-hidden rounded-lg bg-stone-100">
                 <img
-                  src={item.images[0].lien}
+                  src={item.images?.[0]?.lien ?? ""}
                   alt={item.name}
                   className="h-full w-full object-cover mix-blend-multiply"
                 />
@@ -71,16 +72,18 @@ function CartPage() {
                   <div className="flex items-center gap-3 rounded-full bg-stone-100 px-3 py-1">
                     <button
                       onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                      className="flex h-6 w-6 items-center justify-center rounded-full! bg-white! shadow-sm hover:bg-stone-50!"
+                      className="flex h-6 w-6 items-center justify-center rounded-full bg-white shadow-sm hover:bg-stone-50"
                     >
-                      <Minus className="h-3 w-3 shrink-0" />
+                      <Minus className="h-3 w-3" />
                     </button>
+
                     <span className="w-4 text-center text-sm font-medium">{item.quantity}</span>
+
                     <button
                       onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                      className="flex h-6 w-6 items-center justify-center rounded-full! bg-white! shadow-sm hover:bg-stone-50!"
+                      className="flex h-6 w-6 items-center justify-center rounded-full bg-white shadow-sm hover:bg-stone-50"
                     >
-                      <Plus className="h-3 w-3 shrink-0" />
+                      <Plus className="h-3 w-3" />
                     </button>
                   </div>
 
@@ -103,6 +106,7 @@ function CartPage() {
               {total.toFixed(2)} {LOCALIZE.currencySymbol}
             </span>
           </div>
+
           <button className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-stone-900 py-4 font-semibold text-white transition-all hover:bg-stone-800 hover:shadow-lg active:scale-[0.99]">
             {LOCALIZE.cartPage.checkout} <ArrowRight className="h-5 w-5" />
           </button>
