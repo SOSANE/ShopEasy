@@ -9,13 +9,18 @@ class CommandeTest(APITestCase):
     def setUp(self):
         self.api_client = APIClient()
 
-        self.user = m.Utilisateur.objects.create_user(username="client", password="pw")
-        self.client_profile = m.Client.objects.create(utilisateur=self.user)
+        self.user = m.Utilisateur.objects.create_user(
+            username="client", password="pw", is_staff=False
+        )
+        self.client_profile = m.Client.objects.get(utilisateur=self.user)
 
         self.marchand_user = m.Utilisateur.objects.create_user(
-            username="marchand", password="pw", email="marchard@localhost"
+            username="marchand",
+            password="pw",
+            email="marchard@localhost",
+            is_staff=True,
         )
-        self.marchand = m.Marchand.objects.create(utilisateur=self.marchand_user)
+        self.marchand = m.Marchand.objects.get(utilisateur=self.marchand_user)
 
         self.produit = m.Produit.objects.create(
             marchand=self.marchand,

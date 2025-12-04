@@ -11,7 +11,6 @@ import { useAuth } from "../state/contexts/AuthContext";
 import LOCALIZE from "../ressources/text/localize";
 
 function HomePage({ productList, categoryList }) {
-  console.log("PRODUCT LIST =", productList);
   const language = useLocalization();
   const { currentUser } = useAuth();
 

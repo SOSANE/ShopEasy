@@ -6,9 +6,12 @@ class ProduitTest(APITestCase):
     def setUp(self):
         self.api_client = APIClient()
         self.marchand_user = m.Utilisateur.objects.create_user(
-            username="marchand", password="pw", email="marchard@localhost"
+            username="marchand",
+            password="pw",
+            email="marchard@localhost",
+            is_staff=True,
         )
-        self.marchand = m.Marchand.objects.create(utilisateur=self.marchand_user)
+        self.marchand = m.Marchand.objects.get(utilisateur=self.marchand_user)
 
         self.produit_1 = m.Produit.objects.create(
             marchand=self.marchand,
