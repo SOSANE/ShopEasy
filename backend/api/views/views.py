@@ -89,37 +89,6 @@ class CommandeViewSet(viewsets.ViewSet):
         commande.check_out_cart(request.user)
         return Response({"status": "checkout successful"})
 
-class ProduitSearchView(generics.ListAPIView):
-    """
-    Vue API permettant :
-    - la recherche (titre, description)
-    - le filtrage (prix_min, prix_max via ProductFilter)
-    - le tri (par prix, titre, stock)
-    """
-
-    queryset = Produit.objects.all()
-    serializer_class = ProduitSerializer
-    pagination_class = LimitOffsetPagination
-
-    # Filtres et recherche
-    filter_backends = [
-        DjangoFilterBackend,
-        filters.SearchFilter,
-        filters.OrderingFilter,
-    ]
-    filterset_class = ProductFilter
-
-    # Recherche textuelle
-    search_fields = ["titre", "description"]
-
-    # Tri
-    ordering_fields = ["prix", "titre", "stock"]
-    ordering = ["titre"]
-
-
-class CategorieViewSet(viewsets.ModelViewSet):
-    queryset = Catégorie.objects.all()
-    serializer_class = CategorieSerializer
 
 class ProduitSearchView(generics.ListAPIView):
     """
@@ -147,6 +116,8 @@ class ProduitSearchView(generics.ListAPIView):
     # Tri
     ordering_fields = ["prix", "titre", "stock"]
     ordering = ["titre"]
+
+
 class CategorieViewSet(viewsets.ModelViewSet):
     queryset = Catégorie.objects.all()
     serializer_class = CategorieSerializer
