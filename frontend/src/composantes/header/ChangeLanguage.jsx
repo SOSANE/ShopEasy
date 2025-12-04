@@ -1,0 +1,24 @@
+import { Languages } from "lucide-react";
+
+// Constantes
+import LOCALIZE from "../../ressources/text/localize";
+import { SET_LANGUAGE } from "../../state/actions";
+// Composantes & fonctions
+import { useLocalization, useLocalizationDispatch } from "../../state/contexts/LocalizationContext";
+
+function ChangeLanguage() {
+  const language = useLocalization();
+  const dispatch = useLocalizationDispatch();
+
+  return (
+    <button
+      className="flex items-center rounded-lg bg-stone-900! p-2 text-stone-50! hover:bg-stone-950! hover:text-stone-100!"
+      onClick={() => dispatch({ type: SET_LANGUAGE, language: LOCALIZE.langueContraire })}
+    >
+      <Languages className="mr-2" />
+      {LOCALIZE.header.changeLanguage}
+    </button>
+  );
+}
+
+export default ChangeLanguage;

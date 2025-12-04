@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "rest_framework_swagger",
     "rest_framework.authtoken",
     "minio_storage",
+    "django_filters",
 ]
 
 MIDDLEWARE = [
@@ -108,12 +109,18 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.IsAuthenticatedOrReadOnly",
     ),
     "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework.authentication.TokenAuthentication",
         "rest_framework_simplejwt.authentication.JWTAuthentication",
         "rest_framework.authentication.SessionAuthentication",
         "rest_framework.authentication.BasicAuthentication",
     ),
+    "DEFAULT_FILTER_BACKENDS": [
+        "django_filters.rest_framework.DjangoFilterBackend",
+    ],
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    "EXCEPTION_HANDLER": "api.exceptions.api_custom_exception_handler",
 }
+
 
 # Swagger UI avec drf-spectacular
 # https://github.com/tfranzel/drf-spectacular
@@ -155,7 +162,9 @@ JWT_AUTH = {
 
 # JWT Settings list: https://django-rest-framework-simplejwt.readthedocs.io/en/latest/settings.html
 SIMPLE_JWT = {
-    "AUTH_HEADER_TYPES": ["JWT"],
+    "AUTH_HEADER_TYPES": [
+        "Bearer",
+    ],
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
     "ROTATE_REFRESH_TOKENS": True,
@@ -190,7 +199,7 @@ DJOSER = {
     },
 }
 
-# Logging settings (https://docs.djangoproject.com/en/3.0/topics/logging/)
+# Logging settings (https://docs.djangoproject.com/en/5.2/topics/logging/)
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
@@ -204,7 +213,7 @@ LOGGING = {
         "file": {
             "level": "DEBUG",
             "class": "logging.FileHandler",
-            "filename": f"./{APP}/logs/debug.log",
+            "filename": "./logs/debug.log",
             "formatter": "simple",
         }
     },
@@ -215,7 +224,7 @@ LOGGING = {
 }
 
 # Test runner
-TEST_RUNNER = "tests.test_runner.NoDbTestRunner"
+TEST_RUNNER = "django.test.runner.DiscoverRunner"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -246,10 +255,10 @@ SERVER_EMAIL = f"server-errors@{DOMAIN}"
 
 # MinIO Setup
 DEFAULT_FILE_STORAGE = "minio_storage.storage.MinioMediaStorage"
-
-MINIO_STORAGE_ENDPOINT = "localhost:9000"
+PORT = 9000
+MINIO_STORAGE_ENDPOINT = f"minio:{PORT}"
 MINIO_STORAGE_ACCESS_KEY = os.environ.get("MINIO_ROOT_USER")
 MINIO_STORAGE_SECRET_KEY = os.environ.get("MINIO_ROOT_PASSWORD")
 MINIO_STORAGE_USE_HTTPS = False
 MINIO_STORAGE_MEDIA_BUCKET_NAME = os.environ.get("MINIO_DEFAULT_BUCKETS")
-MEDIA_URL = "/media/"
+MINIO_STORAGE_MEDIA_URL = f"http://{DOMAIN}:{PORT}/{MINIO_STORAGE_MEDIA_BUCKET_NAME}"
