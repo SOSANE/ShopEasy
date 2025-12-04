@@ -14,6 +14,7 @@ import ProfilePage from "./pages/ProfilePage";
 import { getAllProducts } from "./api/produits";
 import { getAllCategories } from "./api/categorie";
 import { useAuth } from "./state/contexts/AuthContext";
+import SearchPage from "./pages/SearchPage";
 
 // Constantes
 import PATH from "./ressources/routes/paths";
@@ -51,6 +52,8 @@ function RouteList() {
       <Route path={PATH.category} element={<CategoryPage products={productList} />} />
       <Route path={PATH.cart} element={<CartPage />} />
       <Route path={PATH.product} element={<ProductPage />} />
+      <Route path={PATH.search} element={<SearchPage />} />
+
       {/* Page non trouvée */}
       <Route path="*" element={<Error404Page />} />
     </Routes>
