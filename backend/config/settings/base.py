@@ -28,11 +28,13 @@ SECRET_KEY = "django-insecure-57)4%+i#30iz@n1-=0erpgidx&jpmhs4^l(nu#k1v*(8sv0zc5
 ALLOWED_HOSTS = ["*"]
 CORS_ORIGIN_ALLOW_ALL = True
 
+APP = "api"
+APP_MODELS = "models"
+
 # Application definition
 INSTALLED_APPS = [
     # APPS
-    "backend.backend_models",
-    "user_management.user_management_models",
+    f"{APP}.{APP_MODELS}",
     # BASE
     "django.contrib.admin",
     "django.contrib.auth",
@@ -47,6 +49,8 @@ INSTALLED_APPS = [
     "drf_spectacular",
     "rest_framework_swagger",
     "rest_framework.authtoken",
+    "minio_storage",
+    "django_filters",
 ]
 
 MIDDLEWARE = [
@@ -105,25 +109,31 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.IsAuthenticatedOrReadOnly",
     ),
     "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework.authentication.TokenAuthentication",
         "rest_framework_simplejwt.authentication.JWTAuthentication",
         "rest_framework.authentication.SessionAuthentication",
         "rest_framework.authentication.BasicAuthentication",
     ),
+    "DEFAULT_FILTER_BACKENDS": [
+        "django_filters.rest_framework.DjangoFilterBackend",
+    ],
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    "EXCEPTION_HANDLER": "api.exceptions.api_custom_exception_handler",
 }
+
 
 # Swagger UI avec drf-spectacular
 # https://github.com/tfranzel/drf-spectacular
 SPECTACULAR_SETTINGS = {
-    "TITLE": "Project template API",
-    "DESCRIPTION": "Template pour le projet de session INF1763",
+    "TITLE": "ShopEasy API",
+    "DESCRIPTION": "Projet de session INF1763 - ShopEasy, système de e-commerce simplifié.",
     "VERSION": "1.0.0",
     "SERVE_INCLUDE_SCHEMA": False,
     # OTHER SETTINGS
 }
 
 # Allow the user to log in by email or username
-AUTH_USER_MODEL = "user_management_models.User"
+AUTH_USER_MODEL = f"{APP_MODELS}.Utilisateur"
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
@@ -152,7 +162,9 @@ JWT_AUTH = {
 
 # JWT Settings list: https://django-rest-framework-simplejwt.readthedocs.io/en/latest/settings.html
 SIMPLE_JWT = {
-    "AUTH_HEADER_TYPES": ["JWT"],
+    "AUTH_HEADER_TYPES": [
+        "Bearer",
+    ],
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
     "ROTATE_REFRESH_TOKENS": True,
@@ -187,7 +199,7 @@ DJOSER = {
     },
 }
 
-# Logging settings (https://docs.djangoproject.com/en/3.0/topics/logging/)
+# Logging settings (https://docs.djangoproject.com/en/5.2/topics/logging/)
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
@@ -201,7 +213,7 @@ LOGGING = {
         "file": {
             "level": "DEBUG",
             "class": "logging.FileHandler",
-            "filename": "/backend/logs/debug.log",
+            "filename": "./logs/debug.log",
             "formatter": "simple",
         }
     },
@@ -212,7 +224,7 @@ LOGGING = {
 }
 
 # Test runner
-TEST_RUNNER = "tests.test_runner.NoDbTestRunner"
+TEST_RUNNER = "django.test.runner.DiscoverRunner"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -226,3 +238,27 @@ CACHES = {
         "LOCATION": "redis://redis:6379",
     }
 }
+
+# Email Setup
+## Config pour envoyer email: https://docs.djangoproject.com/en/5.2/topics/email/
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "mailhog"
+EMAIL_PORT = 1025
+EMAIL_HOST_USER = ""
+EMAIL_HOST_PASSWORD = ""
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = False
+
+DOMAIN = "localhost"
+DEFAULT_FROM_EMAIL = f"support@{DOMAIN}"
+SERVER_EMAIL = f"server-errors@{DOMAIN}"
+
+# MinIO Setup
+DEFAULT_FILE_STORAGE = "minio_storage.storage.MinioMediaStorage"
+PORT = 9000
+MINIO_STORAGE_ENDPOINT = f"minio:{PORT}"
+MINIO_STORAGE_ACCESS_KEY = os.environ.get("MINIO_ROOT_USER")
+MINIO_STORAGE_SECRET_KEY = os.environ.get("MINIO_ROOT_PASSWORD")
+MINIO_STORAGE_USE_HTTPS = False
+MINIO_STORAGE_MEDIA_BUCKET_NAME = os.environ.get("MINIO_DEFAULT_BUCKETS")
+MINIO_STORAGE_MEDIA_URL = f"http://{DOMAIN}:{PORT}/{MINIO_STORAGE_MEDIA_BUCKET_NAME}"

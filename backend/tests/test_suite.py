@@ -1,15 +1,16 @@
-from django.test import TestCase, override_settings
-from rest_framework.test import APITestCase
-from tests.backend.tests import run_test
-from tests.user_management.tests import run_create_account
+from tests.api.test_commande import CommandeTest
+from tests.api.test_produit import ProduitTest
+from tests.api.test_produit_panier import ProduitPanierTest
 
 
-# Insertion des Unit tests
-class BackendTest(APITestCase):
-    def test_run_test(self):
-        run_test(self)
+# Insertion des tests de la commande
+class CommandeTests(CommandeTest):
+    pass
 
 
-class UserManagement(APITestCase):
-    def test_run_create_account(self):
-        run_create_account(self)
+class ProduitTests(ProduitTest):
+    pass
+
+
+class ProduitPanierTests(ProduitPanierTest):
+    pass

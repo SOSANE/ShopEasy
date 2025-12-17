@@ -1,0 +1,9 @@
+// https://ui.shadcn.com/docs/javascript
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}
