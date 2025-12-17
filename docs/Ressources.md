@@ -16,3 +16,5 @@ Utiliser les ressources suivantes pour familiarisation du Tech Stack:
 - Frontend testing:
     - [Vitest](https://vitest.dev/)
     - [React Testing Library](https://testing-library.com/docs/react-testing-library/intro)
+    
+- [Générer des tableaux markdown rapidement](https://www.tablesgenerator.com/markdown_tables)
