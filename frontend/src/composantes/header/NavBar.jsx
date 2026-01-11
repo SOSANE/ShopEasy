@@ -9,15 +9,14 @@ import {
 } from "@/components/ui/navigation-menu";
 
 import { User } from "lucide-react";
+import { Link } from "react-router";
 // Composantes & fonctions
 import { useLocalization } from "../../state/contexts/LocalizationContext";
 import ChangeLanguage from "./ChangeLanguage";
 import shopEasyLogo from "../../assets/shopping-bag.svg";
-import { Link } from "react-router";
 import { useAuth } from "../../state/contexts/AuthContext";
 import { logout } from "../../api/authentification";
 
-// Constantes
 import PATH from "../../ressources/routes/paths";
 import LOCALIZE from "../../ressources/text/localize";
 
